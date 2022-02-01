@@ -19,8 +19,8 @@ namespace CSISD_Tolling_System.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("CSISD_Tolling_SystemContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<CSISD_Tolling_SystemContext>();
+                //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                //    .AddEntityFrameworkStores<CSISD_Tolling_SystemContext>();
             });
         }
     }

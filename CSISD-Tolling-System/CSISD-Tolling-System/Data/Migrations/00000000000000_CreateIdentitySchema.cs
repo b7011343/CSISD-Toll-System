@@ -22,6 +22,9 @@ namespace CSISD_Tolling_System.Data.Migrations
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
+            migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "0", "road-user", "ROAD-USER" });
+            migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "1", "toll-operator", "TOLL-OPERATOR" });
+
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -151,6 +154,22 @@ namespace CSISD_Tolling_System.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Preference",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    FontSize = table.Column<int>(nullable: false),
+                    Language = table.Column<string>(nullable: false),
+                    Magnification = table.Column<int>(nullable: false),
+                    ColorBlindMode = table.Column<bool>(nullable: false),
+                    ScreenReader = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Preference", x => new { x.Id });
                 });
 
             migrationBuilder.CreateIndex(

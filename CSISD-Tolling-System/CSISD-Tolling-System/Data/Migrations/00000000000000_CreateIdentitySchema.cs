@@ -26,6 +26,22 @@ namespace CSISD_Tolling_System.Data.Migrations
             migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "1", "toll-operator", "TOLL-OPERATOR" });
 
             migrationBuilder.CreateTable(
+                name: "Preference",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    FontSize = table.Column<int>(nullable: false),
+                    Language = table.Column<string>(nullable: false),
+                    Magnification = table.Column<int>(nullable: false),
+                    ColorBlindMode = table.Column<bool>(nullable: false),
+                    ScreenReader = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Preference", x => new { x.Id });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -43,11 +59,103 @@ namespace CSISD_Tolling_System.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    PreferenceId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(name: "FK_Preference", column: x => x.PreferenceId, principalTable: "Preference", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RFID",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    IsValid = table.Column<bool>(nullable: false),
+                    ExpiryDate = table.Column<DateTime>(nullable: false),
+                    RegistrationPlate = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RFID", x => new { x.Id });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vehicle",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    Make = table.Column<string>(nullable: false),
+                    Model = table.Column<string>(nullable: false),
+                    RegistrationPlate = table.Column<string>(nullable: false),
+                    OwnerId = table.Column<string>(maxLength:450, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vehicle", x => new { x.Id });
+                    table.ForeignKey(name: "FK_AspNetUsersVehicle", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invoice",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    Fee = table.Column<float>(nullable: false),
+                    UserId = table.Column<string>(maxLength: 450, nullable: false),
+                    VehicleId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoice", x => new { x.Id });
+                    table.ForeignKey(name: "FK_AspNetUsersInvoice", column: x => x.UserId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(name: "FK_Vehicle", column: x => x.VehicleId, principalTable: "Vehicle", principalColumn: "Id", onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaymentMethod",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    PaymentType = table.Column<string>(nullable: false),
+                    Amount = table.Column<float>(nullable: false),
+                    TimeStamp = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentMethod", x => new { x.Id });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Card",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    CardNumber = table.Column<string>(nullable: false),
+                    Cvv = table.Column<int>(nullable: false),
+                    ExpiryDate = table.Column<DateTime>(nullable: false),
+                    NameOnCard = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Card", x => new { x.Id });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contract",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false),
+                    Company = table.Column<string>(nullable: false),
+                    Fee = table.Column<float>(nullable: false),
+                    Type = table.Column<string>(nullable: false),
+                    ExpiryDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contract", x => new { x.Id });
                 });
 
             migrationBuilder.CreateTable(
@@ -156,22 +264,6 @@ namespace CSISD_Tolling_System.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Preference",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false),
-                    FontSize = table.Column<int>(nullable: false),
-                    Language = table.Column<string>(nullable: false),
-                    Magnification = table.Column<int>(nullable: false),
-                    ColorBlindMode = table.Column<bool>(nullable: false),
-                    ScreenReader = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Preference", x => new { x.Id });
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -233,7 +325,28 @@ namespace CSISD_Tolling_System.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Invoice");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Preference");
+
+            migrationBuilder.DropTable(
+                name: "Vehicle");
+
+            migrationBuilder.DropTable(
+                name: "RFID");
+
+            migrationBuilder.DropTable(
+                name: "PaymentMethod");
+
+            migrationBuilder.DropTable(
+                name: "Card");
+
+            migrationBuilder.DropTable(
+                name: "Contract");
         }
     }
 }

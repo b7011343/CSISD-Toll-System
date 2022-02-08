@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CSISD_Tolling_System.Areas.Identity;
 using CSISD_Tolling_System.Data;
+using CSISD_Tolling_System.Models;
 
 namespace CSISD_Tolling_System
 {
@@ -34,7 +35,7 @@ namespace CSISD_Tolling_System
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<User>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();

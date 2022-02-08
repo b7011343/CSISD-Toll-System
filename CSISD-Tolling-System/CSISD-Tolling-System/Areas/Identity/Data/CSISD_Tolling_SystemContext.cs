@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using CSISD_Tolling_System.Models;
 
 namespace CSISD_Tolling_System.Data
 {
-    public class CSISD_Tolling_SystemContext : IdentityDbContext<IdentityUser>
+    public class CSISD_Tolling_SystemContext : IdentityDbContext<User>
     {
         public CSISD_Tolling_SystemContext(DbContextOptions<CSISD_Tolling_SystemContext> options)
             : base(options)

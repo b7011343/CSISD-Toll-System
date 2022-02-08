@@ -1,6 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
 @page "/"
 
 @code {
@@ -10,7 +8,7 @@
 <AuthorizeView Roles="road-user">
     <Authorized>
         <div class="container">
-            <h5>Customer ID: @userId</h5>
+            <h5>Customer ID: </h5>
             <table class="table table-hover mt-1 table-sm">
                 <thead>
                     <tr>

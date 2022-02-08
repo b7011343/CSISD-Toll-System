@@ -22,6 +22,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
+            //roles dummy data
             migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "0", "road-user", "ROAD-USER" });
             migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "1", "toll-operator", "TOLL-OPERATOR" });
 
@@ -41,6 +42,9 @@ namespace CSISD_Tolling_System.Data.Migrations
                     table.PrimaryKey("PK_Preference", x => new { x.Id });
                 });
 
+            //default preference insert data
+            migrationBuilder.InsertData("Preference", new string[] { "Id", "FontSize", "Language", "Magnification", "ColorBlindMode", "ScreenReader" }, new object[] { "0", "11", "ENGLISH", "100", "FALSE", "FALSE" });
+            
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -67,6 +71,9 @@ namespace CSISD_Tolling_System.Data.Migrations
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(name: "FK_Preference", column: x => x.PreferenceId, principalTable: "Preference", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
+
+            //dummy users
+            //migrationBuilder.InsertData("Preference", new string[] { "Id", "UserName", "NormalizedUserName", "Email", "NormalizedEmail", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumber", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnd", "LockoutEnabled", "AccessFailedCount", "PreferenceId" }, new object[] { "0", "John Smith", "JOHN SMITH", "j.smith@testemail.com", "J.SMITH@TESTEMAIL.COM", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumber", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnd", "LockoutEnabled", "AccessFailedCount", "PreferenceId" });
 
             migrationBuilder.CreateTable(
                 name: "RFID",

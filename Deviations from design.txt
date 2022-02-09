@@ -1,1 +1,2 @@
 Altered navigation bar to include les fluff options and better tailored options
+Changed text on login page - removed and reference to customer reference number and added a button to re-send the email confirmation - JS

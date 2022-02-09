@@ -1,7 +1,8 @@
 ﻿@page
 @using Microsoft.AspNetCore.Identity
+@using CSISD_Tolling_System.Models
 @attribute [IgnoreAntiforgeryToken]
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<User> SignInManager
 @functions {
     public async Task<IActionResult> OnPost()
     {

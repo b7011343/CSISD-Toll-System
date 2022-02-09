@@ -16,9 +16,7 @@ namespace CSISD_Tolling_System.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<CSISD_Tolling_SystemContext>(options => options.UseSqlServer(context.Configuration.GetConnectionString("CSISD_Tolling_SystemContextConnection")))
-                        .AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                        .AddEntityFrameworkStores<CSISD_Tolling_SystemContext>();
+                services.AddDbContext<CSISD_Tolling_SystemContext>(options => options.UseSqlServer(context.Configuration.GetConnectionString("CSISD_Tolling_SystemContextConnection")));
             });
         }
     }

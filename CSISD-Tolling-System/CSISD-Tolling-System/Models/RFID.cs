@@ -8,7 +8,7 @@ namespace CSISD_Tolling_System.Models
 {
     public class RFID
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required, StringLength(5)]
         public string IsValid { get; set; }
         [Required]

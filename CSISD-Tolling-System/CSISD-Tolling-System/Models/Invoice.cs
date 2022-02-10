@@ -8,7 +8,7 @@ namespace CSISD_Tolling_System.Models
 {
     public class Invoice
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public double Fee { get; set; }
         [Required, StringLength(450)]

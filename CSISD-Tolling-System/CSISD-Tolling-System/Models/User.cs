@@ -10,6 +10,6 @@ namespace CSISD_Tolling_System.Models
     public class User : IdentityUser
     {
         [Required]
-        public int PreferenceId { get; set; }
+        public long PreferenceId { get; set; }
     }
 }

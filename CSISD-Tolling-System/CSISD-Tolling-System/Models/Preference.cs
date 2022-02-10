@@ -8,7 +8,7 @@ namespace CSISD_Tolling_System.Models
 {
     public class Preference
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public int FontSize { get; set; }
         [Required]

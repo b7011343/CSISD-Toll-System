@@ -8,7 +8,7 @@ namespace CSISD_Tolling_System.Models
 {
     public class Vehicle
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public string Make { get; set; }
         [Required]

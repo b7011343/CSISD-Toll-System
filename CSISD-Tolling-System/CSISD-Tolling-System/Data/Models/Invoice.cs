@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace CSISD_Tolling_System.Models
 {
-    public class Card
+    public class Invoice
     {
+        [Key]
         public long Id { get; set; }
         [Required]
-        public string CardNumber { get; set; }
+        public double Fee { get; set; }
+        [Required, StringLength(450)]
+        public string UserId { get; set; }
         [Required]
-        public int Cvv { get; set; }
-        [Required]
-        public DateTime ExpiryDate { get; set; }
-        [Required]
-        public string NameOnCard { get; set; }
+        public int VehicleId { get; set; }
     }
 }

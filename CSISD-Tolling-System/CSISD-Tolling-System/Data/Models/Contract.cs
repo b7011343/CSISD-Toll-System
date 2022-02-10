@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace CSISD_Tolling_System.Models
 {
-    public class Vehicle
+    public class Contract
     {
+        [Key]
         public long Id { get; set; }
         [Required]
-        public string Make { get; set; }
+        public string Company { get; set; }
         [Required]
-        public string Model { get; set; }
+        public double Fee { get; set; }
         [Required]
-        public string RegistrationPlate { get; set; }
-        [Required, StringLength(450)]
-        public string OwnerID { get; set; }
+        public string Type { get; set; }
+        [Required]
+        public DateTime ExpiryDate { get; set; }
     }
 }

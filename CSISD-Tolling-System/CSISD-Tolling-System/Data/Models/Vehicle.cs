@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace CSISD_Tolling_System.Models
 {
-    public class RFID
+    public class Vehicle
     {
+        [Key]
         public long Id { get; set; }
-        [Required, StringLength(5)]
-        public string IsValid { get; set; }
         [Required]
-        public DateTime ExpiryDate { get; set; }
+        public string Make { get; set; }
+        [Required]
+        public string Model { get; set; }
         [Required]
         public string RegistrationPlate { get; set; }
+        [Required, StringLength(450)]
+        public string OwnerID { get; set; }
     }
 }

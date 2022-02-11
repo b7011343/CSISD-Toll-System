@@ -1,6 +1,10 @@
 name: .NET
 
-on: [push]
+on:
+  push:
+    branches:
+      - dev
+      - main
 
 jobs:
   build:

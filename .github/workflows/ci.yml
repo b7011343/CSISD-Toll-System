@@ -8,7 +8,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - run: CSISD-Toll-System
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -16,7 +15,12 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: CSISD-Tolling-System
     - name: Build
       run: dotnet build --no-restore
+      working-directory: CSISD-Tolling-System
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: CSISD-Tolling-System
+
+

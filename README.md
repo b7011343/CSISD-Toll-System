@@ -5,3 +5,7 @@
 Run this line to call the first migration in the package manager console:
 
   update-database -context ApplicationDbContext -migration 00000000000000_CreateIdentitySchema
+
+To drop the database tables run the following command in the package manager console:
+
+  drop-database -Context ApplicationDbContext

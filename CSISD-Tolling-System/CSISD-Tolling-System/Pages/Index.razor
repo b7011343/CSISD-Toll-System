@@ -75,10 +75,9 @@
 
 @code {
     private string customerId;
-
+    
     protected override void OnInitialized()
     {
-
         string userName = httpContextAccessor.HttpContext.User.Identity.Name;
         if (userName != null)
         {

@@ -30,7 +30,8 @@ namespace CSISD_Tolling_System.Data.Migrations
                 name: "Preference",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                              .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FontSize = table.Column<int>(nullable: false),
                     Language = table.Column<string>(nullable: false),
                     Magnification = table.Column<int>(nullable: false),
@@ -79,7 +80,8 @@ namespace CSISD_Tolling_System.Data.Migrations
                 name: "RFID",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                              .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IsValid = table.Column<bool>(nullable: false),
                     ExpiryDate = table.Column<DateTime>(nullable: false),
                     RegistrationPlate = table.Column<string>(nullable: false)
@@ -93,7 +95,8 @@ namespace CSISD_Tolling_System.Data.Migrations
                 name: "Vehicle",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                              .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Make = table.Column<string>(nullable: false),
                     Model = table.Column<string>(nullable: false),
                     RegistrationPlate = table.Column<string>(nullable: false),
@@ -102,17 +105,21 @@ namespace CSISD_Tolling_System.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicle", x => new { x.Id });
-                    table.ForeignKey(name: "FK_AspNetUsersVehicle", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
+                    // table.ForeignKey(name: "FK_AspNetUsersVehicle", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Invoice",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                              .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Fee = table.Column<float>(nullable: false),
                     UserId = table.Column<string>(maxLength: 450, nullable: false),
-                    VehicleId = table.Column<long>(nullable: false)
+                    VehicleId = table.Column<long>(nullable: false),
+                    EntryTimestamp = table.Column<DateTime>(nullable: false),
+                    ExitTimestamp = table.Column<DateTime>(nullable: false),
+                    Paid = table.Column<bool>(nullable:false)
                 },
                 constraints: table =>
                 {
@@ -125,7 +132,8 @@ namespace CSISD_Tolling_System.Data.Migrations
                 name: "PaymentMethod",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                              .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PaymentType = table.Column<string>(nullable: false),
                     Amount = table.Column<float>(nullable: false),
                     TimeStamp = table.Column<DateTime>(nullable: false)
@@ -139,7 +147,8 @@ namespace CSISD_Tolling_System.Data.Migrations
                 name: "Card",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                              .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CardNumber = table.Column<string>(nullable: false),
                     Cvv = table.Column<int>(nullable: false),
                     ExpiryDate = table.Column<DateTime>(nullable: false),
@@ -154,7 +163,8 @@ namespace CSISD_Tolling_System.Data.Migrations
                 name: "Contract",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                              .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Company = table.Column<string>(nullable: false),
                     Fee = table.Column<float>(nullable: false),
                     Type = table.Column<string>(nullable: false),

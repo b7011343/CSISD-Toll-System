@@ -16,7 +16,7 @@ namespace CSISD_Tolling_System.Data
         public DbSet<Preference> Preferences { get; set; }
         public DbSet<RFID> RFIDs { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-
+        
         public ApplicationDbContext() {}
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
@@ -25,13 +25,13 @@ namespace CSISD_Tolling_System.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().ToTable("AspNetUsers");
-            modelBuilder.Entity<Card>().ToTable("Card");
-            modelBuilder.Entity<Contract>().ToTable("Contract");
-            modelBuilder.Entity<Invoice>().ToTable("Invoice");
-            modelBuilder.Entity<PaymentMethod>().ToTable("PaymentMethod");
-            modelBuilder.Entity<Preference>().ToTable("Preference");
-            modelBuilder.Entity<RFID>().ToTable("RFID");
-            modelBuilder.Entity<Vehicle>().ToTable("Vehicle");
+            modelBuilder.Entity<Card>().ToTable("Card").Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Contract>().ToTable("Contract").Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Invoice>().ToTable("Invoice").Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<PaymentMethod>().ToTable("PaymentMethod").Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Preference>().ToTable("Preference").Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<RFID>().ToTable("RFID").Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Vehicle>().ToTable("Vehicle").Property(p => p.Id).ValueGeneratedOnAdd();
         }
     }
 }

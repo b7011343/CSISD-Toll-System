@@ -8,25 +8,39 @@
 
 @*change to match Login Display.razor*@
 
-
-
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
+@if (!(SignInManager.IsSignedIn(User)))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/LogOut">Logout</a>
-    </li>
+    <a href="Identity/Account/Register">Register</a>
+    <a href="Identity/Account/Login">Log in</a>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    
+
+<AuthorizeView Roles="road-user">
+        <Authorized>
+                <a href="Identity/Account/Manage">Hello, @User.Identity.Name!</a>
+                <a href="Identitiy/Account/Register">Current Tolls</a>
+                <a href="Identitiy/Account/Register">Past Payments</a>
+                <a href="Identity/Account/Register">Contracts</a>
+                <a href="Identiity/Account/Register">Contacts</a>
+                <form method="post" action="Identity/Account/LogOut">
+                    <button type="submit" class="nav-link btn btn-link">Log out</button>
+                </form></Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="toll-operator">
+            <Authorized>
+            <a href="Identity/Account/Manage">Hello, @User.Identity.Name!</a>
+                <form method="post" action="Identity/Account/LogOut">
+                    <button type="submit" class="nav-link btn btn-link">Log out</button>
+                </form>
+                <a href="Identitiy/Account/Register">Unpaid Tolls</a>
+                <a href="Identity/Account/Register">Toll History</a>
+                <a href="Identitiy/Account/Register">Invoice</a>
+                <a href="Identity/Account/Register">Contracts</a>
+                <a href="Identiity/Account/Register">Contacts</a>
+            </Authorized>
+         
+        </AuthorizeView>
 }
-</ul>

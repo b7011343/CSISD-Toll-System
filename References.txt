@@ -1,0 +1,2 @@
+https://stackoverflow.com/a/3730040
+https://docs.microsoft.com/en-us/dotnet/api/system.decimal?view=net-6.0#remarks

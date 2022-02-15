@@ -12,10 +12,14 @@ namespace CSISD_Tolling_System.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
         [Required]
-        public double Fee { get; set; }
+        [Column(TypeName = "decimal(19, 4)")]
+        public decimal Fee { get; set; }
+
         [Required, StringLength(450)]
         public string UserId { get; set; }
+
         [Required]
         public long VehicleId { get; set; }
         [Required]

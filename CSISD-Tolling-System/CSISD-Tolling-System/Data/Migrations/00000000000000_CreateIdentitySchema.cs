@@ -114,7 +114,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                               .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Fee = table.Column<float>(nullable: false),
+                    Fee = table.Column<decimal>(nullable: false),
                     UserId = table.Column<string>(maxLength: 450, nullable: false),
                     VehicleId = table.Column<long>(nullable: false),
                     EntryTimestamp = table.Column<DateTime>(nullable: false),
@@ -135,7 +135,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                     Id = table.Column<long>(nullable: false)
                               .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PaymentType = table.Column<string>(nullable: false),
-                    Amount = table.Column<float>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
                     TimeStamp = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -166,7 +166,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                     Id = table.Column<long>(nullable: false)
                               .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Company = table.Column<string>(nullable: false),
-                    Fee = table.Column<float>(nullable: false),
+                    Fee = table.Column<decimal>(nullable: false),
                     Type = table.Column<string>(nullable: false),
                     ExpiryDate = table.Column<DateTime>(nullable: false)
                 },

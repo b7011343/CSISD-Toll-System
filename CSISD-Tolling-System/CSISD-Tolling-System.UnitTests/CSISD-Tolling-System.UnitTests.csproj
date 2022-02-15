@@ -14,8 +14,4 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CSISD-Tolling-System\CSISD-Tolling-System.csproj" />
-  </ItemGroup>
-
 </Project>

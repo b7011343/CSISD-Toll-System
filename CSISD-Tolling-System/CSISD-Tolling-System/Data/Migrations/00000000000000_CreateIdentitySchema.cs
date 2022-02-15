@@ -105,9 +105,9 @@ namespace CSISD_Tolling_System.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicle", x => new { x.Id });
-                    // table.ForeignKey(name: "FK_AspNetUsersVehicle", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(name: "FK_AspNetUsersVehicle", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
-            migrationBuilder.InsertData("Vehicle", new string[] { "Id", "Make", "Model", "RegistrationPlate", "OwnerId"}, new object[] { "0", "Ford", "Fiesta", "RF66 W5F", "1" });
+            //migrationBuilder.InsertData("Vehicle", new string[] { "Id", "Make", "Model", "RegistrationPlate", "OwnerId"}, new object[] { "0", "Ford", "Fiesta", "RF66 W5F", "1" });
 
             migrationBuilder.CreateTable(
                 name: "Invoice",

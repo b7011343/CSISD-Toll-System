@@ -107,6 +107,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                     table.PrimaryKey("PK_Vehicle", x => new { x.Id });
                     // table.ForeignKey(name: "FK_AspNetUsersVehicle", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
+            migrationBuilder.InsertData("Vehicle", new string[] { "Id", "Make", "Model", "RegistrationPlate", "OwnerId"}, new object[] { "0", "Ford", "Fiesta", "RF66 W5F", "1" });
 
             migrationBuilder.CreateTable(
                 name: "Invoice",
@@ -319,6 +320,11 @@ namespace CSISD_Tolling_System.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicle_OwnerID",
+                table: "Vehicle",
+                column: "OwnerID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -1,8 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using CSISD_Tolling_System.Models
+@using CSISD_Tolling_System.Data
+@using Microsoft.AspNetCore.Http
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@*change to match Login Display.razor*@
+
+
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

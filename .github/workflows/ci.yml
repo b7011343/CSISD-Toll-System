@@ -8,9 +8,11 @@ on:
 
 jobs:
   build:
+
     runs-on: windows-latest
 
     steps:
+    - uses: actions/checkout@v2
     - name: Restore dependencies
       run: dotnet restore
       working-directory: CSISD-Tolling-System

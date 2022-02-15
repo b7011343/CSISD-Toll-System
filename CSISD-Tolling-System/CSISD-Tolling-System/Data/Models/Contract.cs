@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CSISD_Tolling_System.Models
 {
@@ -12,10 +10,14 @@ namespace CSISD_Tolling_System.Models
         public long Id { get; set; }
         [Required]
         public string Company { get; set; }
+
         [Required]
-        public double Fee { get; set; }
+        [Column(TypeName = "decimal(19, 4)")]
+        public decimal Fee { get; set; }
+
         [Required]
         public string Type { get; set; }
+
         [Required]
         public DateTime ExpiryDate { get; set; }
     }

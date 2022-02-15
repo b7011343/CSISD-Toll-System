@@ -110,7 +110,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false),
-                    Fee = table.Column<float>(nullable: false),
+                    Fee = table.Column<decimal>(nullable: false),
                     UserId = table.Column<string>(maxLength: 450, nullable: false),
                     VehicleId = table.Column<long>(nullable: false)
                 },
@@ -127,7 +127,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false),
                     PaymentType = table.Column<string>(nullable: false),
-                    Amount = table.Column<float>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
                     TimeStamp = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -156,7 +156,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false),
                     Company = table.Column<string>(nullable: false),
-                    Fee = table.Column<float>(nullable: false),
+                    Fee = table.Column<decimal>(nullable: false),
                     Type = table.Column<string>(nullable: false),
                     ExpiryDate = table.Column<DateTime>(nullable: false)
                 },

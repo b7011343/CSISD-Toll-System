@@ -1,2 +1,7 @@
-Altered navigation bar to include les fluff options and better tailored options
+Altered navigation bar to include less fluff options and better tailored options
 Changed text on login page - removed and reference to customer reference number and added a button to re-send the email confirmation - JS
+Altered "Home" to show current tolls
+Altered "current tolls" to display "Toll History" where we show all tolls tied to an account
+Altered nav bar for the road users now includes: "Home" (current unpaid tolls), "Toll History" (Every toll tied to account), "Contracts" (view  all available contracts), "Information" (Show covered areas, contact info etc...)
+-- To improve readibilty of what each section does and provide the most urgent information on a imediate page, i.e the home page.
+

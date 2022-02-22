@@ -1,12 +1,43 @@
-﻿<AuthorizeView>
-    <Authorized>
-        <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
-        <form method="post" action="Identity/Account/LogOut">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
-        </form>
-    </Authorized>
-    <NotAuthorized>
-        <a href="Identity/Account/Register">Register</a>
-        <a href="Identity/Account/Login">Log in</a>
-    </NotAuthorized>
-</AuthorizeView>
+﻿@using Microsoft.AspNetCore.Identity
+@using CSISD_Tolling_System.Data
+@using Microsoft.AspNetCore.Http
+@using CSISD_Tolling_System.Models
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ApplicationDbContext db
+@inject IHttpContextAccessor httpContextAccessor
+
+
+
+ 
+    <AuthorizeView Roles="road-user">
+        <Authorized>
+                <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
+                <a href="Identitiy/Account/Register">Current Tolls</a>
+                <a href="Identitiy/Account/Register">Past Payments</a>
+                <a href="Identity/Account/Register">Contracts</a>
+                <a href="Identiity/Account/Register">Contacts</a>
+                <form method="post" action="Identity/Account/LogOut">
+                    <button type="submit" class="nav-link btn btn-link">Log out</button>
+                </form></Authorized>
+                <NotAuthorized>
+                    <a href="Identity/Account/Register">Register</a>
+                    <a href="Identity/Account/Login">Log in</a>
+                </NotAuthorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="toll-operator">
+            <Authorized>
+            <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
+                <form method="post" action="Identity/Account/LogOut">
+                    <button type="submit" class="nav-link btn btn-link">Log out</button>
+                </form>
+                <a href="Identitiy/Account/Register">Unpaid Tolls</a>
+                <a href="Identity/Account/Register">Toll History</a>
+                <a href="Identitiy/Account/Register">Invoice</a>
+                <a href="Identity/Account/Register">Contracts</a>
+                <a href="Identiity/Account/Register">Contacts</a>
+            </Authorized>
+         
+        </AuthorizeView>
+ 

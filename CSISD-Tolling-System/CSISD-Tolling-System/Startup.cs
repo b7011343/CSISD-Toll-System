@@ -44,10 +44,8 @@ namespace CSISD_Tolling_System
             services.AddHttpContextAccessor();
             services.AddSingleton<SimulationManager>();
             services.AddSingleton<InvoiceService>();
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> _userManager)
         {
             if (env.IsDevelopment())

@@ -1,5 +1,4 @@
 ﻿
-
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.AspNetCore.Mvc.ViewEngines
 @inject IWebHostEnvironment Environment
@@ -22,7 +21,7 @@
     <link rel="stylesheet" href="~/Identity/css/site.css" />
 </head>
 <body>
-    <header>
+    <header>@*
         <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" href="~/">CSISD-Tolling-System</a>
@@ -46,12 +45,13 @@
                     }
                 </div>
             </div>
-        </nav>
+        </nav>*@
     </header>
 
     <div class="container">
         <partial name="_CookieConsentPartial" optional />
         <main role="main" class="pb-3">
+            
             @RenderBody()
         </main>
     </div>

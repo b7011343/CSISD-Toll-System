@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>aspnet-CSISD_Tolling_System-627E3365-1079-4B5A-B606-FE274BBBB827</UserSecretsId>
     <RootNamespace>CSISD_Tolling_System</RootNamespace>
   </PropertyGroup>

@@ -25,6 +25,7 @@ namespace CSISD_Tolling_System.Data.Migrations
             //roles dummy data
             migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "0", "road-user", "ROAD-USER" });
             migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "1", "toll-operator", "TOLL-OPERATOR" });
+            migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "2", "admin", "ADMIN" });
 
             migrationBuilder.CreateTable(
                 name: "Preference",

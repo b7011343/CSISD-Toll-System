@@ -10,8 +10,12 @@
 
 @if (!(SignInManager.IsSignedIn(User)))
 {
-    <a href="Identity/Account/Register">Register</a>
-    <a href="Identity/Account/Login">Log in</a>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
 }
 else
 {

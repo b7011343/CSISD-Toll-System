@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-
 namespace CSISD_Tolling_System.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]

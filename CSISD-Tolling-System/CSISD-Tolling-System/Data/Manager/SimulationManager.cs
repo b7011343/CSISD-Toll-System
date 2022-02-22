@@ -38,13 +38,13 @@ namespace CSISD_Tolling_System.Data.Manager
         private void generateInvoices()
         {
             List<Vehicle> invoiceVehicles = db.Vehicles.ToList();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < invoiceVehicles.Count(); i++)
             {
                 Random random = new Random();
                 Vehicle vehicle = invoiceVehicles[i];
                 DateTime entry = DateTime.Today.AddDays(-(random.Next(3, 14)));
                 DateTime exit = entry.AddHours(random.NextDouble());
-                Invoice invoice = new Invoice() { Fee = 1, UserId = vehicle.OwnerID, VehicleId = vehicle.Id, Paid = false, EntryTimestamp = entry, ExitTimestamp = exit };
+                Invoice invoice = new Invoice() { Fee = random.Next(5, 50), UserId = vehicle.OwnerID, VehicleId = vehicle.Id, Paid = false, EntryTimestamp = entry, ExitTimestamp = exit };
                 db.Invoices.Add(invoice);
             }
             db.SaveChanges();

@@ -5,4 +5,12 @@ Altered "current tolls" to display "Toll History" where we show all tolls tied t
 Altered nav bar for the road users now includes: "Home" (current unpaid tolls), "Toll History" (Every toll tied to account), "Contracts" (view  all available contracts), "Information" (Show covered areas, contact info etc...)
 -- To improve readibilty of what each section does and provide the most urgent information on a imediate page, i.e the home page.
 
+Altered Toll operator home page to display unpaid tolls as default
+-- Toll operator nav bar "Home" (Unpaid tolls), "Toll History" (paid tolls), "invoices" (create/manage invoices), "contracts" (create/manage contracts), "contacts" (legal team contacts)
+
+Log in page removed magnify icon and opted for just 2 symbols to improve universal understanding, as they are common in other prolific sites
+
+Altered location of nav bar to allow for less white space  
+
 On invoice table added entry and exit and paid fields tobetter track cost of invoice and status
+Add InvoiceService to access invoice data

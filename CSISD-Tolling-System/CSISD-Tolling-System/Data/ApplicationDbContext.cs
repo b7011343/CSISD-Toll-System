@@ -4,6 +4,8 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CSISD_Tolling_System.Models;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace CSISD_Tolling_System.Data
 {
@@ -16,7 +18,7 @@ namespace CSISD_Tolling_System.Data
         public DbSet<Preference> Preferences { get; set; }
         public DbSet<RFID> RFIDs { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-        
+
         public ApplicationDbContext() {}
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
@@ -32,6 +34,19 @@ namespace CSISD_Tolling_System.Data
             modelBuilder.Entity<Preference>().ToTable("Preference").Property(p => p.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<RFID>().ToTable("RFID").Property(p => p.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Vehicle>().ToTable("Vehicle").Property(p => p.Id).ValueGeneratedOnAdd();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.json")
+                   .Build();
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
     }
 }

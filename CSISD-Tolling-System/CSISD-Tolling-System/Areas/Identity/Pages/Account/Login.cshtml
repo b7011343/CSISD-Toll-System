@@ -4,52 +4,96 @@
 @{
     ViewData["Title"] = "Log in";
 }
-<partial name="../Shared/_LoginPartial" />
-
-
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-6">
-        <section>
-            <form id="account" method="post">
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+<section class="topSection">
+    <div class="row">
+        <div class="col">
+            <img class="stockPhoto" src="~/images/pic1.jpg" />
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col-8">
+                    <h1>Nordic Deartment of Transport</h1>
+                    <p class="description">Put text in here</p>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <div class="col-4">
+                    <select name="languages" id="languages-select">
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                    </select>
+                    <a href="#"><i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-search-minus fa-2x" aria-hidden="true"></i></a>
                 </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
+            </div>
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Disabled</a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>For any issues logging in or you have forgotten your password please click: <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a></p>
-                    <p>
-                        New Customer?
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <button type="submit" asp-page-handler="SendVerificationEmail" class="btn-link" style="padding:0px;margin:0px;border:0px">Resend email confirmation</button>
-                    </p>
-                </div>
-            </form>
-        </section>
+                </nav>
+            </div>
+        </div>
     </div>
-</div>
-
+</section>
+<h1>@ViewData["Title"]</h1>
+<section>
+    <form id="account" method="post">
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label asp-for="Input.RememberMe">
+                    <input asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+        <div class="form-group">
+            <p>For any issues logging in or you have forgotten your password please click: <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a></p>
+            <p>
+                New Customer?
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+            </p>
+            <p>
+                <button type="submit" asp-page-handler="SendVerificationEmail" class="btn-link" style="padding:0px;margin:0px;border:0px">Resend email confirmation</button>
+            </p>
+        </div>
+    </form>
+</section>
+<hr />
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -1,10 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-CSISD_Tolling_System-627E3365-1079-4B5A-B606-FE274BBBB827</UserSecretsId>
     <RootNamespace>CSISD_Tolling_System</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Tolls\**" />
+    <Content Remove="Areas\Tolls\**" />
+    <EmbeddedResource Remove="Areas\Tolls\**" />
+    <None Remove="Areas\Tolls\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
@@ -22,11 +29,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Tolls\" />
+    <None Include="Areas\Tolls\Views\Contracts.cshtml" />
+    <None Include="Areas\Tolls\Views\Invoices.cshtml" />
+    <None Include="Areas\Tolls\Views\Payment.cshtml" />
+    <None Include="Areas\Tolls\Views\TollHistory.cshtml" />
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="compilerconfig.json" />
+    <Folder Include="Areas\Tolls\Controllers\" />
+    <Folder Include="Areas\Tolls\Data\" />
+    <Folder Include="Areas\Tolls\Models\" />
   </ItemGroup>
 
 

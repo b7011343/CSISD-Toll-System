@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSISD_Tolling_System.Data.Service.SimulationServices;
 using CSISD_Tolling_System.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,16 +12,14 @@ namespace CSISD_Tolling_System.Data.Manager
 {
     public class SimulationManager : Controller
     {
-        private ApplicationDbContext db;
-        private UserManager<User> userManager;
-
-        public SimulationManager() {}
-
+        private ApplicationDbContext _db;
+        private UserManager<User>    _userManager;
 
         public void generate(UserManager<User> userManager, ApplicationDbContext db)
         {
-            this.db = db;
-            this.userManager = userManager;
+            _db          = db;
+            _userManager = userManager;
+
             if (dbEmpty())
             {
                 _generate();
@@ -37,17 +36,11 @@ namespace CSISD_Tolling_System.Data.Manager
 
         private void generateInvoices()
         {
-            List<Vehicle> invoiceVehicles = db.Vehicles.ToList();
-            for (int i = 0; i < invoiceVehicles.Count(); i++)
-            {
-                Random random = new Random();
-                Vehicle vehicle = invoiceVehicles[i];
-                DateTime entry = DateTime.Today.AddDays(-(random.Next(3, 14)));
-                DateTime exit = entry.AddHours(random.NextDouble());
-                Invoice invoice = new Invoice() { Fee = random.Next(5, 50), UserId = vehicle.OwnerID, VehicleId = vehicle.Id, Paid = false, EntryTimestamp = entry, ExitTimestamp = exit };
-                db.Invoices.Add(invoice);
-            }
-            db.SaveChanges();
+            ISimulationService<Invoice> invoiceSimulator = new InvoiceSimulationService(_db.Vehicles);
+            List<Invoice> invoices = invoiceSimulator.Generate();
+
+            _db.AddRange(invoices);
+            _db.SaveChanges();
         }
 
         private void generateContracts()
@@ -57,19 +50,11 @@ namespace CSISD_Tolling_System.Data.Manager
 
         private void generateRFIDs()
         {
-            List<Vehicle> vehicles = db.Vehicles.ToList();
-            for (int i = 0; i < 5; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    Random gen = new Random();
-                    int range = 10 * 365;
-                    DateTime randomExpiryDate = DateTime.Today.AddDays(gen.Next(range));
-                    RFID rfid = new RFID() { RegistrationPlate = vehicles[i].RegistrationPlate, ExpiryDate = randomExpiryDate };
-                    db.RFIDs.Add(rfid);
-                }
-            }
-            db.SaveChanges();
+            ISimulationService<RFID> rfidSimulator = new RFIDSimulationService(_db.Vehicles);
+            List<RFID> rfids = rfidSimulator.Generate();
+
+            _db.RFIDs.AddRange(rfids);
+            _db.SaveChanges();
         }
 
         private async Task generateUsersAndVehicles()
@@ -82,42 +67,41 @@ namespace CSISD_Tolling_System.Data.Manager
             {
                 string email = "test" + i + "@test.com";
                 var user = new User { UserName = email, Email = email, PreferenceId = 0 };
-                var result = await userManager.CreateAsync(user, "Test123!");
+                var result = await _userManager.CreateAsync(user, "Test123!");
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "road-user");
+                    await _userManager.AddToRoleAsync(user, "road-user");
                     Vehicle vehicle = new Vehicle() { OwnerID = user.Id, Make = makes[i], Model = models[i], RegistrationPlate = regPlates[i] };
-                    db.Vehicles.Add(vehicle);
+                    _db.Vehicles.Add(vehicle);
                 }
             }
 
             string adminEmail = "admin@admin.com";
             var adminUser = new User { UserName = adminEmail, Email = adminEmail, PreferenceId = 0 };
-            var result2 = await userManager.CreateAsync(adminUser, "Test123!");
+            var result2 = await _userManager.CreateAsync(adminUser, "Test123!");
             if (result2.Succeeded)
             {
-                await userManager.AddToRoleAsync(adminUser, "admin");
+                await _userManager.AddToRoleAsync(adminUser, "admin");
             }
 
             string tollOperatorEmail = "tolls@tolls.com";
             var tollOperatorUser = new User { UserName = tollOperatorEmail, Email = tollOperatorEmail, PreferenceId = 0 };
-            var result3 = await userManager.CreateAsync(tollOperatorUser, "Test123!");
+            var result3 = await _userManager.CreateAsync(tollOperatorUser, "Test123!");
             if (result3.Succeeded)
             {
-                await userManager.AddToRoleAsync(tollOperatorUser, "toll-operator");
+                await _userManager.AddToRoleAsync(tollOperatorUser, "toll-operator");
             }
-
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         public bool dbEmpty()
         {
             return (
-                db.Users.ToList().Count() == 0 &&
-                db.Vehicles.ToList().Count() == 0 &&
-                db.RFIDs.ToList().Count() == 0 &&
-                db.Cards.ToList().Count() == 0 &&
-                db.Contracts.ToList().Count() == 0
+                _db.Users.ToList().Count() == 0 &&
+                _db.Vehicles.ToList().Count() == 0 &&
+                _db.RFIDs.ToList().Count() == 0 &&
+                _db.Cards.ToList().Count() == 0 &&
+                _db.Contracts.ToList().Count() == 0
             );
         }
     }

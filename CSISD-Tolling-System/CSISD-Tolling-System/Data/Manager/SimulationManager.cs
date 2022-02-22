@@ -104,7 +104,7 @@ namespace CSISD_Tolling_System.Data.Manager
             var result3 = await userManager.CreateAsync(tollOperatorUser, "Test123!");
             if (result3.Succeeded)
             {
-                await userManager.AddToRoleAsync(tollOperatorUser, "admin");
+                await userManager.AddToRoleAsync(tollOperatorUser, "toll-operator");
             }
 
             db.SaveChanges();

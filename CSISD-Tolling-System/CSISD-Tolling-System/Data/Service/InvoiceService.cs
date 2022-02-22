@@ -20,5 +20,20 @@ namespace CSISD_Tolling_System.Data.Service
         {
             return db.Invoices.Where(x => x.UserId == userId).ToList();
         }
+
+        public List<Invoice> getUserUnpaidInvoices(string userId)
+        {
+            return db.Invoices.Where(x => x.UserId == userId && x.Paid == false).ToList();
+        }
+
+        public List<Invoice> getAllInvoices()
+        {
+            return db.Invoices.ToList();
+        }
+
+        public List<Invoice> getAllUnpaidInvoices()
+        {
+            return db.Invoices.Where(x => x.Paid == false).ToList();
+        }
     }
 }

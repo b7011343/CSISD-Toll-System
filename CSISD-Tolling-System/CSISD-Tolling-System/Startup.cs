@@ -65,10 +65,13 @@ namespace CSISD_Tolling_System
             app.UseAuthentication();
             app.UseAuthorization();
 
-            var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
-            var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
-            //ApplicationDbContext db = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
-            app.ApplicationServices.GetRequiredService<SimulationManager>().generate(_userManager, db);
+            IServiceScope scope = app.ApplicationServices.GetService<IServiceScopeFactory>()
+                                                         .CreateScope();
+
+            ApplicationDbContext databaseContext   = scope.ServiceProvider.GetService<ApplicationDbContext>();
+            SimulationManager    simulationManager = app.ApplicationServices.GetRequiredService<SimulationManager>();
+
+            simulationManager.Generate(_userManager, databaseContext);
 
             app.UseEndpoints(endpoints =>
             {

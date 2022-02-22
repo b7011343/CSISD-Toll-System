@@ -12,97 +12,98 @@ namespace CSISD_Tolling_System.Data.Manager
 {
     public class SimulationManager : Controller
     {
-        private ApplicationDbContext _db;
-        private UserManager<User>    _userManager;
-
-        public void generate(UserManager<User> userManager, ApplicationDbContext db)
+        /// <summary>
+        /// Generate test/demo data for users, invoices, contracts, rfids and vehicles.
+        ///
+        /// If the database is already populated then this is a no-op.
+        /// </summary>
+        /// <param name="userManager">UserManager for creating users & assigning roles. Should not be null.</param>
+        /// <param name="db">Application database context. Should not be null.</param>
+        public void Generate(UserManager<User> userManager, ApplicationDbContext db)
         {
-            _db          = db;
-            _userManager = userManager;
-
-            if (dbEmpty())
+            if (ShouldGenerateTestData(db))
             {
-                _generate();
+                // Need to generate users & vehicles before generating any of
+                // the others (RFIDs, invoices and contracts etc...)
+                GenerateUsersAndVehicles(userManager, db);
+
+                GenerateRFIDs(db);
+                GenerateInvoices(db);
+                GenerateContracts(db);
             }
         }
 
-        public void _generate()
+        /// <summary>
+        /// Update the database with test data for the invoices table
+        /// </summary>
+        private void GenerateInvoices(ApplicationDbContext db)
         {
-            generateUsersAndVehicles().Wait();
-            generateRFIDs();
-            generateInvoices();
-            generateContracts();
-        }
-
-        private void generateInvoices()
-        {
-            ISimulationService<Invoice> invoiceSimulator = new InvoiceSimulationService(_db.Vehicles);
+            ISimulationService<Invoice> invoiceSimulator = new InvoiceSimulationService(db.Vehicles);
             List<Invoice> invoices = invoiceSimulator.Generate();
 
-            _db.AddRange(invoices);
-            _db.SaveChanges();
+            db.AddRange(invoices);
+            db.SaveChanges();
         }
 
-        private void generateContracts()
-        {
+        /// <summary>
+        /// Update the database with test data for the contracts table
+        /// </summary>
+        private void GenerateContracts(ApplicationDbContext db)
+        { }
 
-        }
-
-        private void generateRFIDs()
+        /// <summary>
+        /// Update the database with test data for the RFID table
+        /// </summary>
+        private void GenerateRFIDs(ApplicationDbContext db)
         {
-            ISimulationService<RFID> rfidSimulator = new RFIDSimulationService(_db.Vehicles);
+            ISimulationService<RFID> rfidSimulator = new RFIDSimulationService(db.Vehicles);
             List<RFID> rfids = rfidSimulator.Generate();
 
-            _db.RFIDs.AddRange(rfids);
-            _db.SaveChanges();
+            db.RFIDs.AddRange(rfids);
+            db.SaveChanges();
         }
 
-        private async Task generateUsersAndVehicles()
+        /// <summary>
+        /// Update the database with test data for the users and vehicles
+        /// table.
+        /// Should be called before trying to generate data for RFID, contracts
+        /// or invoices.
+        /// </summary>
+        private async Task GenerateUsersAndVehicles(UserManager<User> userManager, ApplicationDbContext db)
         {
-            List<string> makes = new List<string>() { "Ford", "Audi", "VW", "Skoda", "Lexus" };
-            List<string> models = new List<string>() { "Modeo", "TT", "Polo", "Fabia", "IS200" };
-            List<string> regPlates = new List<string>() { "MW33", "WE22", "LF90", "8008", "JB12" };
+            // Generate the users
+            ISimulationService<User> userSimulator = new UserSimulationService(userManager);
+            userSimulator.Generate();
 
-            for (int i = 0; i < 5; i++)
-            {
-                string email = "test" + i + "@test.com";
-                var user = new User { UserName = email, Email = email, PreferenceId = 0 };
-                var result = await _userManager.CreateAsync(user, "Test123!");
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, "road-user");
-                    Vehicle vehicle = new Vehicle() { OwnerID = user.Id, Make = makes[i], Model = models[i], RegistrationPlate = regPlates[i] };
-                    _db.Vehicles.Add(vehicle);
-                }
-            }
-
-            string adminEmail = "admin@admin.com";
-            var adminUser = new User { UserName = adminEmail, Email = adminEmail, PreferenceId = 0 };
-            var result2 = await _userManager.CreateAsync(adminUser, "Test123!");
-            if (result2.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(adminUser, "admin");
-            }
-
+            // Generate the vehicles (can only do this after we've generated the users)
+            ISimulationService<Vehicle> vehicleSimulator = new VehicleSimulationService(db.Users);
+            
             string tollOperatorEmail = "tolls@tolls.com";
             var tollOperatorUser = new User { UserName = tollOperatorEmail, Email = tollOperatorEmail, PreferenceId = 0 };
-            var result3 = await _userManager.CreateAsync(tollOperatorUser, "Test123!");
+            var result3 = await userManager.CreateAsync(tollOperatorUser, "Test123!");
             if (result3.Succeeded)
             {
-                await _userManager.AddToRoleAsync(tollOperatorUser, "toll-operator");
+                await userManager.AddToRoleAsync(tollOperatorUser, "toll-operator");
             }
-            _db.SaveChanges();
+            db.SaveChanges();
+            List<Vehicle> vehicles = vehicleSimulator.Generate();
+
+            db.Vehicles.AddRange(vehicles);
+            db.SaveChanges();
         }
 
-        public bool dbEmpty()
+        /// <summary>
+        /// Determine if we should insert the test data (or not, if the database is
+        /// already populated)
+        /// </summary>
+        /// <returns>True if the test data should be generated, false if not.</returns>
+        private bool ShouldGenerateTestData(ApplicationDbContext db)
         {
-            return (
-                _db.Users.ToList().Count() == 0 &&
-                _db.Vehicles.ToList().Count() == 0 &&
-                _db.RFIDs.ToList().Count() == 0 &&
-                _db.Cards.ToList().Count() == 0 &&
-                _db.Contracts.ToList().Count() == 0
-            );
+            return db.Users.Count()     == 0 &&
+                   db.Vehicles.Count()  == 0 &&
+                   db.RFIDs.Count()     == 0 &&
+                   db.Cards.Count()     == 0 &&
+                   db.Contracts.Count() == 0;
         }
     }
 }

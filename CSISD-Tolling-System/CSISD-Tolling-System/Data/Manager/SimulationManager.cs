@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSISD_Tolling_System.Data.Service.SimulationServices;
 using CSISD_Tolling_System.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -35,18 +36,10 @@ namespace CSISD_Tolling_System.Data.Manager
 
         private void generateInvoices()
         {
-            List<Vehicle> invoiceVehicles = _db.Vehicles.ToList();
+            ISimulationService<Invoice> invoiceSimulator = new InvoiceSimulationService(_db.Vehicles);
+            List<Invoice> invoices = invoiceSimulator.Generate();
 
-            for (int i = 0; i < 2; i++)
-            {
-                Random random = new Random();
-                Vehicle vehicle = invoiceVehicles[i];
-                DateTime entry = DateTime.Today.AddDays(-(random.Next(3, 14)));
-                DateTime exit = entry.AddHours(random.NextDouble());
-                Invoice invoice = new Invoice() { Fee = 1, UserId = vehicle.OwnerID, VehicleId = vehicle.Id, Paid = false, EntryTimestamp = entry, ExitTimestamp = exit };
-                _db.Invoices.Add(invoice);
-            }
-
+            _db.AddRange(invoices);
             _db.SaveChanges();
         }
 

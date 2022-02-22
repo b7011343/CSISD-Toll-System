@@ -28,7 +28,7 @@ namespace CSISD_Tolling_System.Data.Manager
 
         public void _generate()
         {
-            generateUsersAndVehicles().Wait();
+            generateUsersAndVehicles();
             generateRFIDs();
             generateInvoices();
             generateContracts();
@@ -57,40 +57,17 @@ namespace CSISD_Tolling_System.Data.Manager
             _db.SaveChanges();
         }
 
-        private async Task generateUsersAndVehicles()
+        private void generateUsersAndVehicles()
         {
-            List<string> makes = new List<string>() { "Ford", "Audi", "VW", "Skoda", "Lexus" };
-            List<string> models = new List<string>() { "Modeo", "TT", "Polo", "Fabia", "IS200" };
-            List<string> regPlates = new List<string>() { "MW33", "WE22", "LF90", "8008", "JB12" };
+            // Generate the users
+            ISimulationService<User> userSimulator = new UserSimulationService(_userManager);
+            userSimulator.Generate();
 
-            for (int i = 0; i < 5; i++)
-            {
-                string email = "test" + i + "@test.com";
-                var user = new User { UserName = email, Email = email, PreferenceId = 0 };
-                var result = await _userManager.CreateAsync(user, "Test123!");
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, "road-user");
-                    Vehicle vehicle = new Vehicle() { OwnerID = user.Id, Make = makes[i], Model = models[i], RegistrationPlate = regPlates[i] };
-                    _db.Vehicles.Add(vehicle);
-                }
-            }
+            // Generate the vehicles (can only do this after we've generated the users)
+            ISimulationService<Vehicle> vehicleSimulator = new VehicleSimulationService(_db.Users);
 
-            string adminEmail = "admin@admin.com";
-            var adminUser = new User { UserName = adminEmail, Email = adminEmail, PreferenceId = 0 };
-            var result2 = await _userManager.CreateAsync(adminUser, "Test123!");
-            if (result2.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(adminUser, "admin");
-            }
-
-            string tollOperatorEmail = "tolls@tolls.com";
-            var tollOperatorUser = new User { UserName = tollOperatorEmail, Email = tollOperatorEmail, PreferenceId = 0 };
-            var result3 = await _userManager.CreateAsync(tollOperatorUser, "Test123!");
-            if (result3.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(tollOperatorUser, "admin");
-            }
+            List<Vehicle> vehicles = vehicleSimulator.Generate();
+            _db.Vehicles.AddRange(vehicles);
 
             _db.SaveChanges();
         }

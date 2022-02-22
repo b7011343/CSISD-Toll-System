@@ -17,6 +17,7 @@ using CSISD_Tolling_System.Areas.Identity;
 using CSISD_Tolling_System.Data;
 using CSISD_Tolling_System.Data.Manager;
 using CSISD_Tolling_System.Models;
+using CSISD_Tolling_System.Data.Service;
 
 namespace CSISD_Tolling_System
 {
@@ -42,9 +43,9 @@ namespace CSISD_Tolling_System
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
             services.AddHttpContextAccessor();
             services.AddSingleton<SimulationManager>();
+            services.AddSingleton<InvoiceService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> _userManager)
         {
             if (env.IsDevelopment())

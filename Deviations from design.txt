@@ -13,3 +13,4 @@ Log in page removed magnify icon and opted for just 2 symbols to improve univers
 Altered location of nav bar to allow for less white space  
 
 On invoice table added entry and exit and paid fields tobetter track cost of invoice and status
+Add InvoiceService to access invoice data

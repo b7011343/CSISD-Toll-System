@@ -1,37 +1,83 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">CSISD-Tolling-System</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Identity
+@using CSISD_Tolling_System.Models
+@using CSISD_Tolling_System.Data
+@using Microsoft.AspNetCore.Http
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ApplicationDbContext db
+@inject IHttpContextAccessor httpContextAccessor
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-    </ul>
-</div>
+<section class="topSection">
+    <div class="row">
+        <div class="col">
+            <img class="stockPhoto" src="~/images/pic1.jpg" />
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col-8">
+                    <h1>Nordic Deartment of Transport</h1>
+                    <p class="description">Put text in here</p>
+                </div>
+                <div class="col-4">
+                    <select name="languages" id="languages-select">
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                    </select>
+                    <a href="#"><i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-search-minus fa-2x" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <AuthorizeView Roles="road-user">
+                                <Authorized>
+                                    <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a class="nav-link" href="Identitiy/Account/Register">Current Tolls</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                    </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Disabled</a>
+                            </li>
+                                </Authorized>
+                            </AuthorizeView>
+                            <AuthorizeView Roles ="toll-operator">
+                                <Authorized>
 
-@code {
-    bool collapseNavMenu = true;
+                                </Authorized>
+                            </AuthorizeView>
+                            <AuthorizeView>
+                                <NotAuthorized>
+                                    <li class="nav-item active"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a class="nav-link" href="Identitiy/Account/Register">Register</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="Identitiy/Account/Log In">Log In</a>
+                                    </li>
+                                </NotAuthorized>
+                            </AuthorizeView>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+ 
 
-    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}

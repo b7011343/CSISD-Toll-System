@@ -50,20 +50,10 @@ namespace CSISD_Tolling_System.Data.Manager
 
         private void generateRFIDs()
         {
-            List<Vehicle> vehicles = _db.Vehicles.ToList();
+            ISimulationService<RFID> rfidSimulator = new RFIDSimulationService(_db.Vehicles);
+            List<RFID> rfids = rfidSimulator.Generate();
 
-            for (int i = 0; i < 5; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    Random gen = new Random();
-                    int range = 10 * 365;
-                    DateTime randomExpiryDate = DateTime.Today.AddDays(gen.Next(range));
-                    RFID rfid = new RFID() { RegistrationPlate = vehicles[i].RegistrationPlate, ExpiryDate = randomExpiryDate };
-                    _db.RFIDs.Add(rfid);
-                }
-            }
-
+            _db.RFIDs.AddRange(rfids);
             _db.SaveChanges();
         }
 

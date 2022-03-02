@@ -10,3 +10,5 @@ To drop the database tables run the following command in the package manager con
 ```
   drop-database -Context ApplicationDbContext
 ```
+
+Translation api - free - https://github.com/prokhor-ozornin/Yandex.NET.Translator

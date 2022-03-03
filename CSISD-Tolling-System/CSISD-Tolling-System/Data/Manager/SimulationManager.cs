@@ -69,7 +69,7 @@ namespace CSISD_Tolling_System.Data.Manager
         /// Should be called before trying to generate data for RFID, contracts
         /// or invoices.
         /// </summary>
-        private async Task GenerateUsersAndVehicles(UserManager<User> userManager, ApplicationDbContext db)
+        private void GenerateUsersAndVehicles(UserManager<User> userManager, ApplicationDbContext db)
         {
             // Generate the users
             ISimulationService<User> userSimulator = new UserSimulationService(userManager);
@@ -77,15 +77,6 @@ namespace CSISD_Tolling_System.Data.Manager
 
             // Generate the vehicles (can only do this after we've generated the users)
             ISimulationService<Vehicle> vehicleSimulator = new VehicleSimulationService(db.Users);
-            
-            string tollOperatorEmail = "tolls@tolls.com";
-            var tollOperatorUser = new User { UserName = tollOperatorEmail, Email = tollOperatorEmail, PreferenceId = 0 };
-            var result3 = await userManager.CreateAsync(tollOperatorUser, "Test123!");
-            if (result3.Succeeded)
-            {
-                await userManager.AddToRoleAsync(tollOperatorUser, "toll-operator");
-            }
-            db.SaveChanges();
             List<Vehicle> vehicles = vehicleSimulator.Generate();
 
             db.Vehicles.AddRange(vehicles);

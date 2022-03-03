@@ -68,5 +68,24 @@ namespace CSISD_Tolling_System.UnitTests
             Assert.That(users.Count > 0);
             Assert.That(roles.ContainsValue("road-user"));
         }
+
+        [Test]
+        public void Test_Generate_ContainsAtLeastOneTollOperator()
+        {
+            // Arrange
+            List<User> users = new List<User>();
+            Dictionary<User, string> roles = new Dictionary<User, string>();
+
+            UserManager<User> userManager = MockUserManager(users, roles).Object;
+            UserSimulationService generator = new UserSimulationService(userManager);
+
+            // Act
+            generator.Generate();
+
+            // Assert
+            Assert.That(roles.Count > 0);
+            Assert.That(users.Count > 0);
+            Assert.That(roles.ContainsValue("toll-operator"));
+        }
     }
 }

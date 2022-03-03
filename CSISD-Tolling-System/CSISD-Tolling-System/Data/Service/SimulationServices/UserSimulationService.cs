@@ -91,7 +91,7 @@ namespace CSISD_Tolling_System.Data.Service.SimulationServices
             CreateUserSync(new UserTemplate { Email = "admin@admin.com", Password = "Test123!", Role = "admin" });
 
             // Create a toll operator account
-            CreateUserSync(new UserTemplate { Email = "toll@tolls.com", Password = "Test123!", Role = "admin" });
+            CreateUserSync(new UserTemplate { Email = "tolls@tolls.com", Password = "Test123!", Role = "toll-operator" });
 
             return new List<User>();
         }

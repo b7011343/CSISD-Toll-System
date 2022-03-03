@@ -7,10 +7,11 @@ using CSISD_Tolling_System.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using CSISD_Tolling_System.Data;
 
-namespace CSISD_Tolling_System.Data.Manager
+namespace CSISD_Tolling_System.Manager
 {
-    public class SimulationManager : Controller
+    public class SimulationManager
     {
         /// <summary>
         /// Generate test/demo data for users, invoices, contracts, rfids and vehicles.

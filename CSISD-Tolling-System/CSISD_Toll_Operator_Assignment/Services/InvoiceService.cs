@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CSISD_Tolling_System.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
+using CSISD_Tolling_System.Data;
 
-namespace CSISD_Tolling_System.Data.Service
+namespace CSISD_Tolling_System.Service
 {
     public class InvoiceService
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +6,7 @@ using Microsoft.Extensions.Logging;
 using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
 using CSISD_Tolling_System.Models;
-using System.Security.Claims;
-using CSISD_Toll_Operator_Assignment.Models.View;
-using CSISD_Tolling_System.Data.Service;
+using CSISD_Tolling_System.Service;
 
 namespace CSISD_Toll_Operator_Assignment.Controllers
 {

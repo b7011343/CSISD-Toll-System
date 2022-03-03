@@ -1,4 +1,4 @@
-﻿@using CSISD_Toll_Operator_Assignment.Models.View
+﻿@using CSISD_Toll_Operator_Assignment.Models
 @model IndexViewModel
 @{
     ViewData["Title"] = "Home";
@@ -26,7 +26,7 @@
                         <td>@invoice.EntryTimestamp</td>
                         <td>@invoice.ExitTimestamp</td>
                         <td>£@invoice.Fee</td>
-                        <td>@(invoice.Paid ? "✔" : "❌")</td>
+                        <td>@(invoice.Paid ? "✔" : "❌") <button class="btn btn-sm btn-primary ml-5">Pay</button></td>
                     </tr>
                 }
             }

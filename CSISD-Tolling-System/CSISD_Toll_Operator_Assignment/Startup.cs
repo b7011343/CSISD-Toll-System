@@ -1,23 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//using CSISD_Tolling_System.Areas.Identity;
 using CSISD_Tolling_System.Data;
-using CSISD_Tolling_System.Data.Manager;
 using CSISD_Tolling_System.Models;
-using CSISD_Tolling_System.Data.Service;
+using CSISD_Tolling_System.Manager;
 
 namespace CSISD_Toll_Operator_Assignment
 {
@@ -66,7 +56,6 @@ namespace CSISD_Toll_Operator_Assignment
 
             var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
             var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
-            //ApplicationDbContext db = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
             app.ApplicationServices.GetRequiredService<SimulationManager>().Generate(_userManager, db);
 
             app.UseEndpoints(endpoints =>
@@ -78,8 +67,6 @@ namespace CSISD_Toll_Operator_Assignment
                     name: "identity",
                     pattern: "Identity/{controller=Account}/{action=Login}/{id?}");
                 endpoints.MapRazorPages();
-                //endpoints.MapControllers();
-                //endpoints.MapFallbackToPage("/_Host");
             });
         }
     }

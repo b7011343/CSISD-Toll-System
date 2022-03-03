@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSISD_Tolling_System.Service.SimulationServices;
 using CSISD_Tolling_System.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,82 +12,89 @@ namespace CSISD_Tolling_System.Data.Manager
 {
     public class SimulationManager : Controller
     {
-        private ApplicationDbContext db;
-        private UserManager<User> userManager;
-
-        public SimulationManager()
+        /// <summary>
+        /// Generate test/demo data for users, invoices, contracts, rfids and vehicles.
+        ///
+        /// If the database is already populated then this is a no-op.
+        /// </summary>
+        /// <param name="userManager">UserManager for creating users & assigning roles. Should not be null.</param>
+        /// <param name="db">Application database context. Should not be null.</param>
+        public void Generate(UserManager<User> userManager, ApplicationDbContext db)
         {
-        }
-
-        public void generate(UserManager<User> userManager, ApplicationDbContext db)
-        {
-            this.db = db;
-            this.userManager = userManager;
-            cleanup();
-            _generate();
-        }
-
-        public async void _generate()
-        {
-            generateUsersAndVehicles().Wait();
-            generateRFIDs();
-            generateInvoices();
-            generateContracts();
-        }
-
-        private void generateInvoices()
-        {
-
-        }
-
-        private void generateRFIDs()
-        {
-            List<Vehicle> vehicles = db.Vehicles.ToList();
-            for (int i = 0; i < 5; i++)
+            if (ShouldGenerateTestData(db))
             {
-                if (i % 2 == 0)
-                {
-                    Random gen = new Random();
-                    int range = 10 * 365;
-                    DateTime randomExpiryDate = DateTime.Today.AddDays(gen.Next(range));
-                    RFID rfid = new RFID() { RegistrationPlate = vehicles[i].RegistrationPlate, ExpiryDate = randomExpiryDate };
-                    db.RFIDs.Add(rfid);
-                }
+                // Need to generate users & vehicles before generating any of
+                // the others (RFIDs, invoices and contracts etc...)
+                GenerateUsersAndVehicles(userManager, db);
+
+                GenerateRFIDs(db);
+                GenerateInvoices(db);
+                GenerateContracts(db);
             }
+        }
+
+        /// <summary>
+        /// Update the database with test data for the invoices table
+        /// </summary>
+        private void GenerateInvoices(ApplicationDbContext db)
+        {
+            ISimulationService<Invoice> invoiceSimulator = new InvoiceSimulationService(db.Vehicles);
+            List<Invoice> invoices = invoiceSimulator.Generate();
+
+            db.AddRange(invoices);
             db.SaveChanges();
         }
 
-        private void generateContracts()
+        /// <summary>
+        /// Update the database with test data for the contracts table
+        /// </summary>
+        private void GenerateContracts(ApplicationDbContext db)
+        { }
+
+        /// <summary>
+        /// Update the database with test data for the RFID table
+        /// </summary>
+        private void GenerateRFIDs(ApplicationDbContext db)
         {
+            ISimulationService<RFID> rfidSimulator = new RFIDSimulationService(db.Vehicles);
+            List<RFID> rfids = rfidSimulator.Generate();
 
-        }
-
-        private async Task generateUsersAndVehicles()
-        {
-            List<string> makes = new List<string>() { "Ford", "Audi", "VW", "Skoda", "Lexus" };
-            List<string> models = new List<string>() { "Modeo", "TT", "Polo", "Fabia", "IS200" };
-            List<string> regPlates = new List<string>() { "MW33", "WE22", "LF90", "8008", "JB12" };
-
-            for (int i = 0; i < 5; i++)
-            {
-                string email = "test" + i + "@test.com";
-                var user = new User { UserName = email, Email = email, PreferenceId = 0 };
-                var result = await userManager.CreateAsync(user, "Test123!");
-                if (result.Succeeded)
-                {
-                    Vehicle vehicle = new Vehicle() { OwnerID = user.Id, Make = makes[i], Model = models[i], RegistrationPlate = regPlates[i] };
-                    db.Vehicles.Add(vehicle);
-                }
-            }
+            db.RFIDs.AddRange(rfids);
             db.SaveChanges();
         }
 
-        private void cleanup()
+        /// <summary>
+        /// Update the database with test data for the users and vehicles
+        /// table.
+        /// Should be called before trying to generate data for RFID, contracts
+        /// or invoices.
+        /// </summary>
+        private void GenerateUsersAndVehicles(UserManager<User> userManager, ApplicationDbContext db)
         {
-            db.Users.RemoveRange(db.Users);
-            db.RFIDs.RemoveRange(db.RFIDs);
-            db.Vehicles.RemoveRange(db.Vehicles);
+            // Generate the users
+            ISimulationService<User> userSimulator = new UserSimulationService(userManager);
+            userSimulator.Generate();
+
+            // Generate the vehicles (can only do this after we've generated the users)
+            ISimulationService<Vehicle> vehicleSimulator = new VehicleSimulationService(db.Users);
+            List<Vehicle> vehicles = vehicleSimulator.Generate();
+
+            db.Vehicles.AddRange(vehicles);
             db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Determine if we should insert the test data (or not, if the database is
+        /// already populated)
+        /// </summary>
+        /// <returns>True if the test data should be generated, false if not.</returns>
+        private bool ShouldGenerateTestData(ApplicationDbContext db)
+        {
+            return db.Users.Count() == 0 &&
+                   db.Vehicles.Count() == 0 &&
+                   db.RFIDs.Count() == 0 &&
+                   db.Cards.Count() == 0 &&
+                   db.Contracts.Count() == 0;
         }
     }
 }

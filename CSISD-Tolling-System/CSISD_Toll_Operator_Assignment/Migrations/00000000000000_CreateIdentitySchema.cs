@@ -25,6 +25,7 @@ namespace CSISD_Tolling_System.Data.Migrations
             //roles dummy data
             migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "0", "road-user", "ROAD-USER" });
             migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "1", "toll-operator", "TOLL-OPERATOR" });
+            migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "2", "admin", "ADMIN" });
 
             migrationBuilder.CreateTable(
                 name: "Preference",
@@ -45,7 +46,7 @@ namespace CSISD_Tolling_System.Data.Migrations
 
             //default preference insert data
             migrationBuilder.InsertData("Preference", new string[] { "Id", "FontSize", "Language", "Magnification", "ColorBlindMode", "ScreenReader" }, new object[] { "0", "11", "ENGLISH", "100", "FALSE", "FALSE" });
-            
+
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -100,7 +101,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                     Make = table.Column<string>(nullable: false),
                     Model = table.Column<string>(nullable: false),
                     RegistrationPlate = table.Column<string>(nullable: false),
-                    OwnerId = table.Column<string>(maxLength:450, nullable: false)
+                    OwnerId = table.Column<string>(maxLength: 450, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,7 +121,7 @@ namespace CSISD_Tolling_System.Data.Migrations
                     VehicleId = table.Column<long>(nullable: false),
                     EntryTimestamp = table.Column<DateTime>(nullable: false),
                     ExitTimestamp = table.Column<DateTime>(nullable: false),
-                    Paid = table.Column<bool>(nullable:false)
+                    Paid = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

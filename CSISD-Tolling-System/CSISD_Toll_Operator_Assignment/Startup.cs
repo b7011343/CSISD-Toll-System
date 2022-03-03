@@ -63,7 +63,7 @@ namespace CSISD_Toll_Operator_Assignment
             var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
             var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
             //ApplicationDbContext db = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
-            app.ApplicationServices.GetRequiredService<SimulationManager>().generate(_userManager, db);
+            app.ApplicationServices.GetRequiredService<SimulationManager>().Generate(_userManager, db);
 
             app.UseEndpoints(endpoints =>
             {

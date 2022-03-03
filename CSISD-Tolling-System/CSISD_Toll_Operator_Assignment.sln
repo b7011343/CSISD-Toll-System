@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSISD_Toll_Operator_Assignment", "CSISD_Toll_Operator_Assignment\CSISD_Toll_Operator_Assignment.csproj", "{CEC838FF-5FC6-4339-B29D-5B53CE9D8B41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEC838FF-5FC6-4339-B29D-5B53CE9D8B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC838FF-5FC6-4339-B29D-5B53CE9D8B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC838FF-5FC6-4339-B29D-5B53CE9D8B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC838FF-5FC6-4339-B29D-5B53CE9D8B41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5AA8733D-C37C-4BD0-91C5-FE91C13FFA6B}
+	EndGlobalSection
+EndGlobal

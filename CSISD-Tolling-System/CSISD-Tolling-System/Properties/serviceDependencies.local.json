@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "mssql1": {
-      "type": "mssql.local",
-      "connectionId": "CSISD_Tolling_SystemContextConnection"
-    }
-  }
-}

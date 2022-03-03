@@ -84,6 +84,18 @@ namespace CSISD_Toll_Operator_Assignment.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    if(User.IsInRole("road-user"))
+                    {
+                        return RedirectToAction("Index", "Road");
+                    }
+                    if(User.IsInRole("toll-operator"))
+                    {
+                        return RedirectToAction("Index", "Toll");
+                    }
+                    if(User.IsInRole("admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

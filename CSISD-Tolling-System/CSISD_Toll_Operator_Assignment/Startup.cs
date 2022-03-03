@@ -2,18 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CSISD_Tolling_System.Data;
-using CSISD_Tolling_System.Data.Manager;
-using CSISD_Tolling_System.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+//using CSISD_Tolling_System.Areas.Identity;
+using CSISD_Tolling_System.Data;
+using CSISD_Tolling_System.Data.Manager;
+using CSISD_Tolling_System.Models;
+using CSISD_Tolling_System.Data.Service;
 
 namespace CSISD_Toll_Operator_Assignment
 {
@@ -70,6 +74,12 @@ namespace CSISD_Toll_Operator_Assignment
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "identity",
+                    pattern: "Identity/{controller=Account}/{action=Login}/{id?}");
+                endpoints.MapRazorPages();
+                //endpoints.MapControllers();
+                //endpoints.MapFallbackToPage("/_Host");
             });
         }
     }

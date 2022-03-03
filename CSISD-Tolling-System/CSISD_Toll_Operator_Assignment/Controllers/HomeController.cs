@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CSISD_Toll_Operator_Assignment.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSISD_Toll_Operator_Assignment.Controllers
 {

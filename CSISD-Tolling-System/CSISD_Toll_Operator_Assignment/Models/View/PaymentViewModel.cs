@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSISD_Toll_Operator_Assignment.Manager
+namespace CSISD_Toll_Operator_Assignment.Models.View
 {
-    public class AdminAccountManager
+    public class PaymentViewModel
     {
+
     }
 }

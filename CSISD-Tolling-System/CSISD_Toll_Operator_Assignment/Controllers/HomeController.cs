@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
-using CSISD_Tolling_System.Models;
-using CSISD_Tolling_System.Service;
+using CSISD_Toll_Operator_Assignment.Models;
+using CSISD_Toll_Operator_Assignment.Service;
 
 namespace CSISD_Toll_Operator_Assignment.Controllers
 {

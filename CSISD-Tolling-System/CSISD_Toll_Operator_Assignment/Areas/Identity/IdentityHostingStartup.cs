@@ -1,6 +1,6 @@
 ﻿using System;
-using CSISD_Tolling_System.Data;
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Data;
+using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

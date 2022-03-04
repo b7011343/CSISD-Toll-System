@@ -9,7 +9,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 {
     public class TollController : Controller
     {
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }

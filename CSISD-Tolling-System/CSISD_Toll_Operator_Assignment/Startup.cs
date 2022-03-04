@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CSISD_Tolling_System.Data;
-using CSISD_Tolling_System.Models;
-using CSISD_Tolling_System.Manager;
+using CSISD_Toll_Operator_Assignment.Data;
+using CSISD_Toll_Operator_Assignment.Models;
+using CSISD_Toll_Operator_Assignment.Manager;
 
 namespace CSISD_Toll_Operator_Assignment
 {

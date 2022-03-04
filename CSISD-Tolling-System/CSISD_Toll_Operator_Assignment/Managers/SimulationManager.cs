@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CSISD_Tolling_System.Service.SimulationServices;
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
+using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CSISD_Tolling_System.Data;
+using CSISD_Toll_Operator_Assignment.Data;
 
-namespace CSISD_Tolling_System.Manager
+namespace CSISD_Toll_Operator_Assignment.Manager
 {
     public class SimulationManager
     {

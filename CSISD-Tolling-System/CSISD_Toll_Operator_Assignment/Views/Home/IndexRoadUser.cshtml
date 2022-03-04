@@ -26,7 +26,14 @@
                         <td>@invoice.EntryTimestamp</td>
                         <td>@invoice.ExitTimestamp</td>
                         <td>£@invoice.Fee</td>
-                        <td>@(invoice.Paid ? "✔" : "❌") <button class="btn btn-sm btn-primary ml-5">Pay</button></td>
+                        <td>
+                            <form asp-controller="Demo" asp-action="Register" method="post">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    @(invoice.Paid ? "✔" : "❌")
+                                    <button class="btn btn-sm btn-primary ml-5">Pay</button>
+                                </div>
+                            </form>
+                        </td>
                     </tr>
                 }
             }

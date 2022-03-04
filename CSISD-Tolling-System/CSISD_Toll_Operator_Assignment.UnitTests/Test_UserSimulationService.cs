@@ -1,5 +1,5 @@
-﻿using CSISD_Tolling_System.Service.SimulationServices;
-using CSISD_Tolling_System.Models;
+﻿using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
+using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 using NUnit.Framework;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CSISD_Tolling_System.UnitTests
+namespace CSISD_Toll_Operator_Assignment.UnitTests
 {
     class Test_UserSimulationService
     {

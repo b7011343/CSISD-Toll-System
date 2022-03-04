@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
 using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CSISD_Toll_Operator_Assignment.Data;
@@ -27,7 +27,6 @@ namespace CSISD_Toll_Operator_Assignment.Manager
                 // Need to generate users & vehicles before generating any of
                 // the others (RFIDs, invoices and contracts etc...)
                 GenerateUsersAndVehicles(userManager, db);
-
                 GenerateRFIDs(db);
                 GenerateInvoices(db);
                 GenerateContracts(db);

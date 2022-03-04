@@ -1,25 +1,30 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
-using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Service;
+using CSISD_Toll_Operator_Assignment.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CSISD_Toll_Operator_Assignment.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private UserManager<User> _userManager;
-        private InvoiceService invoiceService;
+        private readonly ApplicationDbContext db;
+        private readonly UserManager<User> _userManager;
+        private readonly InvoiceService invoiceService;
 
         public HomeController(ILogger<HomeController> logger, UserManager<User> userManager)
         {
             _logger = logger;
             _userManager = userManager;
+            db = new ApplicationDbContext();
             invoiceService = new InvoiceService();
         }
 

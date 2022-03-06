@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Service;
 using Microsoft.Extensions.DependencyInjection;
+using CSISD_Toll_Operator_Assignment.Services.SimulationService;
 
 namespace CSISD_Toll_Operator_Assignment.Manager
 {
@@ -54,7 +55,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
         {
-            ISimulationService<Card> cardSimulator = new PaymentProcessingService(db.Users, userManager);
+            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(db.Users, userManager);
             List<Card> cards = cardSimulator.Generate();
 
             db.AddRange(cards);
@@ -77,7 +78,13 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// Update the database with test data for the contracts table
         /// </summary>
         private void GenerateContracts(ApplicationDbContext db)
-        { }
+        {
+            ISimulationService<Contract> contractSimulator = new ContractSimulationService();
+            List<Contract> contracts = contractSimulator.Generate();
+
+            db.Contracts.AddRange(contracts);
+            db.SaveChanges();
+        }
 
         /// <summary>
         /// Update the database with test data for the RFID table

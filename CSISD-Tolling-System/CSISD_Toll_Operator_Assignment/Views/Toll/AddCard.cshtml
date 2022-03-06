@@ -1,0 +1,48 @@
+﻿@using CSISD_Toll_Operator_Assignment.Models
+@model AddCardViewModel
+@{
+    ViewData["Title"] = "Add Card Details";
+}
+
+<div class="container">
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <p>Use this page to add a new payment card.</p>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="d-flex justify-content-start col-8">
+            <form asp-controller="Toll" asp-action="AddCard" method="post">
+                <div class="form-group">
+                    <label asp-for="nameOnCard" class="control-label"></label>
+                    <input asp-for="nameOnCard" class="form-control" />
+                    <span asp-validation-for="nameOnCard" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="cardNumber" class="control-label"></label>
+                    <input asp-for="cardNumber" class="form-control" />
+                    <span asp-validation-for="cardNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="expiryDate" class="control-label"></label>
+                    <input asp-for="expiryDate" type="date" class="form-control" />
+                    <span asp-validation-for="expiryDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="cvv" class="control-label"></label>
+                    <input asp-for="cvv" class="form-control" />
+                    <small class="form-text text-muted">The last 3 digits on the back</small>
+                    <span asp-validation-for="cvv" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+        <div class="d-flex flex-column align-items-end justify-content-center col-4">
+            <img style="width: 135%; margin-right: -5%;" src="~/images/bank-card.jpg" alt="Bank card"/>
+            <div class="alert alert-secondary" role="alert">
+                <i class="fa fa-shield" aria-hidden="true"></i>
+                Your details are securely stored and processed at all times.
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace CSISD_Toll_Operator_Assignment.Service
 {
-    public class PaymentProcessingService : ISimulationService<Card>
+    public class PaymentProcessingSimulationService : ISimulationService<Card>
     {
         private IEnumerable<User> _users;
         private UserManager<User> _userManager;
-        public PaymentProcessingService(IEnumerable<User> users, UserManager<User> userManager)
+        public PaymentProcessingSimulationService(IEnumerable<User> users, UserManager<User> userManager)
         {
             _users = users;
             _userManager = userManager;

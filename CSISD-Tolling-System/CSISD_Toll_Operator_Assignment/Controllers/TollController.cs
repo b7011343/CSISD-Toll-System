@@ -79,7 +79,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 Cvv = model.cvv,
                 ExpiryDate = model.expiryDate,
                 NameOnCard = model.nameOnCard,
-                OwnerID = _userManager.GetUserId(User)
+                OwnerID = userManager.GetUserId(User)
             };
 
             db.Cards.Add(card);

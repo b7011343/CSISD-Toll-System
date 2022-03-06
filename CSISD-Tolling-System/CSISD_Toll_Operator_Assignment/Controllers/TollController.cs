@@ -33,7 +33,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             //paymentService = new PaymentProcessingService();
         }
 
-        [HttpPost]
+        [HttpGet]
         [AutoValidateAntiforgeryToken]
         [Authorize(Roles = Roles.RoadUser)]
         public IActionResult Payment(long invoiceId)

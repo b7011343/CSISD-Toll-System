@@ -20,7 +20,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 
             Random random = new Random();
 
-            foreach (Vehicle vehicle in _vehicles.Take(2))
+            foreach (Vehicle vehicle in _vehicles)
             {
                 DateTime entry = DateTime.Today.AddDays(-(random.Next(3, 14)));
                 DateTime exit = entry.AddHours(random.NextDouble());

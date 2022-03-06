@@ -9,11 +9,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Service;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CSISD_Toll_Operator_Assignment.Manager
 {
     public class SimulationManager
     {
+        private IServiceScopeFactory _scopeFactory;
+
+        public SimulationManager(IServiceScopeFactory scopeFactory)
+        {
+            _scopeFactory = scopeFactory;
+        }
+
         /// <summary>
         /// Generate test/demo data for users, invoices, contracts, rfids and vehicles.
         ///
@@ -21,17 +29,23 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         /// <param name="userManager">UserManager for creating users & assigning roles. Should not be null.</param>
         /// <param name="db">Application database context. Should not be null.</param>
-        public void Generate(UserManager<User> userManager, ApplicationDbContext db)
+        public void Generate()
         {
-            if (ShouldGenerateTestData(db))
+            using (var scope = _scopeFactory.CreateScope())
             {
-                // Need to generate users & vehicles before generating any of
-                // the others (RFIDs, invoices and contracts etc...)
-                GenerateUsersAndVehicles(userManager, db);
-                GenerateRFIDs(db);
-                GenerateInvoices(db);
-                GenerateContracts(db);
-                GenerateCards(userManager, db);
+                ApplicationDbContext db          = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                UserManager<User>    userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+                if (ShouldGenerateTestData(db))
+                {
+                    // Need to generate users & vehicles before generating any of
+                    // the others (RFIDs, invoices and contracts etc...)
+                    GenerateUsersAndVehicles(userManager, db);
+                    GenerateRFIDs(db);
+                    GenerateInvoices(db);
+                    GenerateContracts(db);
+                    GenerateCards(userManager, db);
+                }
             }
         }
 

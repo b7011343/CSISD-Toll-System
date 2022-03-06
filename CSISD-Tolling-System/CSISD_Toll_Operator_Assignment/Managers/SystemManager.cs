@@ -3,36 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CSISD_Toll_Operator_Assignment.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CSISD_Toll_Operator_Assignment.Data.Manager
 {
     public class SystemManager
     {
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IServiceScopeFactory _scopeFactory;
 
-        public long createInvoice()
+        public SystemManager(IServiceScopeFactory scopeFactory)
+        {
+            _scopeFactory = scopeFactory;
+        }
+
+        public long CreateInvoice()
         {
             Invoice invoice = new Invoice() { Paid = false };
-            db.Invoices.Add(invoice);
+
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                db.Invoices.Add(invoice);
+                db.SaveChanges();
+            }
+
             return invoice.Id;
         }
 
-        public long createContract()
+        public long CreateContract()
         {
             return 0;
         }
 
-        public bool sendInvoice()
+        public bool SendInvoice()
         {
             return true;
         }
 
-        public bool sendContract()
+        public bool SendContract()
         {
             return true;
         }
 
-        public bool sendInvoiceByPost()
+        public bool SendInvoiceByPost()
         {
             return true;
         }

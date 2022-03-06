@@ -20,13 +20,12 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         private readonly UserManager<User> _userManager;
         private readonly InvoiceService _invoiceService;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, ApplicationDbContext db)
         {
             _logger         = logger;
             _userManager    = userManager;
-
-            _db             = new ApplicationDbContext();
-            _invoiceService = new InvoiceService();
+            _db             = db;
+            _invoiceService = new InvoiceService(db);
         }
 
         public async Task<IActionResult> Index()

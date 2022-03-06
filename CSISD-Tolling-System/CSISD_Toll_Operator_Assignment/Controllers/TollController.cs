@@ -16,20 +16,22 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 {
     public class TollController : Controller
     {
-        private readonly ILogger<TollController> _logger;
+        private readonly ILogger<TollController> logger;
         private readonly ApplicationDbContext db;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly InvoiceService invoiceService;
         private readonly PaymentProcessingSimulationService paymentService;
 
-        public TollController(ILogger<TollController> logger, UserManager<User> userManager, SignInManager<User> signInManager)
+        //private readonly PaymentProcessingService paymentService;
+
+        public TollController(ILogger<TollController> _logger, UserManager<User> _userManager, SignInManager<User> _signInManager, ApplicationDbContext _db)
         {
-            _logger = logger;
-            _userManager = userManager;
-            db = new ApplicationDbContext();
-            _signInManager = signInManager;
-            invoiceService = new InvoiceService();
+            logger = _logger;
+            userManager = _userManager;
+            db = _db;
+            signInManager = _signInManager;
+            invoiceService = new InvoiceService(_db);
             //paymentService = new PaymentProcessingService();
         }
 
@@ -39,7 +41,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Payment(long invoiceId)
         {
             Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
-            List<Card> cards = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
+            List<Card> cards = db.Cards.Where(x => x.OwnerID == userManager.GetUserId(User)).ToList();
             Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoiceId).First();
             PaymentViewModel model = new PaymentViewModel()
             {

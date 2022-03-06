@@ -17,19 +17,20 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
     public class TollController : Controller
     {
         private readonly ILogger<TollController> _logger;
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly InvoiceService invoiceService;
-        private readonly PaymentProcessingService paymentService;
+        private readonly InvoiceService _invoiceService;
 
-        public TollController(ILogger<TollController> logger, UserManager<User> userManager, SignInManager<User> signInManager)
+        //private readonly PaymentProcessingService paymentService;
+
+        public TollController(ILogger<TollController> logger, UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext db)
         {
             _logger = logger;
             _userManager = userManager;
-            db = new ApplicationDbContext();
+            _db = db;
             _signInManager = signInManager;
-            invoiceService = new InvoiceService();
+            _invoiceService = new InvoiceService(_db);
             //paymentService = new PaymentProcessingService();
         }
 
@@ -38,9 +39,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = Roles.RoadUser)]
         public IActionResult Payment(long invoiceId)
         {
-            Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
-            List<Card> cards = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
-            Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoice.Id).First();
+            Invoice invoice = _db.Invoices.Where(x => x.Id == invoiceId).First();
+            List<Card> cards = _db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
+            Vehicle vehicle = _db.Vehicles.Where(x => x.Id == invoice.Id).First();
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,

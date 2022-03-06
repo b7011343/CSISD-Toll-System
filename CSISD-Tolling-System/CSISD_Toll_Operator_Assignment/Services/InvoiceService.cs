@@ -7,28 +7,31 @@ namespace CSISD_Toll_Operator_Assignment.Service
 {
     public class InvoiceService
     {
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db;
 
-        public InvoiceService() { }
+        public InvoiceService(ApplicationDbContext db)
+        {
+            _db = db;
+        }
 
         public List<Invoice> GetUserInvoices(string userId)
         {
-            return db.Invoices.Where(x => x.UserId == userId).ToList();
+            return _db.Invoices.Where(x => x.UserId == userId).ToList();
         }
 
         public List<Invoice> GetUserUnpaidInvoices(string userId)
         {
-            return db.Invoices.Where(x => x.UserId == userId && x.Paid == false).ToList();
+            return _db.Invoices.Where(x => x.UserId == userId && x.Paid == false).ToList();
         }
 
         public List<Invoice> GetAllInvoices()
         {
-            return db.Invoices.ToList();
+            return _db.Invoices.ToList();
         }
 
         public List<Invoice> GetAllUnpaidInvoices()
         {
-            return db.Invoices.Where(x => x.Paid == false).ToList();
+            return _db.Invoices.Where(x => x.Paid == false).ToList();
         }
     }
 }

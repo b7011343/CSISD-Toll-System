@@ -154,11 +154,13 @@ namespace CSISD_Tolling_System.Data.Migrations
                     CardNumber = table.Column<string>(nullable: false),
                     Cvv = table.Column<int>(nullable: false),
                     ExpiryDate = table.Column<DateTime>(nullable: false),
-                    NameOnCard = table.Column<string>(nullable: false)
+                    NameOnCard = table.Column<string>(nullable: false),
+                    OwnerId = table.Column<string>(maxLength: 450, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Card", x => new { x.Id });
+                    table.ForeignKey(name: "FK_AspNetUsersCard", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

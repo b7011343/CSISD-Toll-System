@@ -40,6 +40,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         {
             Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
             List<Card> cards = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
+            Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoice.Id).First();
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,

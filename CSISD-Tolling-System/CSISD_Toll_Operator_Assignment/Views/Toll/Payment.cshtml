@@ -5,23 +5,22 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<hr/>
 <div class="container">
-    <div class="row">
-        <div id="invoiceDetails" class="col-sm-6">
-            <p>Invoice ID: @Model.invoice.Id</p>
-            <p>Fee: @Model.invoice.Fee</p>
-            <p>CustomerID: @Model.invoice.UserId</p>
-            <p>Entry Timestamp: @Model.invoice.EntryTimestamp</p>
-            <p>Exit Timestamp: @Model.invoice.ExitTimestamp</p>
-            <p>Vehicle Reg Plate: @Model.vehicle.RegistrationPlate</p>
-            <p>Invoice Paid? @Model.invoice.Paid</p>
+    <div class="row d-flex align-items-center justify-content-between">
+        <div id="invoiceDetails" style="width: fit-content;" class="col-sm-6 card">
+            <div class="card-body">
+                <p><b>Customer ID: </b>@Model.invoice.UserId</p>
+                <p><b>Fee: </b>£@Model.invoice.Fee</p>
+                <p><b>Vehicle Reg Plate: </b>@Model.vehicle.RegistrationPlate</p>
+                <p><b>Entry Timestamp: </b>@Model.invoice.EntryTimestamp</p>
+                <p><b>Exit Timestamp: </b>@Model.invoice.ExitTimestamp</p>
+            </div>
         </div>
         <div class="col-sm-6">
             <form asp-controller="Toll" asp-action="Pay" method="post">
                 <div class="form-group">
-                    <label for="id">Invoice ID: </label>
-                    <input name="id" type="text" value="@Model.invoice.Id" readonly />
+                    <h5>Invoice ID: <span class="badge badge-primary">@Model.invoice.Id</span></h5>
                 </div>
                 <div class="form-group">
                     <label for="cards">Select card</label>
@@ -29,7 +28,7 @@
                         <option value="" selected disabled hidden>Choose your card</option>
                         @foreach (var item in Model.cards)
                         {
-                         <option value="@Html.DisplayFor(modelItem => item.CardNumber)">@Html.DisplayFor(modelItem => item.CardNumber)</option>
+                            <option value="@Html.DisplayFor(modelItem => item.CardNumber)">@Html.DisplayFor(modelItem => item.CardNumber)</option>
                         }
                     </select>
                 </div>

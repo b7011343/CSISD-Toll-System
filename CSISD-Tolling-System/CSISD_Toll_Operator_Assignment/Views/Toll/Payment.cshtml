@@ -18,7 +18,7 @@
             <p>Invoice Paid? @Model.invoice.Paid</p>
         </div>
         <div class="col-sm-6">
-            <form asp-controller="Toll" asp-action="Pay" method="post">
+            <form asp-controller="Toll" asp-action="Payment" method="post">
                 <div class="form-group">
                     <label for="id">Invoice ID: </label>
                     <input name="id" type="text" value="@Model.invoice.Id" readonly />
@@ -29,7 +29,7 @@
                         <option value="" selected disabled hidden>Choose your card</option>
                         @foreach (var item in Model.cards)
                         {
-                         <option value="@Html.DisplayFor(modelItem => item.CardNumber)">@Html.DisplayFor(modelItem => item.CardNumber)</option>
+                         <option value="@item.CardNumber">@item.CardNumber</option>
                         }
                     </select>
                 </div>

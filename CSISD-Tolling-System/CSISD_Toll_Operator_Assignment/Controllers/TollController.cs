@@ -55,12 +55,29 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         [Authorize(Roles = Roles.RoadUser)]
-        public IActionResult Pay()
+        public IActionResult Payment()
         {
             Invoice invoice = db.Invoices.Where(x => x.Id == (long)Convert.ToDouble(Request.Form["id"])).First();
-            invoice.Paid = true;
-            db.SaveChanges();
-            return LocalRedirect("/Home/Index");
+            Card card = db.Cards.Where(x => x.CardNumber == (string)Request.Form["cards"].ToString()).First();
+            List<Card> cards = db.Cards.Where(x => x.OwnerID == userManager.GetUserId(User)).ToList();
+            Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoice.Id).First();
+            PaymentViewModel model = new PaymentViewModel()
+            {
+                invoice = invoice,
+                cards = cards,
+                vehicle = vehicle
+            };
+            int cvv = Convert.ToInt32(Request.Form["cvv"]);
+            if(cvv == card.Cvv)
+            {
+                invoice.Paid = true;
+                db.SaveChanges();
+                return LocalRedirect("/Home/Index");
+            }
+            else
+            {
+                return Ok("The card details you have entered are incorrect, please go back and enter them correctly.");
+            }
         }
 
         [HttpPost]
@@ -92,6 +109,24 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = "road-user")]
         public IActionResult AddCard()
         {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "road-user")]
+        public async Task<IActionResult> ContractsAsync()
+        {
+            string userEmail = HttpContext.User.Identity.Name;
+            User user = await userManager.FindByEmailAsync(userEmail);
+            string role = (await userManager.GetRolesAsync(user)).First();
+
+            switch (role)
+            {
+                case Roles.RoadUser:
+                    return View("ContractRoadUser");
+                case Roles.TollOperator:
+                    return View("ContractTollOperator");
+            }
             return View();
         }
     }

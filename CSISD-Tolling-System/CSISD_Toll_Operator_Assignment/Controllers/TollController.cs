@@ -44,7 +44,8 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,
-                cards = cards
+                cards = cards,
+                vehicle = vehicle
             };
             return View(model);
         }

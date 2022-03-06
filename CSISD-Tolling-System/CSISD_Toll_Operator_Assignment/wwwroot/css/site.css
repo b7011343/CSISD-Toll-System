@@ -148,3 +148,7 @@ app {
         display: block;
     }
 }
+
+#invoiceDetails {
+    padding: 0px;
+}

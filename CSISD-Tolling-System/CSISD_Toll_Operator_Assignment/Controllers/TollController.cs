@@ -21,7 +21,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly InvoiceService invoiceService;
-        private readonly PaymentProcessingService paymentService;
+        private readonly PaymentProcessingSimulationService paymentService;
 
         public TollController(ILogger<TollController> logger, UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -40,7 +40,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         {
             Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
             List<Card> cards = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
-            Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoice.Id).First();
+            Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoiceId).First();
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,
@@ -55,8 +55,10 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = Roles.RoadUser)]
         public IActionResult Pay()
         {
-            // TODO: Add logic here for making payment
-            return View();
+            Invoice invoice = db.Invoices.Where(x => x.Id == (long)Convert.ToDouble(Request.Form["id"])).First();
+            invoice.Paid = true;
+            db.SaveChanges();
+            return LocalRedirect("/Home/Index");
         }
     }
 }

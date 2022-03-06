@@ -40,7 +40,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
         {
-            ISimulationService<Card> cardSimulator = new PaymentProcessingService(db.Users, userManager);
+            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(db.Users, userManager);
             List<Card> cards = cardSimulator.Generate();
 
             db.AddRange(cards);

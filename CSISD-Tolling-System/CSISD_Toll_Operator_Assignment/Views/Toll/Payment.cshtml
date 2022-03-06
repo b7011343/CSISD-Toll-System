@@ -20,6 +20,10 @@
         <div class="col-sm-6">
             <form asp-controller="Toll" asp-action="Pay" method="post">
                 <div class="form-group">
+                    <label for="id">Invoice ID: </label>
+                    <input name="id" type="text" value="@Model.invoice.Id" readonly />
+                </div>
+                <div class="form-group">
                     <label for="cards">Select card</label>
                     <select name="cards" id="cards" class="form-control">
                         <option value="" selected disabled hidden>Choose your card</option>
@@ -35,6 +39,7 @@
                 </div>
                 <div class="form-group">
                     <input class="btn btn-success" type="submit" value="Pay" />
+                    <a class="btn btn-primary" asp-controller="Toll" asp-action="">Add New Card</a>
                 </div>
             </form>
         </div>

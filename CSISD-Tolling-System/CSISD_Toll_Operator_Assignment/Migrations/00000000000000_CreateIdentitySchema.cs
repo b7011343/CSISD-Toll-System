@@ -6,6 +6,15 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
+        private void AddRole(MigrationBuilder migrations, string id, string name, string normalisedName)
+        {
+            migrations.InsertData(
+                "AspNetRoles",
+                new string[] { "Id", "Name", "NormalizedName" },
+                new object[] {  id,   name,   normalisedName  }
+            );
+        }
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -22,10 +31,10 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
-            //roles dummy data
-            migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "0", "road-user", "ROAD-USER" });
-            migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "1", "toll-operator", "TOLL-OPERATOR" });
-            migrationBuilder.InsertData("AspNetRoles", new string[] { "Id", "Name", "NormalizedName" }, new object[] { "2", "admin", "ADMIN" });
+            // Add Roles
+            AddRole(migrationBuilder, "0", Roles.RoadUser,      Roles.RoadUserNormalised);
+            AddRole(migrationBuilder, "1", Roles.TollOperator,  Roles.TollOperatorNormalised);
+            AddRole(migrationBuilder, "2", Roles.Administrator, Roles.AdministratorNormalised);
 
             migrationBuilder.CreateTable(
                 name: "Preference",

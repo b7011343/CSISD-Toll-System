@@ -33,9 +33,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             //paymentService = new PaymentProcessingService();
         }
 
-        [HttpPost]
+        [HttpGet]
         [AutoValidateAntiforgeryToken]
-        [Authorize(Roles = "road-user")]
+        [Authorize(Roles = Roles.RoadUser)]
         public IActionResult Payment(long invoiceId)
         {
             Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
@@ -51,7 +51,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        [Authorize(Roles = "road-user")]
+        [Authorize(Roles = Roles.RoadUser)]
         public IActionResult Pay()
         {
             // TODO: Add logic here for making payment

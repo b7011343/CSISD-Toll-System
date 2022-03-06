@@ -2,14 +2,15 @@
 using System.Linq;
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Data;
+using CSISD_Toll_Operator_Assignment.Services;
 
 namespace CSISD_Toll_Operator_Assignment.Service
 {
-    public class InvoiceService
+    public class InvoiceService : IInvoiceService
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IApplicationDbContext _db;
 
-        public InvoiceService(ApplicationDbContext db)
+        public InvoiceService(IApplicationDbContext db)
         {
             _db = db;
         }

@@ -38,20 +38,18 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             User   user = await _userManager.FindByEmailAsync(userEmail);
             string role = (await _userManager.GetRolesAsync(user)).First();
 
-            IndexViewModel model = new IndexViewModel() { userId = user.Id };
+            if (role == Roles.Administrator)
+                return View("IndexAdmin");
+
+            IndexViewModel model = new IndexViewModel(role, user, _invoiceService);
 
             switch(role)
             {
                 case Roles.RoadUser:
-                    model.invoices = _invoiceService.GetUserUnpaidInvoices(user.Id);
                     return View("IndexRoadUser", model);
 
                 case Roles.TollOperator:
-                    model.invoices = _invoiceService.GetAllUnpaidInvoices();
                     return View("IndexTollOperator", model);
-
-                case Roles.Administrator:
-                    return View("IndexAdmin");
             }
 
             return View();

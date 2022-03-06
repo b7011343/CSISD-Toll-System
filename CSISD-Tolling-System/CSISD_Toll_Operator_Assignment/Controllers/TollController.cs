@@ -62,5 +62,37 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             db.SaveChanges();
             return LocalRedirect("/Home/Index");
         }
+
+        [HttpPost]
+        [Authorize(Roles = "road-user")]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddCard(AddCardViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            Card card = new Card()
+            {
+                CardNumber = model.cardNumber,
+                Cvv = model.cvv,
+                ExpiryDate = model.expiryDate,
+                NameOnCard = model.nameOnCard,
+                OwnerID = userManager.GetUserId(User)
+            };
+
+            db.Cards.Add(card);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "road-user")]
+        public IActionResult AddCard()
+        {
+            return View();
+        }
     }
 }

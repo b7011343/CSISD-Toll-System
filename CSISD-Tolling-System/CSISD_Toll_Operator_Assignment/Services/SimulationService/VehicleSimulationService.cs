@@ -30,7 +30,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
                     Model = models[vehicleIndex % models.Count],
                     RegistrationPlate = regPlates[vehicleIndex % regPlates.Count]
                 };
-
+                vehicles.Add(vehicle);
                 vehicleIndex++;
             }
 

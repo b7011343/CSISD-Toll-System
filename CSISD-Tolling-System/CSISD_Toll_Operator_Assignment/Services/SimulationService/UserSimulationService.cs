@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -88,10 +89,10 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
             CreateUsers(users);
 
             // Create a administrator account
-            CreateUserSync(new UserTemplate { Email = "admin@admin.com", Password = "Test123!", Role = "admin" });
+            CreateUserSync(new UserTemplate { Email = "admin@admin.com", Password = "Test123!", Role = Roles.Administrator });
 
             // Create a toll operator account
-            CreateUserSync(new UserTemplate { Email = "tolls@tolls.com", Password = "Test123!", Role = "toll-operator" });
+            CreateUserSync(new UserTemplate { Email = "tolls@tolls.com", Password = "Test123!", Role = Roles.TollOperator });
 
             return new List<User>();
         }

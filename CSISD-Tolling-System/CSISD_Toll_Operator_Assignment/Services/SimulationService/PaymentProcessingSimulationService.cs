@@ -1,4 +1,5 @@
-﻿using CSISD_Toll_Operator_Assignment.Models;
+﻿using CSISD_Toll_Operator_Assignment.Data;
+using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace CSISD_Toll_Operator_Assignment.Service
 {
-    public class PaymentProcessingService : ISimulationService<Card>
+    public class PaymentProcessingSimulationService : ISimulationService<Card>
     {
         private IEnumerable<User> _users;
         private UserManager<User> _userManager;
-        public PaymentProcessingService(IEnumerable<User> users, UserManager<User> userManager)
+        public PaymentProcessingSimulationService(IEnumerable<User> users, UserManager<User> userManager)
         {
             _users = users;
             _userManager = userManager;
@@ -27,7 +28,7 @@ namespace CSISD_Toll_Operator_Assignment.Service
             int index = 0;
             foreach (User user in _users)
             {
-                if (_userManager.IsInRoleAsync(user, "road-user").Result == true)
+                if (_userManager.IsInRoleAsync(user, Roles.RoadUser).Result == true)
                 {
                     DateTime expiry = DateTime.Today.AddMonths(-(random.Next(3, 14)));
                     Card card = new Card()

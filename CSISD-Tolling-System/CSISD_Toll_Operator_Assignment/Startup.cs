@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Manager;
+using CSISD_Toll_Operator_Assignment.Data.Manager;
 
 namespace CSISD_Toll_Operator_Assignment
 {
@@ -30,7 +31,9 @@ namespace CSISD_Toll_Operator_Assignment
                     .AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
             services.AddHttpContextAccessor();
+
             services.AddSingleton<SimulationManager>();
+            services.AddSingleton<SystemManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,9 +57,10 @@ namespace CSISD_Toll_Operator_Assignment
             app.UseAuthentication();
             app.UseAuthorization();
 
-            var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
-            var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
-            app.ApplicationServices.GetRequiredService<SimulationManager>().Generate(_userManager, db);
+            {
+                SimulationManager simulationManager = app.ApplicationServices.GetRequiredService<SimulationManager>();
+                simulationManager.Generate();
+            }
 
             app.UseEndpoints(endpoints =>
             {

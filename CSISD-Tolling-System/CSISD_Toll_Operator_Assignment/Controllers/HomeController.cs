@@ -16,47 +16,42 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
-        private readonly InvoiceService invoiceService;
+        private readonly InvoiceService _invoiceService;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, ApplicationDbContext db)
         {
-            _logger = logger;
-            _userManager = userManager;
-            db = new ApplicationDbContext();
-            invoiceService = new InvoiceService();
+            _logger         = logger;
+            _userManager    = userManager;
+            _db             = db;
+            _invoiceService = new InvoiceService(db);
         }
 
         public async Task<IActionResult> Index()
         {
             string userEmail = HttpContext.User.Identity.Name;
+
             if (userEmail == null)
-            {
                 return View();
-            }
 
-            User user = await _userManager.FindByEmailAsync(userEmail);
-            string userId = user.Id;
-            var roleArr = await _userManager.GetRolesAsync(user);
-            string role = roleArr.First();
+            User   user = await _userManager.FindByEmailAsync(userEmail);
+            string role = (await _userManager.GetRolesAsync(user)).First();
 
-            IndexViewModel model = new IndexViewModel() { userId = userId };
-
-            if (role == "toll-operator")
-            {
-                model.invoices = invoiceService.GetAllUnpaidInvoices();
-            }
-            else if (role == "road-user")
-            {
-                model.invoices = invoiceService.GetUserUnpaidInvoices(userId);
-            }
+            IndexViewModel model = new IndexViewModel() { userId = user.Id };
 
             switch(role)
             {
-                case "road-user": return View("IndexRoadUser", model);
-                case "toll-operator": return View("IndexTollOperator", model);
-                case "admin": return View("IndexAdmin");
+                case Roles.RoadUser:
+                    model.invoices = _invoiceService.GetUserUnpaidInvoices(user.Id);
+                    return View("IndexRoadUser", model);
+
+                case Roles.TollOperator:
+                    model.invoices = _invoiceService.GetAllUnpaidInvoices();
+                    return View("IndexTollOperator", model);
+
+                case Roles.Administrator:
+                    return View("IndexAdmin");
             }
 
             return View();

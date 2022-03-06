@@ -19,6 +19,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly InvoiceService _invoiceService;
+        private const string DEFAULT_PASSWORD = "Test123!";
 
         public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, ApplicationDbContext db)
         {
@@ -51,7 +52,11 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                     return View("IndexTollOperator", model);
 
                 case Roles.Administrator:
-                    return View("IndexAdmin");
+                    IndexAdminViewModel adminModel = new IndexAdminViewModel()
+                    {
+                        users = _db.Users.ToList()
+                    };
+                    return View("IndexAdmin", adminModel);
             }
 
             return View();
@@ -66,6 +71,31 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult AddPrivilagedUser(string role, string email)
+        {
+            User user = new User()
+            {
+                UserName = email,
+                Email = email,
+                PreferenceId = 0
+            };
+
+            Task<IdentityResult> createUserTask = _userManager.CreateAsync(user, DEFAULT_PASSWORD);
+            createUserTask.Wait();
+            IdentityResult result = createUserTask.Result;
+
+            if (!result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            Task<IdentityResult> addRoleTask = _userManager.AddToRoleAsync(user, role);
+            addRoleTask.Wait();
+            return RedirectToAction("Index");
         }
     }
 }

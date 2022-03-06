@@ -33,12 +33,12 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             //paymentService = new PaymentProcessingService();
         }
 
-        [HttpGet]
+        [HttpPost]
         [AutoValidateAntiforgeryToken]
         [Authorize(Roles = "road-user")]
-        public IActionResult Payment(long invoiceId)
+        public IActionResult Payment()
         {
-            Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
+            Invoice invoice = db.Invoices.Where(x => x.UserId == _userManager.GetUserId(User)).First();
             Card card = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).First() ;
             PaymentViewModel model = new PaymentViewModel()
             {

@@ -1,5 +1,5 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
-@model IEnumerable<PaymentViewModel> 
+@model IEnumerable<PaymentViewModel>
 @{
     ViewData["Title"] = "Pay Invoice";
 }
@@ -7,33 +7,6 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.invoice.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.invoice.Fee)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.invoice.UserId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.invoice.VehicleId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.invoice.EntryTimestamp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.invoice.ExitTimestamp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.invoice.Paid)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
             @foreach (var item in Model)
             {
             <tr>
@@ -60,8 +33,6 @@
                 </td>
             </tr>
             }
-        </tbody>
-    </table>
     <form asp-controller="Toll" asp-action="Pay" method="post">
         <p>Total: </p>
         <label for="cards">Select card</label>

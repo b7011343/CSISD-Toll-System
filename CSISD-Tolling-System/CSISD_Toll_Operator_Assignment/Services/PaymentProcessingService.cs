@@ -12,9 +12,10 @@ namespace CSISD_Toll_Operator_Assignment.Service
     {
         private IEnumerable<User> _users;
         private UserManager<User> _userManager;
-        public PaymentProcessingService(IEnumerable<User> users)
+        public PaymentProcessingService(IEnumerable<User> users, UserManager<User> userManager)
         {
             _users = users;
+            _userManager = userManager;
         }
 
         public List<Card> Generate()
@@ -37,6 +38,7 @@ namespace CSISD_Toll_Operator_Assignment.Service
                         NameOnCard = cardNames[index],
                         OwnerID = user.Id
                     };
+                    cards.Add(card);
                     index++;
                 }
             }

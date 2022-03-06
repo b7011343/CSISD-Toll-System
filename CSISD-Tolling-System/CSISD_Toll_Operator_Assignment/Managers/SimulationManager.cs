@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CSISD_Toll_Operator_Assignment.Data;
+using CSISD_Toll_Operator_Assignment.Service;
 
 namespace CSISD_Toll_Operator_Assignment.Manager
 {
@@ -30,7 +31,20 @@ namespace CSISD_Toll_Operator_Assignment.Manager
                 GenerateRFIDs(db);
                 GenerateInvoices(db);
                 GenerateContracts(db);
+                GenerateCards(userManager, db);
             }
+        }
+
+        /// <summary>
+        /// Update the database with test data for the card table
+        /// </summary>
+        private void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
+        {
+            ISimulationService<Card> cardSimulator = new PaymentProcessingService(db.Users, userManager);
+            List<Card> cards = cardSimulator.Generate();
+
+            db.AddRange(cards);
+            db.SaveChanges();
         }
 
         /// <summary>

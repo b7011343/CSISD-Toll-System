@@ -56,5 +56,37 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             // TODO: Add logic here for making payment
             return View();
         }
+
+        [HttpPost]
+        [Authorize(Roles = "road-user")]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddCard(AddCardViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            Card card = new Card()
+            {
+                CardNumber = model.cardNumber,
+                Cvv = model.cvv,
+                ExpiryDate = model.expiryDate,
+                NameOnCard = model.nameOnCard,
+                OwnerID = _userManager.GetUserId(User)
+            };
+
+            db.Cards.Add(card);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "road-user")]
+        public IActionResult AddCard()
+        {
+            return View();
+        }
     }
 }

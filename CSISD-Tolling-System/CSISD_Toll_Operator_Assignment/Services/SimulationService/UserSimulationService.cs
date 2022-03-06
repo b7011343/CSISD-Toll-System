@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -78,20 +79,20 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 
             UserTemplate[] users = new UserTemplate[]
             {
-                new UserTemplate { Email = "test1@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test2@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test3@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test4@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test5@test.com", Password = "Test1234!", Role = "road-user" },
+                new UserTemplate { Email = "test1@test.com", Password = "Test1234!", Role = Roles.RoadUser },
+                new UserTemplate { Email = "test2@test.com", Password = "Test1234!", Role = Roles.RoadUser },
+                new UserTemplate { Email = "test3@test.com", Password = "Test1234!", Role = Roles.RoadUser },
+                new UserTemplate { Email = "test4@test.com", Password = "Test1234!", Role = Roles.RoadUser },
+                new UserTemplate { Email = "test5@test.com", Password = "Test1234!", Role = Roles.RoadUser },
             };
 
             CreateUsers(users);
 
             // Create a administrator account
-            CreateUserSync(new UserTemplate { Email = "admin@admin.com", Password = "Test123!", Role = "admin" });
+            CreateUserSync(new UserTemplate { Email = "admin@admin.com", Password = "Test123!", Role = Roles.Administrator });
 
             // Create a toll operator account
-            CreateUserSync(new UserTemplate { Email = "tolls@tolls.com", Password = "Test123!", Role = "toll-operator" });
+            CreateUserSync(new UserTemplate { Email = "tolls@tolls.com", Password = "Test123!", Role = Roles.TollOperator });
 
             return new List<User>();
         }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CSISD_Toll_Operator_Assignment.Data;
 
 namespace CSISD_Toll_Operator_Assignment.UnitTests
 {
@@ -47,7 +48,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             // Assert
             Assert.That(roles.Count > 0);
             Assert.That(users.Count > 0);
-            Assert.That(roles.ContainsValue("admin"));
+            Assert.That(roles.ContainsValue(Roles.Administrator));
         }
 
         [Test]
@@ -66,7 +67,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             // Assert
             Assert.That(roles.Count > 0);
             Assert.That(users.Count > 0);
-            Assert.That(roles.ContainsValue("road-user"));
+            Assert.That(roles.ContainsValue(Roles.RoadUser));
         }
 
         [Test]
@@ -85,7 +86,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             // Assert
             Assert.That(roles.Count > 0);
             Assert.That(users.Count > 0);
-            Assert.That(roles.ContainsValue("toll-operator"));
+            Assert.That(roles.ContainsValue(Roles.TollOperator));
         }
     }
 }

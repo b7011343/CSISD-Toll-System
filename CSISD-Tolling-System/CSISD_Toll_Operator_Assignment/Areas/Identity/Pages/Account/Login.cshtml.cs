@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using CSISD_Toll_Operator_Assignment.Data;
 
 namespace CSISD_Toll_Operator_Assignment.Areas.Identity.Pages.Account
 {
@@ -84,15 +85,15 @@ namespace CSISD_Toll_Operator_Assignment.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    if(User.IsInRole("road-user"))
+                    if(User.IsInRole(Roles.RoadUser))
                     {
                         return RedirectToAction("Index", "Road");
                     }
-                    if(User.IsInRole("toll-operator"))
+                    if(User.IsInRole(Roles.TollOperator))
                     {
                         return RedirectToAction("Index", "Toll");
                     }
-                    if(User.IsInRole("admin"))
+                    if(User.IsInRole(Roles.Administrator))
                     {
                         return RedirectToAction("Index", "Admin");
                     }

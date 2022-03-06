@@ -1,5 +1,5 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
-@model IEnumerable<PaymentViewModel>
+@model PaymentViewModel
 @{
     ViewData["Title"] = "Pay Invoice";
 }
@@ -7,26 +7,20 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="container">
-            @foreach (var item in Model)
-            {
-                <p>@item.invoice.Id</p>
-                <p>@item.invoice.Fee</p>
-                <p>@item.invoice.UserId</p>
-                <p>@item.invoice.EntryTimestamp</p>
-                <p>@item.invoice.ExitTimestamp</p>
-                <p>@item.invoice.VehicleId</p>
-                <p>@item.invoice.Paid</p>
-            }
+    <p>@Model.invoice.Id</p>
+    <p>@Model.invoice.Fee</p>
+    <p>@Model.invoice.UserId</p>
+    <p>@Model.invoice.EntryTimestamp</p>
+    <p>@Model.invoice.ExitTimestamp</p>
+    <p>@Model.invoice.VehicleId</p>
+    <p>@Model.invoice.Paid</p>
     <form asp-controller="Toll" asp-action="Pay" method="post">
         <p>Total: </p>
         <label for="cards">Select card</label>
         <select name="cards" id="cards">
-            @foreach (var item in Model)
+            @foreach (var item in Model.cards)
             {
-                foreach (var card in item.cards)
-                {
-                    <option value="@Html.DisplayFor(modelItem => card.CardNumber)">@Html.DisplayFor(modelItem => card.CardNumber)</option>
-                }
+             <option value="@Html.DisplayFor(modelItem => item.CardNumber)">@Html.DisplayFor(modelItem => item.CardNumber)</option>
             }
         </select>
         <label for="cvv">CVV:</label>

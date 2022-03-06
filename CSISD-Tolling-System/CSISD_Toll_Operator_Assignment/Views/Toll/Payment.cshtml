@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-6">
+        <div id="invoiceDetails" class="col-sm-6">
             <p>Invoice ID: @Model.invoice.Id</p>
             <p>Fee: @Model.invoice.Fee</p>
             <p>CustomerID: @Model.invoice.UserId</p>
@@ -19,17 +19,23 @@
         </div>
         <div class="col-sm-6">
             <form asp-controller="Toll" asp-action="Pay" method="post">
-                <p>Total: </p>
-                <label for="cards">Select card</label>
-                <select name="cards" id="cards">
-                    @foreach (var item in Model.cards)
-                    {
-                     <option value="@Html.DisplayFor(modelItem => item.CardNumber)">@Html.DisplayFor(modelItem => item.CardNumber)</option>
-                    }
-                </select>
-                <label for="cvv">CVV:</label>
-                <input id="cvv" name="cvv" type="text" placeholder="Enter your cvv" />
-                <input class="btn btn-success" type="submit" value="Pay" />
+                <div class="form-group">
+                    <label for="cards">Select card</label>
+                    <select name="cards" id="cards" class="form-control">
+                        <option value="" selected disabled hidden>Choose your card</option>
+                        @foreach (var item in Model.cards)
+                        {
+                         <option value="@Html.DisplayFor(modelItem => item.CardNumber)">@Html.DisplayFor(modelItem => item.CardNumber)</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV:</label>
+                    <input id="cvv" class="form-control" name="cvv" type="text" placeholder="Enter your cvv" />
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-success" type="submit" value="Pay" />
+                </div>
             </form>
         </div>
     </div>

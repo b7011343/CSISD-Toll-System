@@ -78,11 +78,11 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 
             UserTemplate[] users = new UserTemplate[]
             {
-                new UserTemplate { Email = "test1@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test2@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test3@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test4@test.com", Password = "Test1234!", Role = "road-user" },
-                new UserTemplate { Email = "test5@test.com", Password = "Test1234!", Role = "road-user" },
+                new UserTemplate { Email = "test1@test.com", Password = "Test123!", Role = "road-user" },
+                new UserTemplate { Email = "test2@test.com", Password = "Test123!", Role = "road-user" },
+                new UserTemplate { Email = "test3@test.com", Password = "Test123!", Role = "road-user" },
+                new UserTemplate { Email = "test4@test.com", Password = "Test123!", Role = "road-user" },
+                new UserTemplate { Email = "test5@test.com", Password = "Test123!", Role = "road-user" },
             };
 
             CreateUsers(users);

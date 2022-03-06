@@ -36,9 +36,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         [Authorize(Roles = "road-user")]
-        public IActionResult Payment()
+        public IActionResult Payment(long invoiceId)
         {
-            Invoice invoice = db.Invoices.Where(x => x.UserId == _userManager.GetUserId(User)).First();
+            Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
             List<Card> cards = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
             PaymentViewModel model = new PaymentViewModel()
             {

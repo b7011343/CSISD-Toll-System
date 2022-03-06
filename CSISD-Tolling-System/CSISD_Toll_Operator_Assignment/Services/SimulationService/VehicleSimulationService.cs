@@ -1,7 +1,7 @@
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Models;
 using System.Collections.Generic;
 
-namespace CSISD_Tolling_System.Service.SimulationServices
+namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 {
     public class VehicleSimulationService : ISimulationService<Vehicle>
     {

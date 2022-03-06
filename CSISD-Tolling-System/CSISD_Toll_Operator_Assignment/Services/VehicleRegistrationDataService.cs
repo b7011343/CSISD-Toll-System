@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSISD_Tolling_System.Data.Manager
+namespace CSISD_Toll_Operator_Assignment.Service
 {
-    public class AccountManager
+    public class VehicleRegistrationDataService
     {
     }
 }

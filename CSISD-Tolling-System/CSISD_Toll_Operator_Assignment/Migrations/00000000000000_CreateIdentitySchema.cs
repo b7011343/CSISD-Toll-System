@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CSISD_Tolling_System.Data.Migrations
+namespace CSISD_Toll_Operator_Assignment.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

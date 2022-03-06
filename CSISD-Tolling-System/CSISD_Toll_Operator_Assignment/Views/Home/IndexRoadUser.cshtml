@@ -1,0 +1,44 @@
+﻿@using CSISD_Toll_Operator_Assignment.Models
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container">
+    <h7 class="mb-5 font-weight-bold">Customer ID: @Model.userId</h7>
+    <hr />
+    <table id="data-table" class="table table-hover table-bordered mt-5 table-sm">
+        <thead>
+            <tr>
+                <th class="text-center" colspan="4">Unpaid Tolls</th>
+            </tr>
+            <tr>
+                <th scope="col">Entry</th>
+                <th scope="col">Exit</th>
+                <th scope="col">Charge</th>
+                <th scope="col">Paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var invoice in Model.invoices)
+                {
+                    <tr>
+                        <td>@invoice.EntryTimestamp</td>
+                        <td>@invoice.ExitTimestamp</td>
+                        <td>£@invoice.Fee</td>
+                        <td>
+                            <form asp-controller="Toll" asp-action="Payment" method="post">
+                                <input type="hidden" name="invoiceId" value="@invoice.Id" />
+                                <div class="d-flex justify-content-between align-items-center">
+                                    @(invoice.Paid ? "✔" : "❌")
+                                    <button class="btn btn-sm btn-primary ml-5">Pay</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

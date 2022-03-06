@@ -5,8 +5,9 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 
-namespace CSISD_Tolling_System.Models
+namespace CSISD_Toll_Operator_Assignment.Models
 {
+    [Table("Invoice", Schema = "dbo")]
     public class Invoice
     {
         [Key]

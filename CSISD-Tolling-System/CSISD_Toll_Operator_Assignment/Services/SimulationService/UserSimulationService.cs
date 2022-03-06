@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace CSISD_Tolling_System.Service.SimulationServices
+namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 {
     public class SimulatedUserTemplate
     {

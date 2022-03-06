@@ -1,12 +1,12 @@
-﻿using CSISD_Tolling_System.Models;
-using CSISD_Tolling_System.Service.SimulationServices;
+﻿using CSISD_Toll_Operator_Assignment.Models;
+using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSISD_Tolling_System.Data.Service
+namespace CSISD_Toll_Operator_Assignment.Service
 {
     public class PaymentProcessingService : ISimulationService<Card>
     {

@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using CSISD_Tolling_System.Service.SimulationServices;
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
+using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using CSISD_Toll_Operator_Assignment.Data;
 
-namespace CSISD_Tolling_System.Data.Manager
+namespace CSISD_Toll_Operator_Assignment.Manager
 {
-    public class SimulationManager : Controller
+    public class SimulationManager
     {
         /// <summary>
         /// Generate test/demo data for users, invoices, contracts, rfids and vehicles.
@@ -26,7 +27,6 @@ namespace CSISD_Tolling_System.Data.Manager
                 // Need to generate users & vehicles before generating any of
                 // the others (RFIDs, invoices and contracts etc...)
                 GenerateUsersAndVehicles(userManager, db);
-
                 GenerateRFIDs(db);
                 GenerateInvoices(db);
                 GenerateContracts(db);

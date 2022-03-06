@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace CSISD_Tolling_System.Data
+namespace CSISD_Toll_Operator_Assignment.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {

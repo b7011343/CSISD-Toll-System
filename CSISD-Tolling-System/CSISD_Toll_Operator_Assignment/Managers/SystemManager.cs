@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Models;
 
-namespace CSISD_Tolling_System.Data.Manager
+namespace CSISD_Toll_Operator_Assignment.Data.Manager
 {
     public class SystemManager
     {

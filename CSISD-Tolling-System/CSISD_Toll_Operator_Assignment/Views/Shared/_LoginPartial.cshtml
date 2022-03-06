@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using CSISD_Tolling_System.Models
+@using CSISD_Toll_Operator_Assignment.Models
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -13,6 +13,9 @@
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Toll" asp-action="Payment">Payment</a>
     </li>
 }
 else

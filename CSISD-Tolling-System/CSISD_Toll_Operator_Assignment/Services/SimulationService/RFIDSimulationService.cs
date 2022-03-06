@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CSISD_Tolling_System.Models;
+using CSISD_Toll_Operator_Assignment.Models;
 
-namespace CSISD_Tolling_System.Service.SimulationServices
+namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 {
     public class RFIDSimulationService : ISimulationService<RFID>
     {

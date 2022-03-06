@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace CSISD_Tolling_System.Models
+namespace CSISD_Toll_Operator_Assignment.Models
 {
+    [Table("Card", Schema = "dbo")]
     public class Card
     {
         [Key]

@@ -39,7 +39,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Payment(long invoiceId)
         {
             Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
-            Card card = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).First() ;
+            Card card = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).First();
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,

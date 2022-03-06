@@ -28,13 +28,10 @@
                         <td>@invoice.ExitTimestamp</td>
                         <td>£@invoice.Fee</td>
                         <td>
-                            <form asp-controller="Toll" asp-action="Payment" method="post">
-                                <input type="hidden" name="invoiceId" value="@invoice.Id" />
-                                <div class="d-flex justify-content-between align-items-center">
-                                    @(invoice.Paid ? "✔" : "❌")
-                                    <button class="btn btn-sm btn-primary ml-5">Pay</button>
-                                </div>
-                            </form>
+                            <div class="d-flex justify-content-between align-items-center">
+                                @(invoice.Paid ? "✔" : "❌")
+                                <a href="/Toll/Payment?invoiceId=@invoice.Id" class="btn btn-sm btn-primary ml-5">Pay</a>
+                            </div>
                         </td>
                     </tr>
                 }

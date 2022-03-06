@@ -39,11 +39,11 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Payment()
         {
             Invoice invoice = db.Invoices.Where(x => x.UserId == _userManager.GetUserId(User)).First();
-            Card card = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).First() ;
+            List<Card> cards = db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,
-                card = card
+                cards = cards
             };
             return View(model);
         }

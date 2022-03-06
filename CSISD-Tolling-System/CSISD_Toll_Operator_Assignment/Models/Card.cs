@@ -23,10 +23,4 @@ namespace CSISD_Toll_Operator_Assignment.Models
         [Required]
         public string OwnerID { get; set; }
     }
-    public class CardDBContext : DbContext
-    {
-        public CardDBContext(DbContextOptions<CardDBContext> options) : base(options)
-        { }
-        public DbSet<Card> Cards { get; set; }
-    }
 }

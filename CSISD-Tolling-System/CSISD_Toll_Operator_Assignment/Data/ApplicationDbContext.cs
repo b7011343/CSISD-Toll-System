@@ -9,18 +9,17 @@ using System.IO;
 
 namespace CSISD_Toll_Operator_Assignment.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbContext
     {
-        public DbSet<Card> Cards { get; set; }
-        public DbSet<Contract> Contracts { get; set; }
-        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Card>          Cards          { get; set; }
+        public DbSet<Contract>      Contracts      { get; set; }
+        public DbSet<Invoice>       Invoices       { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<Preference> Preferences { get; set; }
-        public DbSet<RFID> RFIDs { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Preference>    Preferences    { get; set; }
+        public DbSet<RFID>          RFIDs          { get; set; }
+        public DbSet<Vehicle>       Vehicles       { get; set; }
 
         public ApplicationDbContext() { }
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
+using CSISD_Toll_Operator_Assignment.Models.View;
 using CSISD_Toll_Operator_Assignment.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -113,21 +114,39 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "road-user")]
-        public async Task<IActionResult> ContractsAsync()
+        [Authorize(Roles = "road-user, toll-operator")]
+        public async Task<IActionResult> Contracts()
         {
             string userEmail = HttpContext.User.Identity.Name;
             User user = await userManager.FindByEmailAsync(userEmail);
             string role = (await userManager.GetRolesAsync(user)).First();
-
+            List<Contract> _tollContracts = db.Set<Contract>().ToList();
+            var id = userManager.GetUserId(User);
+            List<Contract> _userContracts = db.Contracts.Where(x => x.UserId == userManager.GetUserId(User)).ToList();
+            ContractView tollContracts = new ContractView()
+            {
+                contracts = _tollContracts
+            };
+            ContractView userContracts = new ContractView()
+            {
+                contracts = _userContracts
+            };
             switch (role)
             {
                 case Roles.RoadUser:
-                    return View("ContractRoadUser");
+                    return View("ContractRoadUser", userContracts);
                 case Roles.TollOperator:
-                    return View("ContractTollOperator");
+                    return View("ContractTollOperator", tollContracts);
             }
             return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "road-user, toll-operator")]
+        public IActionResult ContractDetails(long contractID)
+        {
+            Contract contract = db.Contracts.Where(x => x.Id == contractID).First();
+            return View(contract);
         }
     }
 }

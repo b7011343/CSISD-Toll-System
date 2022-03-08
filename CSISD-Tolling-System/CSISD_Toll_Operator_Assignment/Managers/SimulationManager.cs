@@ -44,7 +44,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
                     GenerateUsersAndVehicles(userManager, db);
                     GenerateRFIDs(db);
                     GenerateInvoices(db);
-                    GenerateContracts(db);
+                    GenerateContracts(db, userManager);
                     GenerateCards(userManager, db);
                 }
             }
@@ -77,9 +77,9 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// <summary>
         /// Update the database with test data for the contracts table
         /// </summary>
-        private void GenerateContracts(ApplicationDbContext db)
+        private void GenerateContracts(ApplicationDbContext db, UserManager<User> userManager)
         {
-            ISimulationService<Contract> contractSimulator = new ContractSimulationService();
+            ISimulationService<Contract> contractSimulator = new ContractSimulationService(userManager);
             List<Contract> contracts = contractSimulator.Generate();
 
             db.Contracts.AddRange(contracts);

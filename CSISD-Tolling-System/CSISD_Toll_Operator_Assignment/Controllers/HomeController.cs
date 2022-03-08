@@ -58,6 +58,28 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
             return View();
         }
+        public async Task<IActionResult> TollHistory()
+        {
+            string userEmail = HttpContext.User.Identity.Name;
+
+            if (userEmail == null)
+                return View();
+
+            User user = await _userManager.FindByEmailAsync(userEmail);
+            string role = (await _userManager.GetRolesAsync(user)).First();
+            TollHistoryViewModel model = new TollHistoryViewModel(role, user, _invoiceService);
+
+            switch (role)
+            {
+                case Roles.RoadUser:
+                    return View("TollHistoryRoadUser", model);
+
+                case Roles.TollOperator:
+                    return View("TollHistoryTollOperator", model);
+            }
+
+            return View();
+        }
 
         public IActionResult Privacy()
         {

@@ -1,61 +1,76 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Identity
+
 @inject IViewLocalizer Localizer
+@inject UserManager<User> userManager
 
 @model IndexAdminViewModel
+
 @{
 	ViewData["Title"] = @Localizer["Home"];
 }
 
 <div class="row">
-	<div class="col-9">
-		<table id="data-table" class="table table-hover table-bordered mt-5 table-sm">
-			<thead>
-				<tr>
+    <div class="col-9">
+        <table id="data-table" class="table table-hover table-bordered mt-5 table-sm">
+            <thead>
+                <tr>
 					<th class="text-center" colspan="3">@Localizer["All Users"]</th>
-				</tr>
-				<tr>
-					<th scope="col">@Localizer["ID"]</th>
-					<th scope="col">@Localizer["Email"]</th>
-					<th scope="col">@Localizer["Role"]</th>
-				</tr>
-			</thead>
-			<tbody>
-				@{
-					foreach (var user in Model.users)
-					{
-						<tr>
-							<td>@user.Id</td>
-							<td>@user.Email</td>
-							<td><!--Add role here--></td>
-						</tr>
-					}
-				}
-			</tbody>
-		</table>
-	</div>
-	<div class="col-3">
-		<div class="card">
-			<div class="card-body">
-				<div class="alert alert-secondary mb-3" role="alert">
-					@Localizer["As an admin, you can add new toll operator and admin accounts. By default the password will be set to"]: Test123!</b>
-				</div>
-				<form asp-controller="Home" asp-action="AddPrivilagedUser" method="post">
-					<div class="form-group">
-						<label for="email">@Localizer["Email Address"]</label>
-						<input type="email" name="email" class="form-control" id="email" required placeholder="Enter email">
-						<small class="form-text text-muted">@Localizer["Add an email and set a role"]</small>
-					</div>
-					<div class="form-group">
-						<label for="role">@Localizer["Role"]</label>
-						<select name="role" class="form-control" id="role">
-							<option value="toll-operator">@Localizer["Toll Operator"]</option>
-							<option value="admin">@Localizer["Admin"]</option>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-primary">@Localizer["Submit"]</button>
-				</form>
-			</div>
-		</div>
-	</div>
+                </tr>
+                <tr>
+                    <th scope="col">@Localizer["ID"]</th>
+                    <th scope="col">@Localizer["Email"]</th>
+                    <th scope="col">@Localizer["Role"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.users)
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Email</td>
+                        <td>
+                            @if (userManager.IsInRoleAsync(user, "toll-operator").Result)
+                            {
+                                <span>Toll Operator</span>
+                            }
+                            else if (userManager.IsInRoleAsync(user, "road-user").Result)
+                            {
+                                <span>Road User</span>
+                            }
+                            else if (userManager.IsInRoleAsync(user, "admin").Result)
+                            {
+                                <span>Admin</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-secondary mb-3" role="alert">
+                    @Localizer["As an admin, you can add new toll operator and admin accounts. By default the password will be set to"]: <b>Test123!</b>
+                </div>
+                <form asp-controller="Home" asp-action="AddPrivilagedUser" method="post">
+                    <div class="form-group">
+                        <label for="email">@Localizer["Email Address"]</label>
+                        <input type="email" name="email" class="form-control" id="email" required placeholder="Enter email">
+                        <small class="form-text text-muted">@Localizer["Add an email and set a role"]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">@Localizer["Role"]</label>
+                        <select name="role" class="form-control" id="role">
+                            <option value="toll-operator">@Localizer["Toll Operator"]</option>
+                            <option value="admin">@Localizer["Admin"]</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">@Localizer["Submit"]</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

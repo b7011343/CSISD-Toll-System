@@ -24,5 +24,7 @@ namespace CSISD_Toll_Operator_Assignment.Models
 
         [Required]
         public DateTime ExpiryDate { get; set; }
+        [Required]
+        public string UserId { get; set; }
     }
 }

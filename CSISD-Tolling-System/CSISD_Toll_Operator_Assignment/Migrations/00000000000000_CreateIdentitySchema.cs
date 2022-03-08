@@ -181,11 +181,13 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                     Company = table.Column<string>(nullable: false),
                     Fee = table.Column<decimal>(nullable: false),
                     Type = table.Column<string>(nullable: false),
-                    ExpiryDate = table.Column<DateTime>(nullable: false)
+                    ExpiryDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(maxLength: 450, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contract", x => new { x.Id });
+                    table.ForeignKey(name: "FK_AspNetUsersContract", column: x => x.UserId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

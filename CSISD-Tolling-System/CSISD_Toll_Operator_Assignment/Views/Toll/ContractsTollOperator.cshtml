@@ -4,11 +4,11 @@
 
 <h1>@ViewData["Title"]</h1>
 @{
-    ViewData["Title"] = "ContractRoadUser";
+    ViewData["Title"] = "ContractTollOperator";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ContractRoadUser</h1>
+<h1>ContractTollOperator</h1>
 
 <div class="container">
     <table class="table table-hover table-bordered mt-5 table-sm">
@@ -27,18 +27,17 @@
             @{
                 foreach (var cont in Model.contracts)
                 {
-                <tr>
-                    <td>@cont.Id</td>
-                    <td>@cont.Company</td>
-                    <td>@cont.Fee</td>
-                    <td>@cont.Type</td>
-                    <td>@cont.ExpiryDate</td>
-                    <td>@cont.UserId</td>
-                    <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">View Details</a></td>
-                </tr>
+                    <tr>
+                        <td>@cont.Id</td>
+                        <td>@cont.Company</td>
+                        <td>@cont.Fee</td>
+                        <td>@cont.Type</td>
+                        <td>@cont.ExpiryDate</td>
+                        <td>@cont.UserId</td>
+                        <td><a href="/Toll/Contract?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">View Details</a></td>
+                    </tr>
                 }
             }
         </tbody>
     </table>
-    <button id="newContract" class="btn btn-success">Request New Contract</button>
 </div>

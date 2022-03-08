@@ -11,8 +11,11 @@ namespace CSISD_Toll_Operator_Assignment.Services.SimulationService
 {
     public class ContractSimulationService : ISimulationService<Contract>
     {
-        public ContractSimulationService()
-        {}
+        private readonly UserManager<User> _userManager;
+        public ContractSimulationService(UserManager<User> userManager)
+        {
+            _userManager = userManager;
+        }
         public List<Contract> Generate()
         {
             List<Contract> contracts = new List<Contract>();
@@ -28,7 +31,8 @@ namespace CSISD_Toll_Operator_Assignment.Services.SimulationService
                     Company = companyNames[i],
                     Fee = (decimal)fee[i],
                     Type = type[i],
-                    ExpiryDate = expiry
+                    ExpiryDate = expiry,
+                    UserId = _userManager.Users.First().Id
                 };
                 contracts.Add(card);
             }

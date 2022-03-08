@@ -9,6 +9,11 @@ using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Manager;
 using CSISD_Toll_Operator_Assignment.Data.Manager;
+using Microsoft.Extensions.Options;
+using System.Collections.Generic;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CSISD_Toll_Operator_Assignment
 {
@@ -34,6 +39,38 @@ namespace CSISD_Toll_Operator_Assignment
 
             services.AddSingleton<SimulationManager>();
             services.AddSingleton<SystemManager>();
+
+            services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
+
+            services.AddMvc()
+                .AddViewLocalization(
+                    LanguageViewLocationExpanderFormat.Suffix,
+                    opts => { opts.ResourcesPath = "Resources"; })
+                .AddDataAnnotationsLocalization();
+
+            services.Configure<RequestLocalizationOptions>(
+                opts =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                    {
+                            new CultureInfo("en"),
+                            new CultureInfo("fr"),
+                            new CultureInfo("ar"),
+                    };
+
+                    opts.DefaultRequestCulture = new RequestCulture("en");
+
+                    // Formatting numbers, dates, etc.
+                    opts.SupportedCultures = supportedCultures;
+
+                    // UI strings that we have localized.
+                    opts.SupportedUICultures = supportedCultures;
+
+                    opts.RequestCultureProviders = new List<IRequestCultureProvider>()
+                    {
+                        new QueryStringRequestCultureProvider()
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +93,9 @@ namespace CSISD_Toll_Operator_Assignment
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             {
                 SimulationManager simulationManager = app.ApplicationServices.GetRequiredService<SimulationManager>();

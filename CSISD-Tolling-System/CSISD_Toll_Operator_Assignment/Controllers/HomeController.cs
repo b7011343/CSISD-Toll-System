@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using CSISD_Toll_Operator_Assignment.Service;
 using CSISD_Toll_Operator_Assignment.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CSISD_Toll_Operator_Assignment.Controllers
 {
@@ -19,14 +20,17 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly InvoiceService _invoiceService;
+        private readonly PreferenceService _preferenceService;
         private const string DEFAULT_PASSWORD = "Test123!";
+        private const int MAGNIFICATION_INCREMENT = 1;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, ApplicationDbContext db)
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, ApplicationDbContext db, PreferenceService preferenceService)
         {
-            _logger         = logger;
-            _userManager    = userManager;
-            _db             = db;
-            _invoiceService = new InvoiceService(db);
+            _logger             = logger;
+            _userManager        = userManager;
+            _db                 = db;
+            _invoiceService     = new InvoiceService(db);
+            _preferenceService  = preferenceService;
         }
 
         public async Task<IActionResult> Index()
@@ -93,6 +97,58 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             Task<IdentityResult> addRoleTask = _userManager.AddToRoleAsync(user, role);
             addRoleTask.Wait();
             return RedirectToAction("Index");
+        }
+
+        public void CheckIfUserHasPreferences()
+        {
+            User user = _userManager.GetUserAsync(User).Result;
+
+            if (user.PreferenceId == 0)
+            {
+                Preference preference = _db.Preferences.Find(user.PreferenceId);
+                Preference newPreference = new Preference()
+                {
+                    ColorBlindMode = preference.ColorBlindMode,
+                    FontSize = preference.FontSize,
+                    Magnification = preference.Magnification,
+                    Language = preference.Language,
+                    ScreenReader = preference.ScreenReader,
+                };
+
+                _db.Preferences.Add(newPreference);
+                _db.SaveChanges();
+                user.PreferenceId = newPreference.Id;
+                _db.SaveChanges();
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult IncrementMagnification(string returnUrl)
+        {
+            CheckIfUserHasPreferences();
+
+            int currentMagnification = _preferenceService.GetMagnification();
+            _preferenceService.SetMagnification(currentMagnification + MAGNIFICATION_INCREMENT);
+
+            return Redirect(returnUrl);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult DecrementMagnification(string returnUrl)
+        {
+            CheckIfUserHasPreferences();
+
+            int currentMagnification = _preferenceService.GetMagnification();
+            if (currentMagnification - MAGNIFICATION_INCREMENT >= 100)
+            {
+                _preferenceService.SetMagnification(currentMagnification - MAGNIFICATION_INCREMENT);
+            }
+
+            return Redirect(returnUrl);
         }
     }
 }

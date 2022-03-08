@@ -1,5 +1,6 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Service
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http.Extensions
 @inject PreferenceService preferenceService
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -27,25 +28,28 @@
                         <h1 class="font-weight-bold">Nordic Department of Transport</h1>
                     </div>
                     <div class="col-5">
-                        <select class="custom-select mb-1" name="languages" id="languages-select">
-                            <option value="english">English</option>
-                            <option value="french">French</option>
-                        </select>
-                        <div class="d-flex justify-content-end">
-                            <form method="post">
-                                <button title="Increase font size by 5%" type="button" class="btn btn-link">
-                                    <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                            <form method="post">
-                                <button title="Decrease font size by 5%" type="button" class="btn btn-link">
-                                    <i class="fa fa-search-minus fa-2x" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <small>@preferenceService.GetMagnification()%</small>
-                        </div>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <select class="custom-select mb-1" name="languages" id="languages-select">
+                                <option value="english">English</option>
+                                <option value="french">French</option>
+                            </select>
+                            <div class="d-flex justify-content-end row align-items-center">
+                                <form asp-controller="Home" asp-action="DecrementMagnification" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post">
+                                    <button disabled="@(preferenceService.GetMagnification() <= 100)" title="Decrease font size by 1%" type="submit" class="btn btn-link">
+                                        <i class="fa fa-search-minus fa-2x" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                                <form asp-controller="Home" asp-action="IncrementMagnification" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post">
+                                    <button title="Increase font size by 1%" type="submit" class="btn btn-link">
+                                        <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <small>@preferenceService.GetMagnification()%</small>
+                            </div>
+                        }
                     </div>
                 </div>
                 <nav style="padding-top: 18px;" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -79,7 +83,7 @@
         </div>
     </header>
 
-    <hr/>
+    <hr />
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -98,7 +102,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>document.onload = adjustFontSizes(@(preferenceService.GetMagnification() / 100))</script>
+    <script>document.onload = adjustFontSizes(@((double)preferenceService.GetMagnification() / 100))</script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -2,7 +2,8 @@
     $('#data-table').DataTable();
 });
 
-const adjustFontSizes = (multiplier = 1) => {
+const adjustFontSizes = (multiplier) => {
+    console.log(`Adjusting magnification to ${multiplier*100}%`)
     const el = document.querySelector('body');
     let n, a = [], walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
     while (n = walk.nextNode()) a.push(n);

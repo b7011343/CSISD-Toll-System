@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using CSISD_Toll_Operator_Assignment.Service
+@inject PreferenceService preferenceService 
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -48,6 +51,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>document.onload = adjustFontSizes(@(preferenceService.GetMagnification() / 100))</script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

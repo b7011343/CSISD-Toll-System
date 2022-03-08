@@ -20,8 +20,8 @@ namespace CSISD_Toll_Operator_Assignment.Models
         [Required]
         public int Magnification { get; set; }
         [Required, StringLength(5)]
-        public string ColorBlindMode { get; set; }
+        public bool ColorBlindMode { get; set; }
         [Required, StringLength(5)]
-        public string ScreenReader { get; set; }
+        public bool ScreenReader { get; set; }
     }
 }

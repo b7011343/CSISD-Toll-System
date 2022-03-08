@@ -9,6 +9,7 @@ using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Manager;
 using CSISD_Toll_Operator_Assignment.Data.Manager;
+using CSISD_Toll_Operator_Assignment.Service;
 
 namespace CSISD_Toll_Operator_Assignment
 {
@@ -34,6 +35,7 @@ namespace CSISD_Toll_Operator_Assignment
 
             services.AddSingleton<SimulationManager>();
             services.AddSingleton<SystemManager>();
+            services.AddTransient<PreferenceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

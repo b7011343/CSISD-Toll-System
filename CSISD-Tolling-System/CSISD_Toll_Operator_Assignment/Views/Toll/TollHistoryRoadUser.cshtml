@@ -1,4 +1,4 @@
-@using CSISD_Toll_Operator_Assignment.Models
+﻿@using CSISD_Toll_Operator_Assignment.Models
 @model TollHistoryViewModel
 @{
     ViewData["Title"] = "TollHistory";
@@ -16,6 +16,7 @@
                 <th scope="col">Entry</th>
                 <th scope="col">Exit</th>
                 <th scope="col">Charge</th>
+                <th scope="col">Paid</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +26,13 @@
                     <tr>
                         <td>@invoice.EntryTimestamp</td>
                         <td>@invoice.ExitTimestamp</td>
-                        <td>�@invoice.Fee</td>
+                        <td>£@invoice.Fee</td>
+                        <td>
+                            <div class="d-flex justify-content-between align-items-center">
+                                @(invoice.Paid ? "✔" : "❌")
+                                <a href="/Toll/Payment?invoiceId=@invoice.Id" class="btn btn-sm btn-primary ml-5">Pay</a>
+                            </div>
+                        </td>
                     </tr>
                 }
             }

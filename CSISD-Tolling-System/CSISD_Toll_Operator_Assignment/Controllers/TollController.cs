@@ -120,7 +120,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             string userEmail = HttpContext.User.Identity.Name;
             User user = await userManager.FindByEmailAsync(userEmail);
             string role = (await userManager.GetRolesAsync(user)).First();
-            List<Contract> _tollContracts = db.Set<Contract>().ToList();
+            List<Contract> _tollContracts = db.Contracts.ToList();
             var id = userManager.GetUserId(User);
             List<Contract> _userContracts = db.Contracts.Where(x => x.UserId == userManager.GetUserId(User)).ToList();
             ContractView tollContracts = new ContractView()
@@ -147,6 +147,29 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         {
             Contract contract = db.Contracts.Where(x => x.Id == contractID).First();
             return View(contract);
+        }
+
+        public async Task<IActionResult> TollHistory()
+        {
+            string userEmail = HttpContext.User.Identity.Name;
+
+            if (userEmail == null)
+                return View();
+
+            User user = await userManager.FindByEmailAsync(userEmail);
+            string role = (await userManager.GetRolesAsync(user)).First();
+            TollHistoryViewModel model = new TollHistoryViewModel(role, user, invoiceService);
+
+            switch (role)
+            {
+                case Roles.RoadUser:
+                    return View("TollHistoryRoadUser", model);
+
+                case Roles.TollOperator:
+                    return View("TollHistoryTollOperator", model);
+            }
+
+            return View();
         }
     }
 }

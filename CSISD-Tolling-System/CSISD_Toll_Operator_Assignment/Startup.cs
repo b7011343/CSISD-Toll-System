@@ -32,7 +32,6 @@ namespace CSISD_Toll_Operator_Assignment
                     .AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
             services.AddHttpContextAccessor();
-
             services.AddSingleton<SimulationManager>();
             services.AddSingleton<SystemManager>();
             services.AddTransient<PreferenceService>();

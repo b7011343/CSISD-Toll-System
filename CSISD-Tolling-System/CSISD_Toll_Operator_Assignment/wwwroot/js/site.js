@@ -13,3 +13,10 @@ const adjustFontSizes = (multiplier = 1) => {
         htmlEl.style.fontSize = (fontSize * multiplier) + 'px';
     }
 };
+
+$(document).ready(function () {
+    $('li.active').removeClass('active');
+    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+    $('.nav-link').removeClass('active');
+    $('a[href="' + location.pathname + '"]').closest('.nav-link').addClass('active');
+});

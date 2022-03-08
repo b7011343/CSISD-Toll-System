@@ -1,16 +1,19 @@
-﻿@{
-    ViewData["Title"] = "Home";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+	ViewData["Title"] = @Localizer["Home"];
 }
 
 <section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">Welcome to the <b>Nordic Tolling Service</b></h1>
-        <p class="lead text-muted">
-            Register or login to make use of this system...
-        </p>
-        <p>
-            <a href="/Identity/Account/Register" class="btn btn-primary my-2">Register</a>
-            <a href="/Identity/Account/Login" class="btn btn-secondary my-2">Login</a>
-        </p>
-    </div>
+	<div class="container">
+		<h1 class="jumbotron-heading">@Localizer["Welcome to the Nordic Tolling Service"]</h1>
+		<p class="lead text-muted">
+			@Localizer["Register or login to make use of this system..."]
+		</p>
+		<p>
+			<a href="/Identity/Account/Register" class="btn btn-primary my-2">@Localizer["Register"]</a>
+			<a href="/Identity/Account/Login" class="btn btn-secondary my-2">@Localizer["Login"]</a>
+		</p>
+	</div>
 </section>

@@ -173,7 +173,7 @@ namespace ResourceTranslator
                 HashSet<string> keys = new HashSet<string>();
 
                 string contents = File.ReadAllText(file);
-                MatchCollection matches = Regex.Matches(contents, "@Localizer\\[\"(.*)\"\\]");
+                MatchCollection matches = Regex.Matches(contents, "@Localizer\\[\"(.*)\".*\\]");
 
                 foreach (Match match in matches)
                 {

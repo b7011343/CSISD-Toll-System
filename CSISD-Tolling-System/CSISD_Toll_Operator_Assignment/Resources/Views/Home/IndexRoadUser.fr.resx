@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Home" xml:space="preserve">
+    <value>Domicile</value>
+  </data>
+  <data name="Customer ID: {0}" xml:space="preserve">
+    <value>Id client : {0}</value>
+  </data>
+  <data name="Unpaid Tolls" xml:space="preserve">
+    <value>Péages impayés</value>
+  </data>
+  <data name="Entry" xml:space="preserve">
+    <value>Entrée</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Sortie</value>
+  </data>
+  <data name="Charge" xml:space="preserve">
+    <value>Charger</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Payé</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Payer</value>
+  </data>
 </root>

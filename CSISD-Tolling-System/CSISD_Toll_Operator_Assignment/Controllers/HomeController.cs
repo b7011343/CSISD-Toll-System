@@ -38,10 +38,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
             User   user = await _userManager.FindByEmailAsync(userEmail);
             string role = (await _userManager.GetRolesAsync(user)).First();
-
-            if (role == Roles.Administrator)
-                return View("IndexAdmin");
-
             IndexViewModel model = new IndexViewModel(role, user, _invoiceService);
 
             switch(role)

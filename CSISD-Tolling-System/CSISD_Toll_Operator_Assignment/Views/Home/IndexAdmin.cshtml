@@ -1,5 +1,7 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
+@using Microsoft.AspNetCore.Identity
 @model IndexAdminViewModel
+@inject UserManager<User> userManager
 @{
     ViewData["Title"] = "Home";
 }
@@ -18,15 +20,26 @@
                 </tr>
             </thead>
             <tbody>
-                @{
-                    foreach (var user in Model.users)
-                    {
-                        <tr>
-                            <td>@user.Id</td>
-                            <td>@user.Email</td>
-                            <td><!--Add role here--></td>
-                        </tr>
-                    }
+                @foreach (var user in Model.users)
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Email</td>
+                        <td>
+                            @if (userManager.IsInRoleAsync(user, "toll-operator").Result)
+                            {
+                                <span>Toll Operator</span>
+                            }
+                            else if (userManager.IsInRoleAsync(user, "road-user").Result)
+                            {
+                                <span>Road User</span>
+                            }
+                            else if (userManager.IsInRoleAsync(user, "admin").Result)
+                            {
+                                <span>Admin</span>
+                            }
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>

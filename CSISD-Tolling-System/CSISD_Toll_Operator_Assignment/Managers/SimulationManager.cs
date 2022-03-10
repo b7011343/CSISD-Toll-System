@@ -51,19 +51,21 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// <summary>
         /// Update the database with test data for the card table
         /// </summary>
-        private async void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
+        private void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
         {
-            List<User> users = db.Users.ToList();
             List<User> roadUsers = new List<User>();
-            foreach(var user in users)
+
+            foreach(var user in db.Users)
             {
                 if(userManager.IsInRoleAsync(user, "road-user").Result == true)
                 {
                     roadUsers.Add(user);
                 }
             }
-            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(roadUsers, userManager);
+
+            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(roadUsers);
             List<Card> cards = cardSimulator.GenerateAsync();
+
             db.AddRange(cards);
             db.SaveChanges();
         }

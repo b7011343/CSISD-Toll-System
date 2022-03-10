@@ -12,11 +12,10 @@ namespace CSISD_Toll_Operator_Assignment.Service
     public class PaymentProcessingSimulationService : ISimulationService<Card>
     {
         private IEnumerable<User> _users;
-        private UserManager<User> _userManager;
-        public PaymentProcessingSimulationService(IEnumerable<User> users, UserManager<User> userManager)
+
+        public PaymentProcessingSimulationService(IEnumerable<User> users)
         {
             _users = users;
-            _userManager = userManager;
         }
 
         public List<Card> GenerateAsync()

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Use this page to add a new payment card." xml:space="preserve">
+    <value>استخدم هذه الصفحة لإضافة بطاقة دفع جديدة.</value>
+  </data>
   <data name="The last 3 digits on the back" xml:space="preserve">
     <value>آخر 3 أرقام على الظهر</value>
   </data>

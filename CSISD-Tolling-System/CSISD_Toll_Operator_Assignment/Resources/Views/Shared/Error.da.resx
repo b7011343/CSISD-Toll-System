@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error" xml:space="preserve">
+    <value>Fejl</value>
+  </data>
+  <data name="An error occurred while processing your request" xml:space="preserve">
+    <value>Der opstod en fejl under behandling af din anmodning</value>
+  </data>
+  <data name="Request ID" xml:space="preserve">
+    <value>Anmodnings-id</value>
+  </data>
 </root>

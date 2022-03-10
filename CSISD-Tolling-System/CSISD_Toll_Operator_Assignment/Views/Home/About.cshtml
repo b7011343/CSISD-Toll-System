@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = Localizer["About Us"];
+}
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<h1>@ViewData["Title"]</h1>
+
+<p> @Localizer["Norway Department of transport - Toll Payment System"]</p>
+<p>@Localizer["Tolls are levied for the passage of certain roads, tunnels and bridges. Invoices are sent out according to the registration plate photographed when passing through a toll gate or using a RFID chip to automatically pay."]</p>
+<h2> @Localizer["Options for payment of tolls in Norway:"]</h2>
+<p> @Localizer["Tolls are charged according to the toll gates passed through."]</p>
+<div class="row">
+    <ul class="list">
+        <li>
+            <p>@Localizer["Without an RFID Chip - Invoices will be sent according to the photographed registration plate then can be paid using this system or bank transfer"]</p>
+        </li>
+        <li>
+            <p>@Localizer["With an RFID Chip - When the chip is scanned it will bill the user straight away and take the payment from the contract linked to the account"]</p>
+        </li>
+    </ul>
+</div>
+

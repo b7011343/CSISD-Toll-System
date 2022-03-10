@@ -1,6 +1,41 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = Localizer["Privacy Policy"];
 }
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p> @Localizer["Last Updates and Effective: 3/10/2022"]</p>
+<p>@Localizer["This Privacy Policy also explains how we process personal data and for what purposes."]</p>
+<h2> @Localizer["What data we collect"]</h2>
+<p> @Localizer["The personal data we from collect from you includes:"]</p>
+<div class="row">
+ <ul class="list">
+     <li>
+         <p>@Localizer["Identifiers: We collect certain identifying information from you including first name, last name, Email address, phone number. We also collect Vehcile information such as model, registration plate"]</p>
+     </li>
+     <li>
+         <p>@Localizer["Commercial information: we record and store payment information and record all paid & unpaid tolls."]</p>
+     </li>
+ </ul>
+</div>
+<h2>@Localizer["How we use information"]</h2>
+<p>@Localizer["We will only use your personal data when the law allows us to. Most commonly, we will use your personal data for the following business purposes:"]</p>
+<div class="row">
+    <ul class="list">
+        <li>
+            <p>@Localizer["We only use the data we collect to send invoices so users can easily pay when they go through a Nordic toll."]</p>
+        </li>
+        <li>
+            <p>@Localizer["We store all data given safely without any Third parties having access to the data we store."]</p>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+
+

@@ -14,68 +14,68 @@ namespace CSISD_Toll_Operator_Assignment.Service
     public class PreferenceService
     {
         private readonly ApplicationDbContext _db;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<User>    _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private Preference defaultPreference;
+        private Preference                    _defaultPreference;
 
         public PreferenceService(ApplicationDbContext db, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
-            _db = db;
-            _userManager = userManager;
+            _db                  = db;
+            _userManager         = userManager;
             _httpContextAccessor = httpContextAccessor;
-            defaultPreference = db.Preferences.Find(0L);
+            _defaultPreference   = db.Preferences.Find(0L);
         }
 
-        private Preference GetUserPreference()
+        private Preference GetCurrentlyLoggedInUserPreference()
         {
             User user = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
-            return user == null ? defaultPreference : user.GetPreference();
+            return user == null ? _defaultPreference : _db.Preferences.Find(user.PreferenceId);
         }
 
         public string GetLanguage()
         {
-            return GetUserPreference().Language;
+            return GetCurrentlyLoggedInUserPreference().Language;
         }
 
         public int GetMagnification()
         {
-            return GetUserPreference().Magnification;
+            return GetCurrentlyLoggedInUserPreference().Magnification;
         }
 
         public bool GetColorBlindMode()
         {
-            return GetUserPreference().ColorBlindMode;
+            return GetCurrentlyLoggedInUserPreference().ColorBlindMode;
         }
 
         public bool GetScreenReader()
         {
-            return GetUserPreference().ScreenReader;
+            return GetCurrentlyLoggedInUserPreference().ScreenReader;
         }
 
         public void SetMagnification(int magnification)
         {
-            Preference preference = GetUserPreference();
+            Preference preference = GetCurrentlyLoggedInUserPreference();
             preference.Magnification = magnification;
             _db.SaveChanges();
         }
 
         public void SetLanguage(string language)
         {
-            Preference preference = GetUserPreference();
+            Preference preference = GetCurrentlyLoggedInUserPreference();
             preference.Language = language;
             _db.SaveChanges();
         }
 
         public void SetColorBlindMode(bool isColorBlind)
         {
-            Preference preference = GetUserPreference();
+            Preference preference = GetCurrentlyLoggedInUserPreference();
             preference.ColorBlindMode = isColorBlind;
             _db.SaveChanges();
         }
 
         public void SetScreenReader(bool isScreenReader)
         {
-            Preference preference = GetUserPreference();
+            Preference preference = GetCurrentlyLoggedInUserPreference();
             preference.ScreenReader = isScreenReader;
             _db.SaveChanges();
         }

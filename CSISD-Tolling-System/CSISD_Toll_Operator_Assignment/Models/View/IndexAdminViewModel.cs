@@ -10,6 +10,11 @@ namespace CSISD_Toll_Operator_Assignment.Models
         /// <summary>
         /// List of all users visible on the administrator page
         /// </summary>
-        public List<User> Users { get; set; }
+        public IEnumerable<User> Users { get; set; }
+
+        public IndexAdminViewModel(IEnumerable<User> allUsers)
+        {
+            Users = allUsers;
+        }
     }
 }

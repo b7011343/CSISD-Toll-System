@@ -40,6 +40,8 @@ namespace CSISD_Toll_Operator_Assignment
             services.AddSingleton<SimulationManager>();
             services.AddSingleton<SystemManager>();
             services.AddTransient<PreferenceService>();
+            services.AddTransient<InvoiceService>();
+            services.AddTransient<IApplicationDbContext, ApplicationDbContext>();
 
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 

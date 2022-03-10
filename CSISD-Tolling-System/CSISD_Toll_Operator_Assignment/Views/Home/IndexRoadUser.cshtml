@@ -34,7 +34,10 @@
 						<td>
 							<div class="d-flex justify-content-between align-items-center">
 								@(invoice.Paid ? "✔" : "❌")
-								<a href="/Toll/Payment?invoiceId=@invoice.Id" class="btn btn-sm btn-primary ml-5">@Localizer["Pay"]</a>
+								@if (!invoice.Paid)
+								{
+									<a href="/Toll/Payment?invoiceId=@invoice.Id" class="btn btn-sm btn-primary ml-5">@Localizer["Pay"]</a>
+								}
 							</div>
 						</td>
 					</tr>

@@ -98,13 +98,13 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             IdentityResult createUserResult = await _userManager.CreateAsync(user, DEFAULT_PASSWORD);
 
             if (!createUserResult.Succeeded)
-                return RedirectToAction("Index");
+                return Ok("Failed to create user " + email);
 
             // If adding user was a success then
             IdentityResult addRoleResult = await _userManager.AddToRoleAsync(user, role);
 
             if (!addRoleResult.Succeeded)
-                return RedirectToAction("Index");
+                return Ok("Failed to add role " + role + " to user " + email);
 
             return RedirectToAction("Index");
         }

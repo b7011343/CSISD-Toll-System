@@ -26,3 +26,8 @@ $("#delContract").click(function () {
     $("#delContract").prop("disabled", true);
     $("#delTxt").removeClass("hidden");
 });
+
+$("#newContract").click(function () {
+    $("#newContract").prop("disabled", true);
+    $("#newTxt").removeClass("hidden");
+});

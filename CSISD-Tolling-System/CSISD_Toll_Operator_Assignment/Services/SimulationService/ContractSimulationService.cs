@@ -32,7 +32,7 @@ namespace CSISD_Toll_Operator_Assignment.Services.SimulationService
                     Fee = (decimal)fee[i],
                     Type = type[i],
                     ExpiryDate = expiry,
-                    UserId = _userManager.Users.First().Id
+                    UserId = _userManager.Users.Where(x => x.Email == "test1@test.com").First().Id
                 };
                 contracts.Add(card);
             }

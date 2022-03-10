@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Http.Extensions
 @using Microsoft.AspNetCore.Mvc.Localization
+
 @inject IViewLocalizer Localizer
 @inject PreferenceService preferenceService
 @inject SignInManager<User> SignInManager
@@ -32,15 +33,18 @@
                     <div class="col-5">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <select class="custom-select mb-1" name="languages" id="languages-select">
-                                <option value="en">@Localizer["English"]</option>
-                                <option value="fr">@Localizer["French"]</option>
-                                <option value="ar">@Localizer["Arabic"]</option>
-                                <option value="no">@Localizer["Norwegian"]</option>
-                                <option value="sv">@Localizer["Swedish"]</option>
-                                <option value="da">@Localizer["Danish"]</option>
-                                <option value="fi">@Localizer["Finnish"]</option>
-                            </select>
+                            <form asp-controller="Home" asp-action="ChangeLanguage" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post" id="LanguageDropdown">
+                                <select class="custom-select mb-1" name="languages" id="languages-select" onchange="LanguageDropdown.submit()">
+                                    <option value="en" selected="@(preferenceService.GetLanguage() == "en")">@Localizer["English"]</option>
+                                    <option value="fr" selected="@(preferenceService.GetLanguage() == "fr")">@Localizer["French"]</option>
+                                    <option value="ar" selected="@(preferenceService.GetLanguage() == "ar")">@Localizer["Arabic"]</option>
+                                    <option value="no" selected="@(preferenceService.GetLanguage() == "no")">@Localizer["Norwegian"]</option>
+                                    <option value="sv" selected="@(preferenceService.GetLanguage() == "sv")">@Localizer["Swedish"]</option>
+                                    <option value="da" selected="@(preferenceService.GetLanguage() == "da")">@Localizer["Danish"]</option>
+                                    <option value="fi" selected="@(preferenceService.GetLanguage() == "fi")">@Localizer["Finnish"]</option>
+                                </select>
+                            </form>
+
                             <div class="d-flex justify-content-end row align-items-center">
                                 <form asp-controller="Home" asp-action="DecrementMagnification" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post">
                                     <button disabled="@(preferenceService.GetMagnification() <= 100)" title="@Localizer["Decrease font size by 1%"]" type="submit" class="btn btn-link">

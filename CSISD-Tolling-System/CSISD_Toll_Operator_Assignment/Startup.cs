@@ -73,6 +73,7 @@ namespace CSISD_Toll_Operator_Assignment
 
                     opts.RequestCultureProviders = new List<IRequestCultureProvider>()
                     {
+                        new UserPreferenceRequestCultureProvider(),
                         new QueryStringRequestCultureProvider()
                     };
                 });

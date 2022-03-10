@@ -150,5 +150,17 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
             return Redirect(returnUrl);
         }
+
+        [HttpPost]
+        [Authorize]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult ChangeLanguage(string returnUrl, string languages)
+        {
+            CheckIfUserHasPreferences();
+
+            _preferenceService.SetLanguage(languages);
+
+            return Redirect(returnUrl);
+        }
     }
 }

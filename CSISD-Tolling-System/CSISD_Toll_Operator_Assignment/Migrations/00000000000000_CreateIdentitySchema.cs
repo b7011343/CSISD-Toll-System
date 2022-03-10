@@ -54,7 +54,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                 });
 
             //default preference insert data
-            migrationBuilder.InsertData("Preference", new string[] { "Id", "FontSize", "Language", "Magnification", "ColorBlindMode", "ScreenReader" }, new object[] { "0", "11", "ENGLISH", "100", "FALSE", "FALSE" });
+            migrationBuilder.InsertData("Preference", new string[] { "Id", "FontSize", "Language", "Magnification", "ColorBlindMode", "ScreenReader" }, new object[] { "0", "11", "en", "100", "FALSE", "FALSE" });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",

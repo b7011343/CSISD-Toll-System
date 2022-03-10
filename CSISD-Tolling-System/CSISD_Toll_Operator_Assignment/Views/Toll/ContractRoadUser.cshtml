@@ -1,15 +1,8 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models.View
-<<<<<<< HEAD
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
-=======
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
->>>>>>> 06b002b08343da3ac5c03a59c4523a5ab42f7842
 
-@model ContractView
-
-@inject IStringLocalizer<ContractView> Localizer
+@model ContractViewModel
 
 <h1>@ViewData["Title"]</h1>
 @{
@@ -34,7 +27,7 @@
         </thead>
         <tbody>
             @{
-                foreach (var cont in Model.contracts)
+                foreach (var cont in Model.Contracts)
                 {
                 <tr>
                     <td>@cont.Id</td>

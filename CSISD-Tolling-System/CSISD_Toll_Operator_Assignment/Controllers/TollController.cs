@@ -93,10 +93,10 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             // Creates new card in the database with the current users ID on it
             Card card = new Card()
             {
-                CardNumber = model.cardNumber,
-                Cvv = model.cvv,
-                ExpiryDate = model.expiryDate,
-                NameOnCard = model.nameOnCard,
+                CardNumber = model.CardNumber,
+                Cvv = model.CVV,
+                ExpiryDate = model.ExpiryDate,
+                NameOnCard = model.NameOnCard,
                 OwnerID = userManager.GetUserId(User)
             };
 
@@ -125,13 +125,13 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             List<Contract> _tollContracts = db.Contracts.ToList();
             var id = userManager.GetUserId(User);
             List<Contract> _userContracts = db.Contracts.Where(x => x.UserId == userManager.GetUserId(User)).ToList();
-            ContractView tollContracts = new ContractView()
+            ContractViewModel tollContracts = new ContractViewModel()
             {
-                contracts = _tollContracts
+                Contracts = _tollContracts
             };
-            ContractView userContracts = new ContractView()
+            ContractViewModel userContracts = new ContractViewModel()
             {
-                contracts = _userContracts
+                Contracts = _userContracts
             };
             // Different view rendered dependent on role
             switch (role)

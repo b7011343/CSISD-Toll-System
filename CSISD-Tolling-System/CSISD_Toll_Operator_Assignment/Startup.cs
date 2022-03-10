@@ -57,7 +57,7 @@ namespace CSISD_Toll_Operator_Assignment
                             new CultureInfo("en"), // English
                             new CultureInfo("fr"), // French
                             new CultureInfo("ar"), // Arabic
-                            new CultureInfo("no"), // Norwegian
+                            new CultureInfo("nb"), // Norwegian
                             new CultureInfo("sv"), // Swedish
                             new CultureInfo("da"), // Danish
                             new CultureInfo("fi"), // Finnish

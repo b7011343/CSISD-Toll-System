@@ -117,4 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Customer ID:" xml:space="preserve">
+    <value>ID client :</value>
+  </data>
+  <data name="Fee:" xml:space="preserve">
+    <value>Honoraires:</value>
+  </data>
+  <data name="Vehicle Reg Plate:" xml:space="preserve">
+    <value>Plaque d’immatriculation du véhicule:</value>
+  </data>
+  <data name="Entry Timestamp:" xml:space="preserve">
+    <value>Horodatage d’entrée :</value>
+  </data>
+  <data name="Exit Timestamp:" xml:space="preserve">
+    <value>Horodatage de sortie :</value>
+  </data>
+  <data name="Invoice ID:" xml:space="preserve">
+    <value>ID de facture :</value>
+  </data>
+  <data name="Select card" xml:space="preserve">
+    <value>Sélectionner une carte</value>
+  </data>
+  <data name="Choose your card" xml:space="preserve">
+    <value>Choisissez votre carte</value>
+  </data>
+  <data name="Enter your CVV" xml:space="preserve">
+    <value>Entrez votre CVV</value>
+  </data>
+  <data name="Add New Card" xml:space="preserve">
+    <value>Ajouter une nouvelle carte</value>
+  </data>
 </root>

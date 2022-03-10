@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Manage Road User Account" xml:space="preserve">
+    <value>إدارة حساب مستخدم الطريق</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>الخروج</value>
+  </data>
+  <data name="Manage Toll Operator Account" xml:space="preserve">
+    <value>إدارة حساب مشغل الرسوم</value>
+  </data>
+  <data name="Manage Admin Account" xml:space="preserve">
+    <value>إدارة حساب المسؤول</value>
+  </data>
+  <data name="Register Road User" xml:space="preserve">
+    <value>تسجيل مستخدم الطريق</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
 </root>

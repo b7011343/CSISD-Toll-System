@@ -73,7 +73,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
             CreateUserAsync(template);
         }
 
-        public List<User> Generate()
+        public List<User> GenerateAsync()
         {
             // Create some normal test road user accounts
 

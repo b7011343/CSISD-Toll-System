@@ -66,6 +66,15 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             // Fallback view for user with no role
             return View();
         }
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

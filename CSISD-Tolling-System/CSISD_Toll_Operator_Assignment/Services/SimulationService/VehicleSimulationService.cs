@@ -12,7 +12,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
             _users = users;
         }
 
-        public List<Vehicle> Generate()
+        public List<Vehicle> GenerateAsync()
         {
             List<Vehicle> vehicles = new List<Vehicle>();
 

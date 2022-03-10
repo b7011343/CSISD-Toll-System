@@ -21,3 +21,8 @@ $(document).ready(function () {
     $('.nav-link').removeClass('active');
     $('a[href="' + location.pathname + '"]').closest('.nav-link').addClass('active');
 });
+
+$("#delContract").click(function () {
+    $("#delContract").prop("disabled", true);
+    $("#delTxt").removeClass("hidden");
+});

@@ -43,7 +43,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             UserSimulationService generator = new UserSimulationService(userManager);
 
             // Act
-            generator.Generate();
+            generator.GenerateAsync();
 
             // Assert
             Assert.That(roles.Count > 0);
@@ -62,7 +62,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             UserSimulationService generator = new UserSimulationService(userManager);
 
             // Act
-            generator.Generate();
+            generator.GenerateAsync();
 
             // Assert
             Assert.That(roles.Count > 0);
@@ -81,7 +81,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             UserSimulationService generator = new UserSimulationService(userManager);
 
             // Act
-            generator.Generate();
+            generator.GenerateAsync();
 
             // Assert
             Assert.That(roles.Count > 0);

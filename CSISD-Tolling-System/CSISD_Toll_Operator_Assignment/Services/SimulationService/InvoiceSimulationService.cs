@@ -14,7 +14,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
             _vehicles = vehicles;
         }
 
-        public List<Invoice> Generate()
+        public List<Invoice> GenerateAsync()
         {
             List<Invoice> invoices = new List<Invoice>();
 

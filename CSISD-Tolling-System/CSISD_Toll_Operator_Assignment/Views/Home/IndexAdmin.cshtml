@@ -33,15 +33,15 @@
                         <td>
                             @if (userManager.IsInRoleAsync(user, "toll-operator").Result)
                             {
-                                <span>Toll Operator</span>
+                                <span>@Localizer["Toll Operator"]</span>
                             }
                             else if (userManager.IsInRoleAsync(user, "road-user").Result)
                             {
-                                <span>Road User</span>
+                                <span>@Localizer["Road User"]</span>
                             }
                             else if (userManager.IsInRoleAsync(user, "admin").Result)
                             {
-                                <span>Admin</span>
+                                <span>@Localizer["Admin"]</span>
                             }
                         </td>
                     </tr>
@@ -58,7 +58,7 @@
                 <form asp-controller="Home" asp-action="AddPrivilagedUser" method="post">
                     <div class="form-group">
                         <label for="email">@Localizer["Email Address"]</label>
-                        <input type="email" name="email" class="form-control" id="email" required placeholder="Enter email">
+                        <input type="email" name="email" class="form-control" id="email" required placeholder="@Localizer["Enter email"]">
                         <small class="form-text text-muted">@Localizer["Add an email and set a role"]</small>
                     </div>
                     <div class="form-group">

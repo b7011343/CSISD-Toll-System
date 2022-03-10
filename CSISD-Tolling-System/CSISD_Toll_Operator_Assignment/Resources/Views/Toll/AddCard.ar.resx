@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="The last 3 digits on the back" xml:space="preserve">
+    <value>آخر 3 أرقام على الظهر</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>جمع</value>
+  </data>
+  <data name="Your details are securely stored and processed at all times." xml:space="preserve">
+    <value>يتم تخزين التفاصيل الخاصة بك ومعالجتها بشكل آمن في جميع الأوقات.</value>
+  </data>
 </root>

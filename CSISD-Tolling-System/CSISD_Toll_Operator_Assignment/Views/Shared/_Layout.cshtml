@@ -1,6 +1,9 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Service
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 @inject PreferenceService preferenceService
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -25,23 +28,31 @@
             <div class="col-9">
                 <div class="row mb-2">
                     <div class="col-7">
-                        <h1 class="font-weight-bold">Nordic Department of Transport</h1>
+                        <h1 class="font-weight-bold">@Localizer["Nordic Department of Transport"]</h1>
                     </div>
                     <div class="col-5">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <select class="custom-select mb-1" name="languages" id="languages-select">
-                                <option value="english">English</option>
-                                <option value="french">French</option>
-                            </select>
+                            <form asp-controller="Home" asp-action="ChangeLanguage" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post" id="LanguageDropdown">
+                                <select class="custom-select mb-1" name="languages" id="languages-select" onchange="LanguageDropdown.submit()">
+                                    <option value="en" selected="@(preferenceService.GetLanguage() == "en")">@Localizer["English"]</option>
+                                    <option value="fr" selected="@(preferenceService.GetLanguage() == "fr")">@Localizer["French"]</option>
+                                    <option value="ar" selected="@(preferenceService.GetLanguage() == "ar")">@Localizer["Arabic"]</option>
+                                    <option value="no" selected="@(preferenceService.GetLanguage() == "no")">@Localizer["Norwegian"]</option>
+                                    <option value="sv" selected="@(preferenceService.GetLanguage() == "sv")">@Localizer["Swedish"]</option>
+                                    <option value="da" selected="@(preferenceService.GetLanguage() == "da")">@Localizer["Danish"]</option>
+                                    <option value="fi" selected="@(preferenceService.GetLanguage() == "fi")">@Localizer["Finnish"]</option>
+                                </select>
+                            </form>
+
                             <div class="d-flex justify-content-end row align-items-center">
                                 <form asp-controller="Home" asp-action="DecrementMagnification" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post">
-                                    <button disabled="@(preferenceService.GetMagnification() <= 100)" title="Decrease font size by 1%" type="submit" class="btn btn-link">
+                                    <button disabled="@(preferenceService.GetMagnification() <= 100)" title="@Localizer["Decrease font size by 1%"]" type="submit" class="btn btn-link">
                                         <i class="fa fa-search-minus fa-2x" aria-hidden="true"></i>
                                     </button>
                                 </form>
                                 <form asp-controller="Home" asp-action="IncrementMagnification" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post">
-                                    <button title="Increase font size by 1%" type="submit" class="btn btn-link">
+                                    <button title="@Localizer["Increase font size by 1%"]" type="submit" class="btn btn-link">
                                         <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>
                                     </button>
                                 </form>
@@ -61,19 +72,19 @@
                             <li class="nav-item">
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                             </li>
                             @if (SignInManager.IsSignedIn(User) && !User.IsInRole("admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Toll" asp-action="TollHistory">Toll History</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Toll" asp-action="TollHistory">@Localizer["Toll History"]</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Toll" asp-action="Contracts">Contracts</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Toll" asp-action="Contracts">@Localizer["Contracts"]</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
                             </li>
                             <partial name="_LoginPartial" />
                         </ul>
@@ -93,7 +104,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container p-3">
-            &copy; 2022 - Nordic Tolling Service - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - @Localizer["Nordic Tolling Service"] - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,7 +1,9 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model AddCardViewModel
 @{
-    ViewData["Title"] = "Add Card Details";
+    ViewData["Title"] = Localizer["Add Card Details"];
 }
 
 <div class="container">
@@ -9,7 +11,7 @@
         <h1>@ViewData["Title"]</h1>
         <p>Use this page to add a new payment card.</p>
     </div>
-    <hr/>
+    <hr />
     <div class="row">
         <div class="d-flex justify-content-start col-8">
             <form asp-controller="Toll" asp-action="AddCard" method="post">
@@ -31,17 +33,17 @@
                 <div class="form-group">
                     <label asp-for="cvv" class="control-label"></label>
                     <input asp-for="cvv" class="form-control" />
-                    <small class="form-text text-muted">The last 3 digits on the back</small>
+                    <small class="form-text text-muted">@Localizer["The last 3 digits on the back"]</small>
                     <span asp-validation-for="cvv" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" class="btn btn-primary">@Localizer["Add"]</button>
             </form>
         </div>
         <div class="d-flex flex-column align-items-end justify-content-center col-4">
-            <img style="width: 135%; margin-right: -5%;" src="~/images/bank-card.jpg" alt="Bank card"/>
+            <img style="width: 135%; margin-right: -5%;" src="~/images/bank-card.jpg" alt="Bank card" />
             <div class="alert alert-secondary" role="alert">
                 <i class="fa fa-shield" aria-hidden="true"></i>
-                Your details are securely stored and processed at all times.
+                @Localizer["Your details are securely stored and processed at all times."]
             </div>
         </div>
     </div>

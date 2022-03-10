@@ -24,8 +24,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         private readonly InvoiceService invoiceService;
         private readonly PaymentProcessingSimulationService paymentService;
 
-        //private readonly PaymentProcessingService paymentService;
-
         public TollController(ILogger<TollController> _logger, UserManager<User> _userManager, SignInManager<User> _signInManager, ApplicationDbContext _db)
         {
             logger = _logger;
@@ -33,7 +31,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             db = _db;
             signInManager = _signInManager;
             invoiceService = new InvoiceService(_db);
-            //paymentService = new PaymentProcessingService();
         }
 
         [HttpGet]
@@ -41,6 +38,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = Roles.RoadUser)]
         public IActionResult Payment(long invoiceId)
         {
+            // Generate view model and return view
             Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
             List<Card> cards = db.Cards.Where(x => x.OwnerID == userManager.GetUserId(User)).ToList();
             Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoiceId).First();
@@ -58,6 +56,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = Roles.RoadUser)]
         public IActionResult Payment()
         {
+            // Allows user to pay for an invoice
             Invoice invoice = db.Invoices.Where(x => x.Id == (long)Convert.ToDouble(Request.Form["id"])).First();
             Card card = db.Cards.Where(x => x.CardNumber == (string)Request.Form["cards"].ToString()).First();
             List<Card> cards = db.Cards.Where(x => x.OwnerID == userManager.GetUserId(User)).ToList();
@@ -91,6 +90,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 return View();
             }
 
+            // Creates new card in the database with the current users ID on it
             Card card = new Card()
             {
                 CardNumber = model.cardNumber,
@@ -110,6 +110,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = "road-user")]
         public IActionResult AddCard()
         {
+            // Returns AddCard view
             return View();
         }
 
@@ -117,6 +118,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = "road-user, toll-operator")]
         public async Task<IActionResult> Contracts()
         {
+            // Gets current user and checks role
             string userEmail = HttpContext.User.Identity.Name;
             User user = await userManager.FindByEmailAsync(userEmail);
             string role = (await userManager.GetRolesAsync(user)).First();
@@ -131,6 +133,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             {
                 contracts = _userContracts
             };
+            // Different view rendered dependent on role
             switch (role)
             {
                 case Roles.RoadUser:
@@ -145,6 +148,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         [Authorize(Roles = "road-user, toll-operator")]
         public IActionResult ContractDetails(long contractID)
         {
+            // Get the contract required, and return view with that contract as a model
             Contract contract = db.Contracts.Where(x => x.Id == contractID).First();
             return View(contract);
         }
@@ -156,10 +160,12 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             if (userEmail == null)
                 return View();
 
+            // Gets current user and role
             User user = await userManager.FindByEmailAsync(userEmail);
             string role = (await userManager.GetRolesAsync(user)).First();
             TollHistoryViewModel model = new TollHistoryViewModel(role, user, invoiceService);
 
+            // Renders different view dependent on roll for toll history
             switch (role)
             {
                 case Roles.RoadUser:

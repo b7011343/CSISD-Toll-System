@@ -117,4 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Nordic Department of Transport" xml:space="preserve">
+    <value>Ministère nordique des transports</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>Arabe</value>
+  </data>
+  <data name="Norwegian" xml:space="preserve">
+    <value>Norvégien</value>
+  </data>
+  <data name="Swedish" xml:space="preserve">
+    <value>Suédois</value>
+  </data>
+  <data name="Danish" xml:space="preserve">
+    <value>Danois</value>
+  </data>
+  <data name="Finnish" xml:space="preserve">
+    <value>Finnois</value>
+  </data>
+  <data name="Decrease font size by 1%" xml:space="preserve">
+    <value>Diminuer la taille de la police de 1 %</value>
+  </data>
+  <data name="Increase font size by 1%" xml:space="preserve">
+    <value>Augmenter la taille de la police de 1 %</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Domicile</value>
+  </data>
+  <data name="Toll History" xml:space="preserve">
+    <value>Historique des péages</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>Contrats</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Vie privée</value>
+  </data>
+  <data name="Nordic Tolling Service&quot;] - &lt;a asp-area=&quot;&quot; asp-controller=&quot;Home&quot; asp-action=&quot;Privacy&quot;&gt;@Localizer[&quot;Privacy" xml:space="preserve">
+    <value>Nordic Tolling Service"] - &lt;a asp-area=" » asp-controller="Home » asp-action="Privacy"&gt;@Localizer["Privacy</value>
+  </data>
 </root>

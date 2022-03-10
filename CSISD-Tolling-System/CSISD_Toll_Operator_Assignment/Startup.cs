@@ -49,14 +49,19 @@ namespace CSISD_Toll_Operator_Assignment
                     opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
+            // Configures all the localization services
             services.Configure<RequestLocalizationOptions>(
                 opts =>
                 {
                     var supportedCultures = new List<CultureInfo>
                     {
-                            new CultureInfo("en"),
-                            new CultureInfo("fr"),
-                            new CultureInfo("ar"),
+                            new CultureInfo("en"), // English
+                            new CultureInfo("fr"), // French
+                            new CultureInfo("ar"), // Arabic
+                            new CultureInfo("nb"), // Norwegian
+                            new CultureInfo("sv"), // Swedish
+                            new CultureInfo("da"), // Danish
+                            new CultureInfo("fi"), // Finnish
                     };
 
                     opts.DefaultRequestCulture = new RequestCulture("en");
@@ -67,8 +72,10 @@ namespace CSISD_Toll_Operator_Assignment
                     // UI strings that we have localized.
                     opts.SupportedUICultures = supportedCultures;
 
+                    // Allows language to be set by a query string parameter
                     opts.RequestCultureProviders = new List<IRequestCultureProvider>()
                     {
+                        new UserPreferenceRequestCultureProvider(),
                         new QueryStringRequestCultureProvider()
                     };
                 });

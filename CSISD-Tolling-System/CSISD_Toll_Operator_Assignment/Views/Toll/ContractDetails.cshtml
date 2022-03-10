@@ -1,29 +1,32 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Localization
 
 @model Contract
 
+@inject IStringLocalizer<Contract> Localizer
+
 <h1>@ViewData["Title"]</h1>
 @{
-    ViewData["Title"] = "ContractTollOperator";
+    ViewData["Title"] = Localizer["ContractTollOperator"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Contract Details</h1>
+<h1>@Localizer["Contract Details"]</h1>
 
 <div class="container">
-    <h3>Details</h3>
-    <p>Contract Id: <b>@Model.Id</b></p>
-    <p>Company Name: <b>@Model.Company</b></p>
-    <p>Fee: <b>@Model.Fee</b></p>
-    <p>Expiry Date: <b>@Model.ExpiryDate</b></p>
+    <h3>@Localizer["Details"]</h3>
+    <p>@Localizer["Contract Id:"] <b>@Model.Id</b></p>
+    <p>@Localizer["Company Name:"] <b>@Localizer[Model.Company]</b></p>
+    <p>@Localizer["Fee:"] <b>@Model.Fee</b></p>
+    <p>@Localizer["Expiry Date:"] <b>@Model.ExpiryDate</b></p>
     @if (User.IsInRole("toll-operator"))
     {
-        <p>Contracts User Id: <b>@Model.UserId</b></p>
+        <p>@Localizer["Contracts User Id:"] <b>@Model.UserId</b></p>
     }
     @if (User.IsInRole("road-user"))
     {
-        <button id="delContract" class="btn btn-danger">Request To Delete Contract</button>
-        <p id="delTxt" class="hidden">Your request has been sent. One of our team will get back to you shortly.</p>
+        <button id="delContract" class="btn btn-danger">@Localizer["Request To Delete Contract"]</button>
+        <p id="delTxt" class="hidden">@Localizer["Your request has been sent. One of our team will get back to you shortly."]</p>
     }
 </div>

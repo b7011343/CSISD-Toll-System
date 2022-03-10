@@ -1,26 +1,29 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models.View
+@using Microsoft.Extensions.Localization
 
 @model ContractView
 
+@inject IStringLocalizer<ContractView> Localizer
+
 <h1>@ViewData["Title"]</h1>
 @{
-    ViewData["Title"] = "ContractTollOperator";
+    ViewData["Title"] = Localizer["ContractTollOperator"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ContractTollOperator</h1>
+<h1>@Localizer["Contract Toll Operator"]</h1>
 
 <div class="container">
     <table class="table table-hover table-bordered mt-5 table-sm">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Company</th>
-                <th scope="col">Fee</th>
-                <th scope="col">Type</th>
-                <th scope="col">ExpiryDate</th>
-                <th scope="col">UserId</th>
-                <th scope="col">Details</th>
+                <th scope="col">@Localizer["Id"]</th>
+                <th scope="col">@Localizer["Company"]</th>
+                <th scope="col">@Localizer["Fee"]</th>
+                <th scope="col">@Localizer["Type"]</th>
+                <th scope="col">@Localizer["Expiry Date"]</th>
+                <th scope="col">@Localizer["User Id"]</th>
+                <th scope="col">@Localizer["Details"]</th>
             </tr>
         </thead>
         <tbody>
@@ -29,12 +32,12 @@
                 {
                     <tr>
                         <td>@cont.Id</td>
-                        <td>@cont.Company</td>
+                        <td>@Localizer[cont.Company]</td>
                         <td>@cont.Fee</td>
-                        <td>@cont.Type</td>
+                        <td>@Localizer[cont.Type]</td>
                         <td>@cont.ExpiryDate</td>
                         <td>@cont.UserId</td>
-                        <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">View Details</a></td>
+                        <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">@Localizer["View Details"]</a></td>
                     </tr>
                 }
             }

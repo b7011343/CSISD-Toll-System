@@ -117,4 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Contract Toll Operator" xml:space="preserve">
+    <value>Kontraktstulloperatör</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Företag</value>
+  </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Avgift</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="Expiry Date" xml:space="preserve">
+    <value>Utgångsdatum</value>
+  </data>
+  <data name="User ID" xml:space="preserve">
+    <value>Användar-ID</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaljer</value>
+  </data>
+  <data name="View Details" xml:space="preserve">
+    <value>Visa information</value>
+  </data>
 </root>

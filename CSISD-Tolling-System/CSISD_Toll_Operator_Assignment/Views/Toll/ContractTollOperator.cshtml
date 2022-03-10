@@ -1,13 +1,22 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models.View
+<<<<<<< HEAD
 @using Microsoft.Extensions.Localization
 
+=======
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+>>>>>>> b67951ef28de65aa305f0526a3c1f1f469bc4bd6
 @model ContractView
 
 @inject IStringLocalizer<ContractView> Localizer
 
 <h1>@ViewData["Title"]</h1>
 @{
+<<<<<<< HEAD
     ViewData["Title"] = Localizer["ContractTollOperator"];
+=======
+    ViewData["Title"] = Localizer["Contract Toll Operator"];
+>>>>>>> b67951ef28de65aa305f0526a3c1f1f469bc4bd6
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,7 +31,11 @@
                 <th scope="col">@Localizer["Fee"]</th>
                 <th scope="col">@Localizer["Type"]</th>
                 <th scope="col">@Localizer["Expiry Date"]</th>
+<<<<<<< HEAD
                 <th scope="col">@Localizer["User Id"]</th>
+=======
+                <th scope="col">@Localizer["User ID"]</th>
+>>>>>>> b67951ef28de65aa305f0526a3c1f1f469bc4bd6
                 <th scope="col">@Localizer["Details"]</th>
             </tr>
         </thead>
@@ -37,7 +50,11 @@
                         <td>@Localizer[cont.Type]</td>
                         <td>@cont.ExpiryDate</td>
                         <td>@cont.UserId</td>
+<<<<<<< HEAD
                         <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">@Localizer["View Details"]</a></td>
+=======
+                        <td><a href="/Toll/Contract?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">@Localizer["View Details"]</a></td>
+>>>>>>> b67951ef28de65aa305f0526a3c1f1f469bc4bd6
                     </tr>
                 }
             }

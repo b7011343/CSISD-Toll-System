@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Nordic Tolling Service</title>
+    <title>@ViewData["Title"] - @Localizer["Nordic Tolling Service"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -38,7 +38,7 @@
                                     <option value="en" selected="@(preferenceService.GetLanguage() == "en")">@Localizer["English"]</option>
                                     <option value="fr" selected="@(preferenceService.GetLanguage() == "fr")">@Localizer["French"]</option>
                                     <option value="ar" selected="@(preferenceService.GetLanguage() == "ar")">@Localizer["Arabic"]</option>
-                                    <option value="no" selected="@(preferenceService.GetLanguage() == "no")">@Localizer["Norwegian"]</option>
+                                    <option value="nb" selected="@(preferenceService.GetLanguage() == "nb")">@Localizer["Norwegian"]</option>
                                     <option value="sv" selected="@(preferenceService.GetLanguage() == "sv")">@Localizer["Swedish"]</option>
                                     <option value="da" selected="@(preferenceService.GetLanguage() == "da")">@Localizer["Danish"]</option>
                                     <option value="fi" selected="@(preferenceService.GetLanguage() == "fi")">@Localizer["Finnish"]</option>
@@ -83,7 +83,6 @@
                                     <a class="nav-link" asp-area="" asp-controller="Toll" asp-action="Contracts">@Localizer["Contracts"]</a>
                                 </li>
                             }
-                            <partial name="_LoginPartial" />
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">@Localizer["About Us"]</a>
                             </li>
@@ -93,6 +92,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="ContactUs">@Localizer["Contact Us"]</a>
                             </li>
+                            <partial name="_LoginPartial" />
                         </ul>
                     </div>
                 </nav>

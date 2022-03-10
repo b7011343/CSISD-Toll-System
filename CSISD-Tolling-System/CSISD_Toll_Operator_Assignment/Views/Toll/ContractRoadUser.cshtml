@@ -1,6 +1,11 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models.View
+<<<<<<< HEAD
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+=======
 @using Microsoft.Extensions.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
+>>>>>>> 06b002b08343da3ac5c03a59c4523a5ab42f7842
 
 @model ContractView
 
@@ -8,7 +13,11 @@
 
 <h1>@ViewData["Title"]</h1>
 @{
+<<<<<<< HEAD
     ViewData["Title"] = Localizer["ContractRoadUser"];
+=======
+    ViewData["Title"] = Localizer["Contract Road User"];
+>>>>>>> b67951ef28de65aa305f0526a3c1f1f469bc4bd6
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -31,6 +40,7 @@
             @{
                 foreach (var cont in Model.contracts)
                 {
+<<<<<<< HEAD
                     <tr>
                         <td>@cont.Id</td>
                         <td>@Localizer[cont.Company]</td>
@@ -40,13 +50,28 @@
                         <td>@cont.UserId</td>
                         <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">@Localizer["View Details"]</a></td>
                     </tr>
+=======
+                <tr>
+                    <td>@cont.Id</td>
+                    <td>@cont.Company</td>
+                    <td>@cont.Fee</td>
+                    <td>@cont.Type</td>
+                    <td>@cont.ExpiryDate</td>
+                    <td>@cont.UserId</td>
+                    <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">@Localizer["View Details"]</a></td>
+                </tr>
+>>>>>>> b67951ef28de65aa305f0526a3c1f1f469bc4bd6
                 }
             }
         </tbody>
     </table>
+<<<<<<< HEAD
     @if (User.IsInRole("road-user"))
     {
         <button id="newContract" class="btn btn-success">@Localizer["Request New Contract"]</button>
         <p id="newTxt" class="hidden">@Localizer["Your request has been sent. One of our team will get back to you shortly."]</p>
     }
+=======
+    <button id="newContract" class="btn btn-success">@Localizer["Request New Contract"]</button>
+>>>>>>> b67951ef28de65aa305f0526a3c1f1f469bc4bd6
 </div>

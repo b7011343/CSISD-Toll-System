@@ -73,7 +73,7 @@ namespace ResourceTranslator
 
             if (json.Count > 0)
             {
-                string route = "/translate?api-version=3.0&from=en&to=fr&to=ar&to=no&to=sv&to=da&to=fi";
+                string route = "/translate?api-version=3.0&from=en&to=fr&to=ar&to=nb&to=sv&to=da&to=fi";
                 var requestBody = JsonConvert.SerializeObject(json);
 
                 using (var client = new HttpClient())
@@ -186,7 +186,7 @@ namespace ResourceTranslator
 
                 CreateResourceFile(translationMap.Result, keys, "fr", fileRelativePath);
                 CreateResourceFile(translationMap.Result, keys, "ar", fileRelativePath);
-                CreateResourceFile(translationMap.Result, keys, "no", fileRelativePath);
+                CreateResourceFile(translationMap.Result, keys, "nb", fileRelativePath);
                 CreateResourceFile(translationMap.Result, keys, "sv", fileRelativePath);
                 CreateResourceFile(translationMap.Result, keys, "da", fileRelativePath);
                 CreateResourceFile(translationMap.Result, keys, "fi", fileRelativePath);

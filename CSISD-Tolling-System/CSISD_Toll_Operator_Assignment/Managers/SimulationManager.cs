@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+
 using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
 using CSISD_Toll_Operator_Assignment.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Service;
-using Microsoft.Extensions.DependencyInjection;
 using CSISD_Toll_Operator_Assignment.Services.SimulationService;
 
 namespace CSISD_Toll_Operator_Assignment.Manager

@@ -16,25 +16,25 @@
         <div class="d-flex justify-content-start col-8">
             <form asp-controller="Toll" asp-action="AddCard" method="post">
                 <div class="form-group">
-                    <label asp-for="nameOnCard" class="control-label"></label>
-                    <input asp-for="nameOnCard" class="form-control" />
-                    <span asp-validation-for="nameOnCard" class="text-danger"></span>
+                    <label asp-for="NameOnCard" class="control-label"></label>
+                    <input asp-for="NameOnCard" class="form-control" />
+                    <span asp-validation-for="NameOnCard" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="cardNumber" class="control-label"></label>
-                    <input asp-for="cardNumber" class="form-control" />
-                    <span asp-validation-for="cardNumber" class="text-danger"></span>
+                    <label asp-for="CardNumber" class="control-label"></label>
+                    <input asp-for="CardNumber" class="form-control" />
+                    <span asp-validation-for="CardNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="expiryDate" class="control-label"></label>
-                    <input asp-for="expiryDate" type="date" class="form-control" />
-                    <span asp-validation-for="expiryDate" class="text-danger"></span>
+                    <label asp-for="ExpiryDate" class="control-label"></label>
+                    <input asp-for="ExpiryDate" type="date" class="form-control" />
+                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="cvv" class="control-label"></label>
-                    <input asp-for="cvv" class="form-control" />
+                    <label asp-for="CVV" class="control-label"></label>
+                    <input asp-for="CVV" class="form-control" />
                     <small class="form-text text-muted">@Localizer["The last 3 digits on the back"]</small>
-                    <span asp-validation-for="cvv" class="text-danger"></span>
+                    <span asp-validation-for="CVV" class="text-danger"></span>
                 </div>
                 <button type="submit" class="btn btn-primary">@Localizer["Add"]</button>
             </form>

@@ -58,7 +58,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 case Roles.Administrator:
                     IndexAdminViewModel adminModel = new IndexAdminViewModel()
                     {
-                        users = _db.Users.ToList()
+                        Users = _db.Users.ToList()
                     };
                     return View("IndexAdmin", adminModel);
             }

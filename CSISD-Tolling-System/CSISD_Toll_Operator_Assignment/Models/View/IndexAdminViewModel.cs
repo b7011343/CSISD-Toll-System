@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CSISD_Toll_Operator_Assignment.Models
 {
+    /// <summary>
+    /// Model for the IndexAdmin.cshtml view.
+    /// </summary>
     public class IndexAdminViewModel
     {
-        public List<User> users { get; set; }
+        /// <summary>
+        /// List of all users visible on the administrator page
+        /// </summary>
+        public List<User> Users { get; set; }
     }
 }

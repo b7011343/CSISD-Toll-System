@@ -1,36 +1,30 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Models.View;
 using CSISD_Toll_Operator_Assignment.Service;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Security.Claims;
 
 namespace CSISD_Toll_Operator_Assignment.Controllers
 {
     public class TollController : Controller
     {
-        private readonly ILogger<TollController> logger;
-        private readonly ApplicationDbContext db;
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
-        private readonly InvoiceService invoiceService;
-        private readonly PaymentProcessingSimulationService paymentService;
+        private readonly ApplicationDbContext _db;
+        private readonly UserManager<User>    _userManager;
+        private readonly InvoiceService       _invoiceService;
 
-        public TollController(ILogger<TollController> _logger, UserManager<User> _userManager, SignInManager<User> _signInManager, ApplicationDbContext _db)
+        public TollController(UserManager<User> userManager, ApplicationDbContext db, InvoiceService invoiceService)
         {
-            logger = _logger;
-            userManager = _userManager;
-            db = _db;
-            signInManager = _signInManager;
-            invoiceService = new InvoiceService(_db);
+            _userManager    = userManager;
+            _db             = db;
+            _invoiceService = invoiceService;
         }
 
         [HttpGet]
@@ -39,9 +33,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Payment(long invoiceId)
         {
             // Generate view model and return view
-            Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
-            List<Card> cards = db.Cards.Where(x => x.OwnerID == userManager.GetUserId(User)).ToList();
-            Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoiceId).First();
+            Invoice invoice = _db.Invoices.Where(x => x.Id == invoiceId).First();
+            List<Card> cards = _db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
+            Vehicle vehicle = _db.Vehicles.Where(x => x.Id == invoiceId).First();
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,
@@ -57,10 +51,10 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Payment()
         {
             // Allows user to pay for an invoice
-            Invoice invoice = db.Invoices.Where(x => x.Id == (long)Convert.ToDouble(Request.Form["id"])).First();
-            Card card = db.Cards.Where(x => x.CardNumber == (string)Request.Form["cards"].ToString()).First();
-            List<Card> cards = db.Cards.Where(x => x.OwnerID == userManager.GetUserId(User)).ToList();
-            Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoice.Id).First();
+            Invoice invoice = _db.Invoices.Where(x => x.Id == (long)Convert.ToDouble(Request.Form["id"])).First();
+            Card card = _db.Cards.Where(x => x.CardNumber == (string)Request.Form["cards"].ToString()).First();
+            List<Card> cards = _db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
+            Vehicle vehicle = _db.Vehicles.Where(x => x.Id == invoice.Id).First();
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,
@@ -71,7 +65,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             if(cvv == card.Cvv)
             {
                 invoice.Paid = true;
-                db.SaveChanges();
+                _db.SaveChanges();
                 return LocalRedirect("/Home/Index");
             }
             else
@@ -97,11 +91,11 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 Cvv = model.CVV,
                 ExpiryDate = model.ExpiryDate,
                 NameOnCard = model.NameOnCard,
-                OwnerID = userManager.GetUserId(User)
+                OwnerID = _userManager.GetUserId(User)
             };
 
-            db.Cards.Add(card);
-            db.SaveChanges();
+            _db.Cards.Add(card);
+            _db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
@@ -120,11 +114,11 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         {
             // Gets current user and checks role
             string userEmail = HttpContext.User.Identity.Name;
-            User user = await userManager.FindByEmailAsync(userEmail);
-            string role = (await userManager.GetRolesAsync(user)).First();
-            List<Contract> _tollContracts = db.Contracts.ToList();
-            var id = userManager.GetUserId(User);
-            List<Contract> _userContracts = db.Contracts.Where(x => x.UserId == userManager.GetUserId(User)).ToList();
+            User user = await _userManager.FindByEmailAsync(userEmail);
+            string role = (await _userManager.GetRolesAsync(user)).First();
+            List<Contract> _tollContracts = _db.Contracts.ToList();
+            var id = _userManager.GetUserId(User);
+            List<Contract> _userContracts = _db.Contracts.Where(x => x.UserId == _userManager.GetUserId(User)).ToList();
             ContractViewModel tollContracts = new ContractViewModel()
             {
                 Contracts = _tollContracts
@@ -149,7 +143,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult ContractDetails(long contractID)
         {
             // Get the contract required, and return view with that contract as a model
-            Contract contract = db.Contracts.Where(x => x.Id == contractID).First();
+            Contract contract = _db.Contracts.Where(x => x.Id == contractID).First();
             return View(contract);
         }
 
@@ -161,9 +155,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 return View();
 
             // Gets current user and role
-            User user = await userManager.FindByEmailAsync(userEmail);
-            string role = (await userManager.GetRolesAsync(user)).First();
-            TollHistoryViewModel model = new TollHistoryViewModel(role, user, invoiceService);
+            User user = await _userManager.FindByEmailAsync(userEmail);
+            string role = (await _userManager.GetRolesAsync(user)).First();
+            TollHistoryViewModel model = new TollHistoryViewModel(role, user, _invoiceService);
 
             // Renders different view dependent on roll for toll history
             switch (role)

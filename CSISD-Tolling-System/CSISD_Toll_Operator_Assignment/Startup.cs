@@ -49,6 +49,7 @@ namespace CSISD_Toll_Operator_Assignment
                     opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
+            // Configures all the localization services
             services.Configure<RequestLocalizationOptions>(
                 opts =>
                 {
@@ -71,6 +72,7 @@ namespace CSISD_Toll_Operator_Assignment
                     // UI strings that we have localized.
                     opts.SupportedUICultures = supportedCultures;
 
+                    // Allows language to be set by a query string parameter
                     opts.RequestCultureProviders = new List<IRequestCultureProvider>()
                     {
                         new UserPreferenceRequestCultureProvider(),

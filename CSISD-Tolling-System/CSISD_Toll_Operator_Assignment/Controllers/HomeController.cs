@@ -40,10 +40,13 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             if (userEmail == null)
                 return View();
 
+            // Gets the current user
             User   user = await _userManager.FindByEmailAsync(userEmail);
+            // Gets the current user's role
             string role = (await _userManager.GetRolesAsync(user)).First();
             IndexViewModel model = new IndexViewModel(role, user, _invoiceService);
 
+            // Renders different view depending on role
             switch(role)
             {
                 case Roles.RoadUser:
@@ -60,6 +63,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                     return View("IndexAdmin", adminModel);
             }
 
+            // Fallback view for user with no role
             return View();
         }
 
@@ -85,6 +89,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 PreferenceId = 0
             };
 
+            // Create new user
             Task<IdentityResult> createUserTask = _userManager.CreateAsync(user, DEFAULT_PASSWORD);
             createUserTask.Wait();
             IdentityResult result = createUserTask.Result;
@@ -94,6 +99,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 return RedirectToAction("Index");
             }
 
+            // If adding user was a sucess then
             Task<IdentityResult> addRoleTask = _userManager.AddToRoleAsync(user, role);
             addRoleTask.Wait();
             return RedirectToAction("Index");
@@ -101,8 +107,10 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
         public void CheckIfUserHasPreferences()
         {
+            // Checks if the current user currently has changed their preference
             User user = _userManager.GetUserAsync(User).Result;
 
+            // If user has not changed preferences, create a new preferance record in the database
             if (user.PreferenceId == 0)
             {
                 Preference preference = _db.Preferences.Find(user.PreferenceId);

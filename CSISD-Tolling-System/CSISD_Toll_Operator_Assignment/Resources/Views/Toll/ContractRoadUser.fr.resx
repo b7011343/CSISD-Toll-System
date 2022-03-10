@@ -117,4 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Compagnie</value>
+  </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Honoraires</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Date d’expiration</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>ID utilisateur</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="View Details" xml:space="preserve">
+    <value>Voir les détails</value>
+  </data>
+  <data name="Request New Contract" xml:space="preserve">
+    <value>Demander un nouveau contrat</value>
+  </data>
 </root>

@@ -1,10 +1,12 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models.View
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @model ContractView
 
 <h1>@ViewData["Title"]</h1>
 @{
-    ViewData["Title"] = "ContractRoadUser";
+    ViewData["Title"] = Localizer["Contract Road User"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,13 +16,13 @@
     <table class="table table-hover table-bordered mt-5 table-sm">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Company</th>
-                <th scope="col">Fee</th>
-                <th scope="col">Type</th>
-                <th scope="col">ExpiryDate</th>
-                <th scope="col">UserId</th>
-                <th scope="col">Details</th>
+                <th scope="col">@Localizer["Id"]</th>
+                <th scope="col">@Localizer["Company"]</th>
+                <th scope="col">@Localizer["Fee"]</th>
+                <th scope="col">@Localizer["Type"]</th>
+                <th scope="col">@Localizer["ExpiryDate"]</th>
+                <th scope="col">@Localizer["UserId"]</th>
+                <th scope="col">@Localizer["Details"]</th>
             </tr>
         </thead>
         <tbody>
@@ -34,11 +36,11 @@
                     <td>@cont.Type</td>
                     <td>@cont.ExpiryDate</td>
                     <td>@cont.UserId</td>
-                    <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">View Details</a></td>
+                    <td><a href="/Toll/ContractDetails?contractId=@cont.Id" class="btn btn-sm btn-primary ml-5">@Localizer["View Details"]</a></td>
                 </tr>
                 }
             }
         </tbody>
     </table>
-    <button id="newContract" class="btn btn-success">Request New Contract</button>
+    <button id="newContract" class="btn btn-success">@Localizer["Request New Contract"]</button>
 </div>

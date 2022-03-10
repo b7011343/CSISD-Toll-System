@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+
 using CSISD_Toll_Operator_Assignment.Models;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CSISD_Toll_Operator_Assignment.Data.Manager
 {

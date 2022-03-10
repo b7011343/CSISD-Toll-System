@@ -1,6 +1,7 @@
-﻿using CSISD_Toll_Operator_Assignment.Data;
+﻿using System.Collections.Generic;
+
+using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Services;
-using System.Collections.Generic;
 
 namespace CSISD_Toll_Operator_Assignment.Models
 {

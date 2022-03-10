@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -5,17 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Manager;
 using CSISD_Toll_Operator_Assignment.Data.Manager;
 using CSISD_Toll_Operator_Assignment.Service;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
-using System.Linq;
 
 namespace CSISD_Toll_Operator_Assignment
 {

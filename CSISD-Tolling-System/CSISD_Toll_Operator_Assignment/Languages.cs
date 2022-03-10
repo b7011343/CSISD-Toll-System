@@ -27,6 +27,10 @@ namespace CSISD_Toll_Operator_Assignment
         /// <summary>
         /// List of all languages that the application supports (can be translated into)
         /// </summary>
+        /// <remarks>
+        /// Developer note, if you're changing anything in this list, you'll probably need
+        /// to update the ResourceTranslator tool as well.
+        /// </remarks>
         public static readonly SupportedLanguage[] SupportedLanguages = new SupportedLanguage[]
             {
                 new SupportedLanguage("en", "English"),

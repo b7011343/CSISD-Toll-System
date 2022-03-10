@@ -7,7 +7,5 @@ namespace CSISD_Toll_Operator_Assignment.Models
     {
         [Required]
         public long PreferenceId { get; set; }
-
-
     }
 }

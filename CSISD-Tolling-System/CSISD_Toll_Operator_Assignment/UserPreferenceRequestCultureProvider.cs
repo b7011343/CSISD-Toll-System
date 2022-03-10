@@ -1,14 +1,10 @@
-﻿using CSISD_Toll_Operator_Assignment.Data;
-using CSISD_Toll_Operator_Assignment.Models;
-using CSISD_Toll_Operator_Assignment.Service;
+﻿using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using CSISD_Toll_Operator_Assignment.Service;
 
 namespace CSISD_Toll_Operator_Assignment
 {

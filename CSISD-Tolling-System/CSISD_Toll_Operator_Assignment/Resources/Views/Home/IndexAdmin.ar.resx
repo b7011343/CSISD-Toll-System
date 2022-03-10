@@ -132,20 +132,26 @@
   <data name="Role" xml:space="preserve">
     <value>دور</value>
   </data>
+  <data name="Toll Operator" xml:space="preserve">
+    <value>مشغل الرسوم</value>
+  </data>
+  <data name="Road User" xml:space="preserve">
+    <value>مستخدم الطريق</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>المشرف</value>
+  </data>
   <data name="As an admin, you can add new toll operator and admin accounts. By default the password will be set to" xml:space="preserve">
     <value>بصفتك مشرفا، يمكنك إضافة مشغل رسوم جديد وحسابات إدارية. بشكل افتراضي ، سيتم تعيين كلمة المرور على</value>
   </data>
   <data name="Email Address" xml:space="preserve">
     <value>عنوان البريد الإلكتروني</value>
   </data>
+  <data name="Enter email" xml:space="preserve">
+    <value>أدخل البريد الإلكتروني</value>
+  </data>
   <data name="Add an email and set a role" xml:space="preserve">
     <value>إضافة بريد إلكتروني وتعيين دور</value>
-  </data>
-  <data name="Toll Operator" xml:space="preserve">
-    <value>مشغل الرسوم</value>
-  </data>
-  <data name="Admin" xml:space="preserve">
-    <value>المشرف</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>إرسال</value>

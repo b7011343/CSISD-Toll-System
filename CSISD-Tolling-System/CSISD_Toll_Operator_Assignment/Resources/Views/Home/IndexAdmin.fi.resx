@@ -117,22 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Manage Road User Account" xml:space="preserve">
-    <value>Gérer le compte d’utilisateur routier</value>
+  <data name="Home" xml:space="preserve">
+    <value>Koti</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Déconnexion</value>
+  <data name="All Users" xml:space="preserve">
+    <value>Kaikki käyttäjät</value>
   </data>
-  <data name="Manage Toll Operator Account" xml:space="preserve">
-    <value>Gérer le compte de l’opérateur de péage</value>
+  <data name="ID" xml:space="preserve">
+    <value>HENKILÖLLISYYSTODISTUS</value>
   </data>
-  <data name="Manage Admin Account" xml:space="preserve">
-    <value>Gérer le compte administrateur</value>
+  <data name="Email" xml:space="preserve">
+    <value>Sähköposti</value>
   </data>
-  <data name="Register Road User" xml:space="preserve">
-    <value>Enregistrer les usagers de la route</value>
+  <data name="Role" xml:space="preserve">
+    <value>Rooli</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Connectez-vous</value>
+  <data name="Toll Operator" xml:space="preserve">
+    <value>Tietullioperaattori</value>
+  </data>
+  <data name="Road User" xml:space="preserve">
+    <value>Tienkäyttäjä</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="As an admin, you can add new toll operator and admin accounts. By default the password will be set to" xml:space="preserve">
+    <value>Järjestelmänvalvojana voit lisätä uusia tietullioperaattori- ja järjestelmänvalvojan tilejä. Salasanaksi asetetaan oletusarvoisesti</value>
+  </data>
+  <data name="Email Address" xml:space="preserve">
+    <value>Sähköpostiosoite</value>
+  </data>
+  <data name="Enter email" xml:space="preserve">
+    <value>Kirjoita sähköpostiosoite</value>
+  </data>
+  <data name="Add an email and set a role" xml:space="preserve">
+    <value>Sähköpostin lisääminen ja roolin määrittäminen</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Alistua</value>
   </data>
 </root>

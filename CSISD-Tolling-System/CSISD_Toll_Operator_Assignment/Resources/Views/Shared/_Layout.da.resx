@@ -117,22 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Manage Road User Account" xml:space="preserve">
-    <value>Gérer le compte d’utilisateur routier</value>
+  <data name="Nordic Department of Transport" xml:space="preserve">
+    <value>Nordisk Transportministerium</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Déconnexion</value>
+  <data name="English" xml:space="preserve">
+    <value>Engelsk</value>
   </data>
-  <data name="Manage Toll Operator Account" xml:space="preserve">
-    <value>Gérer le compte de l’opérateur de péage</value>
+  <data name="French" xml:space="preserve">
+    <value>Fransk</value>
   </data>
-  <data name="Manage Admin Account" xml:space="preserve">
-    <value>Gérer le compte administrateur</value>
+  <data name="Arabic" xml:space="preserve">
+    <value>Arabisk</value>
   </data>
-  <data name="Register Road User" xml:space="preserve">
-    <value>Enregistrer les usagers de la route</value>
+  <data name="Norwegian" xml:space="preserve">
+    <value>Norsk</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Connectez-vous</value>
+  <data name="Swedish" xml:space="preserve">
+    <value>Svensk</value>
+  </data>
+  <data name="Danish" xml:space="preserve">
+    <value>Dansk</value>
+  </data>
+  <data name="Finnish" xml:space="preserve">
+    <value>Finsk</value>
+  </data>
+  <data name="Decrease font size by 1%" xml:space="preserve">
+    <value>Formindsk skriftstørrelsen med 1 %</value>
+  </data>
+  <data name="Increase font size by 1%" xml:space="preserve">
+    <value>Forøg skriftstørrelsen med 1 %</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Hjem</value>
+  </data>
+  <data name="Toll History" xml:space="preserve">
+    <value>Betalingshistorik</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>Kontrakter</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privatliv</value>
+  </data>
+  <data name="Nordic Tolling Service&quot;] - &lt;a asp-area=&quot;&quot; asp-controller=&quot;Home&quot; asp-action=&quot;Privacy&quot;&gt;@Localizer[&quot;Privacy" xml:space="preserve">
+    <value>Nordic Tolling Service"] - &lt;a asp-area="" asp-controller="Home" asp-action="Privacy"&gt;@Localizer["Privacy</value>
   </data>
 </root>

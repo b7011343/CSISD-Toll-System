@@ -117,22 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Manage Road User Account" xml:space="preserve">
-    <value>Gérer le compte d’utilisateur routier</value>
+  <data name="Home" xml:space="preserve">
+    <value>Hjem</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Déconnexion</value>
+  <data name="Welcome to the Nordic Tolling Service" xml:space="preserve">
+    <value>Velkommen til Den nordiske tolltjenesten</value>
   </data>
-  <data name="Manage Toll Operator Account" xml:space="preserve">
-    <value>Gérer le compte de l’opérateur de péage</value>
+  <data name="Register or login to make use of this system..." xml:space="preserve">
+    <value>Registrer deg eller logg inn for å benytte deg av dette systemet...</value>
   </data>
-  <data name="Manage Admin Account" xml:space="preserve">
-    <value>Gérer le compte administrateur</value>
-  </data>
-  <data name="Register Road User" xml:space="preserve">
-    <value>Enregistrer les usagers de la route</value>
+  <data name="Register" xml:space="preserve">
+    <value>Registrering</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Connectez-vous</value>
+    <value>Pålogging</value>
   </data>
 </root>

@@ -132,20 +132,26 @@
   <data name="Role" xml:space="preserve">
     <value>Rôle</value>
   </data>
+  <data name="Toll Operator" xml:space="preserve">
+    <value>Opérateur de péage</value>
+  </data>
+  <data name="Road User" xml:space="preserve">
+    <value>Usager de la route</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
   <data name="As an admin, you can add new toll operator and admin accounts. By default the password will be set to" xml:space="preserve">
     <value>En tant qu’administrateur, vous pouvez ajouter de nouveaux comptes d’opérateur de péage et d’administrateur. Par défaut, le mot de passe sera défini sur</value>
   </data>
   <data name="Email Address" xml:space="preserve">
     <value>Adresse courriel</value>
   </data>
+  <data name="Enter email" xml:space="preserve">
+    <value>Entrez l’adresse e-mail</value>
+  </data>
   <data name="Add an email and set a role" xml:space="preserve">
     <value>Ajouter un e-mail et définir un rôle</value>
-  </data>
-  <data name="Toll Operator" xml:space="preserve">
-    <value>Opérateur de péage</value>
-  </data>
-  <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Envoyer</value>

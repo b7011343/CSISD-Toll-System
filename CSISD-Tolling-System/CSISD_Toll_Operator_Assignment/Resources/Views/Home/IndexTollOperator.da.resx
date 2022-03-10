@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Manage Road User Account" xml:space="preserve">
-    <value>Gérer le compte d’utilisateur routier</value>
+  <data name="Unpaid User Tolls" xml:space="preserve">
+    <value>Ubetalte brugerbetaling</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Déconnexion</value>
+  <data name="User ID" xml:space="preserve">
+    <value>Bruger-id</value>
   </data>
-  <data name="Manage Toll Operator Account" xml:space="preserve">
-    <value>Gérer le compte de l’opérateur de péage</value>
+  <data name="Entry" xml:space="preserve">
+    <value>Indtræden</value>
   </data>
-  <data name="Manage Admin Account" xml:space="preserve">
-    <value>Gérer le compte administrateur</value>
+  <data name="Exit" xml:space="preserve">
+    <value>Udgang</value>
   </data>
-  <data name="Register Road User" xml:space="preserve">
-    <value>Enregistrer les usagers de la route</value>
+  <data name="Charge" xml:space="preserve">
+    <value>Anklage</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Connectez-vous</value>
+  <data name="Paid" xml:space="preserve">
+    <value>Betalt</value>
   </data>
 </root>

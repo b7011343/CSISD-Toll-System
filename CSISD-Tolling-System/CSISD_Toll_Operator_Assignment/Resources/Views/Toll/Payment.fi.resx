@@ -117,22 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Manage Road User Account" xml:space="preserve">
-    <value>Gérer le compte d’utilisateur routier</value>
+  <data name="Customer ID:" xml:space="preserve">
+    <value>Asiakkaan tunnus:</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Déconnexion</value>
+  <data name="Fee:" xml:space="preserve">
+    <value>Maksu:</value>
   </data>
-  <data name="Manage Toll Operator Account" xml:space="preserve">
-    <value>Gérer le compte de l’opérateur de péage</value>
+  <data name="Vehicle Reg Plate:" xml:space="preserve">
+    <value>Ajoneuvon rekisterikilpi:</value>
   </data>
-  <data name="Manage Admin Account" xml:space="preserve">
-    <value>Gérer le compte administrateur</value>
+  <data name="Entry Timestamp:" xml:space="preserve">
+    <value>Merkinnän aikaleima:</value>
   </data>
-  <data name="Register Road User" xml:space="preserve">
-    <value>Enregistrer les usagers de la route</value>
+  <data name="Exit Timestamp:" xml:space="preserve">
+    <value>Poistu aikaleimasta:</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Connectez-vous</value>
+  <data name="Invoice ID:" xml:space="preserve">
+    <value>Laskun tunnus:</value>
+  </data>
+  <data name="Select card" xml:space="preserve">
+    <value>Valitse kortti</value>
+  </data>
+  <data name="Choose your card" xml:space="preserve">
+    <value>Valitse korttisi</value>
+  </data>
+  <data name="Enter your CVV" xml:space="preserve">
+    <value>Syötä CVV</value>
+  </data>
+  <data name="Add New Card" xml:space="preserve">
+    <value>Lisää uusi kortti</value>
   </data>
 </root>

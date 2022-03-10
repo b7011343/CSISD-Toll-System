@@ -117,22 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Manage Road User Account" xml:space="preserve">
-    <value>Gérer le compte d’utilisateur routier</value>
+  <data name="Home" xml:space="preserve">
+    <value>Hjem</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Déconnexion</value>
+  <data name="All Users" xml:space="preserve">
+    <value>Alle brukere</value>
   </data>
-  <data name="Manage Toll Operator Account" xml:space="preserve">
-    <value>Gérer le compte de l’opérateur de péage</value>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
   </data>
-  <data name="Manage Admin Account" xml:space="preserve">
-    <value>Gérer le compte administrateur</value>
+  <data name="Email" xml:space="preserve">
+    <value>E-post</value>
   </data>
-  <data name="Register Road User" xml:space="preserve">
-    <value>Enregistrer les usagers de la route</value>
+  <data name="Role" xml:space="preserve">
+    <value>Rolle</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Connectez-vous</value>
+  <data name="Toll Operator" xml:space="preserve">
+    <value>Bompengeoperatør</value>
+  </data>
+  <data name="Road User" xml:space="preserve">
+    <value>Trafikant</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="As an admin, you can add new toll operator and admin accounts. By default the password will be set to" xml:space="preserve">
+    <value>Som administrator kan du legge til nye bompengeoperatører og administratorkontoer. Som standard settes passordet til</value>
+  </data>
+  <data name="Email Address" xml:space="preserve">
+    <value>E-postadresse</value>
+  </data>
+  <data name="Enter email" xml:space="preserve">
+    <value>Skriv inn e-post</value>
+  </data>
+  <data name="Add an email and set a role" xml:space="preserve">
+    <value>Legge til en e-post og angi en rolle</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Forelegge</value>
   </data>
 </root>

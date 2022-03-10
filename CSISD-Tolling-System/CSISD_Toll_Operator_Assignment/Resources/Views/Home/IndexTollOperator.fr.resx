@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Unpaid User Tolls" xml:space="preserve">
+    <value>Péages d’utilisateurs impayés</value>
+  </data>
+  <data name="User ID" xml:space="preserve">
+    <value>Identifiant</value>
+  </data>
+  <data name="Entry" xml:space="preserve">
+    <value>Entrée</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Sortie</value>
+  </data>
+  <data name="Charge" xml:space="preserve">
+    <value>Charger</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Payé</value>
+  </data>
 </root>

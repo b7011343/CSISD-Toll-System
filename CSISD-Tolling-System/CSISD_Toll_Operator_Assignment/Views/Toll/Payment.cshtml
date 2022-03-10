@@ -22,7 +22,7 @@
         <div class="col-sm-6">
             <form asp-controller="Toll" asp-action="Payment" method="post">
                 <div class="form-group">
-                    <h5>Invoice ID: <input type="text" class="inputBadge badge-primary" name="id" value="@Model.invoice.Id" /></h5>
+                    <h5>@Localizer["Invoice ID:"] <input type="text" class="inputBadge badge-primary" name="id" value="@Model.invoice.Id" /></h5>
                 </div>
                 <div class="form-group">
                     <label for="cards">@Localizer["Select card"]</label>

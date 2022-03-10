@@ -1,42 +1,44 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using CSISD_Toll_Operator_Assignment.Models
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer Localizer
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
 
 @if (SignInManager.IsSignedIn(User))
 {
-    @if (User.IsInRole("road-user")) // Add specific navigation options for each different role 
+    @if (User.IsInRole("road-user")) // Add specific navigation options for each different role
     {
         <li class="nav-item">
-            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage Road User Account</a>
+            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Manage Road User Account"]</a>
         </li>
         <li class="nav-item" style="padding-top: 8px;">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="btn btn-sm btn-secondary ml-1">Logout</button>
+                <button id="logout" type="submit" class="btn btn-sm btn-secondary ml-1">@Localizer["Logout"]</button>
             </form>
         </li>
     }
     @if (User.IsInRole("toll-operator"))
     {
         <li class="nav-item">
-            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage Toll Operator Account</a>
+            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Manage Toll Operator Account"]</a>
         </li>
         <li class="nav-item" style="padding-top: 8px;">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="btn btn-sm btn-secondary ml-1">Logout</button>
+                <button id="logout" type="submit" class="btn btn-sm btn-secondary ml-1">@Localizer["Logout"]</button>
             </form>
         </li>
     }
     @if (User.IsInRole("admin"))
     {
         <li class="nav-item">
-            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage Admin Account</a>
+            <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Manage Admin Account"]</a>
         </li>
         <li class="nav-item" style="padding-top: 8px;">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="btn btn-sm btn-secondary ml-1">Logout</button>
+                <button id="logout" type="submit" class="btn btn-sm btn-secondary ml-1">@Localizer["Logout"]</button>
             </form>
         </li>
     }
@@ -44,9 +46,9 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register Road User</a>
+        <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">@Localizer["Register Road User"]</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">@Localizer["Login"]</a>
     </li>
 }

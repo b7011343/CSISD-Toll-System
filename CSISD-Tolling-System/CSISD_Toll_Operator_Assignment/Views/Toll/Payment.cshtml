@@ -1,44 +1,46 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model PaymentViewModel
 @{
-    ViewData["Title"] = "Pay Invoice";
+    ViewData["Title"] = Localizer["Pay Invoice"];
 }
 
 <h1>@ViewData["Title"]</h1>
-<hr/>
+<hr />
 <div class="container">
     <div class="row d-flex align-items-center justify-content-between">
         <div id="invoiceDetails" style="width: fit-content;" class="col-sm-6 card">
             <div class="card-body">
-                <p><b>Customer ID: </b>@Model.invoice.UserId</p>
-                <p><b>Fee: </b>£@Model.invoice.Fee</p>
-                <p><b>Vehicle Reg Plate: </b>@Model.vehicle.RegistrationPlate</p>
-                <p><b>Entry Timestamp: </b>@Model.invoice.EntryTimestamp</p>
-                <p><b>Exit Timestamp: </b>@Model.invoice.ExitTimestamp</p>
+                <p><b>@Localizer["Customer ID:"] </b>@Model.invoice.UserId</p>
+                <p><b>@Localizer["Fee:"] </b>£@Model.invoice.Fee</p>
+                <p><b>@Localizer["Vehicle Reg Plate:"] </b>@Model.vehicle.RegistrationPlate</p>
+                <p><b>@Localizer["Entry Timestamp:"] </b>@Model.invoice.EntryTimestamp</p>
+                <p><b>@Localizer["Exit Timestamp:"] </b>@Model.invoice.ExitTimestamp</p>
             </div>
         </div>
         <div class="col-sm-6">
             <form asp-controller="Toll" asp-action="Payment" method="post">
                 <div class="form-group">
-                    <h5>Invoice ID: <span class="badge badge-primary">@Model.invoice.Id</span></h5>
+                    <h5>@Localizer["Invoice ID:"] <span class="badge badge-primary">@Model.invoice.Id</span></h5>
                 </div>
                 <div class="form-group">
-                    <label for="cards">Select card</label>
+                    <label for="cards">@Localizer["Select card"]</label>
                     <select name="cards" id="cards" class="form-control">
-                        <option value="" selected disabled hidden>Choose your card</option>
+                        <option value="" selected disabled hidden>@Localizer["Choose your card"]</option>
                         @foreach (var item in Model.cards)
                         {
-                         <option value="@item.CardNumber">@item.CardNumber</option>
+                            <option value="@item.CardNumber">@item.CardNumber</option>
                         }
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="cvv">CVV:</label>
-                    <input id="cvv" class="form-control" name="cvv" type="text" placeholder="Enter your cvv" />
+                    <input id="cvv" class="form-control" name="cvv" type="text" placeholder="@Localizer["Enter your CVV"]" />
                 </div>
                 <div class="form-group">
                     <input class="btn btn-success" type="submit" value="Pay" />
-                    <a class="btn btn-primary" asp-controller="Toll" asp-action="AddCard">Add New Card</a>
+                    <a class="btn btn-primary" asp-controller="Toll" asp-action="AddCard">@Localizer["Add New Card"]</a>
                 </div>
             </form>
         </div>

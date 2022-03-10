@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using System.Linq;
 
 namespace CSISD_Toll_Operator_Assignment
 {
@@ -35,7 +36,7 @@ namespace CSISD_Toll_Operator_Assignment
             services.AddDefaultIdentity<User>()
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
+            
             services.AddHttpContextAccessor();
             services.AddSingleton<SimulationManager>();
             services.AddSingleton<SystemManager>();
@@ -55,18 +56,10 @@ namespace CSISD_Toll_Operator_Assignment
             services.Configure<RequestLocalizationOptions>(
                 opts =>
                 {
-                    var supportedCultures = new List<CultureInfo>
-                    {
-                            new CultureInfo("en"), // English
-                            new CultureInfo("fr"), // French
-                            new CultureInfo("ar"), // Arabic
-                            new CultureInfo("nb"), // Norwegian
-                            new CultureInfo("sv"), // Swedish
-                            new CultureInfo("da"), // Danish
-                            new CultureInfo("fi"), // Finnish
-                    };
+                    IList<CultureInfo> supportedCultures =
+                        Languages.DefaultLanguage.Select(lang => new CultureInfo(lang)).ToList();
 
-                    opts.DefaultRequestCulture = new RequestCulture("en");
+                    opts.DefaultRequestCulture = new RequestCulture(Languages.DefaultLanguage);
 
                     // Formatting numbers, dates, etc.
                     opts.SupportedCultures = supportedCultures;

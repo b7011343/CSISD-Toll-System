@@ -14,17 +14,6 @@ namespace CSISD_Toll_Operator_Assignment
 {
     public class UserPreferenceRequestCultureProvider : RequestCultureProvider
     {
-        private bool IsSupportedLanguage(string lang)
-        {
-            return lang == "en" ||
-                   lang == "fr" ||
-                   lang == "ar" ||
-                   lang == "nb" ||
-                   lang == "sv" ||
-                   lang == "da" ||
-                   lang == "fi";
-        }
-
         public override Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
         {
             PreferenceService service = httpContext.RequestServices.GetService<PreferenceService>();
@@ -32,8 +21,8 @@ namespace CSISD_Toll_Operator_Assignment
             string language = service.GetLanguage();
 
             // Workaround
-            if (!IsSupportedLanguage(language))
-                return Task.FromResult(new ProviderCultureResult("en"));
+            if (!Languages.IsSupportedLanguage(language))
+                return Task.FromResult(new ProviderCultureResult(Languages.DefaultLanguage));
 
             return Task.FromResult(new ProviderCultureResult(language));
         }

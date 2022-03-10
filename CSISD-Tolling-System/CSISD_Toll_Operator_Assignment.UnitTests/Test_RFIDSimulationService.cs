@@ -16,7 +16,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             ISimulationService<RFID> sim = new RFIDSimulationService(vehicles);
 
             // Act
-            List<RFID> output = sim.Generate();
+            List<RFID> output = sim.GenerateAsync();
 
             // Assert
             Assert.That(output.Count == 0);
@@ -34,7 +34,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             ISimulationService<RFID> sim = new RFIDSimulationService(vehicles);
 
             // Act
-            List<RFID> output = sim.Generate();
+            List<RFID> output = sim.GenerateAsync();
 
             // Assert
             Assert.That(output.Count == 1);
@@ -54,7 +54,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             ISimulationService<RFID> sim = new RFIDSimulationService(vehicles);
 
             // Act
-            List<RFID> output = sim.Generate();
+            List<RFID> output = sim.GenerateAsync();
 
             // Assert
             Assert.That(output.Count == 1);
@@ -75,7 +75,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             ISimulationService<RFID> sim = new RFIDSimulationService(vehicles);
 
             // Act
-            List<RFID> output = sim.Generate();
+            List<RFID> output = sim.GenerateAsync();
 
             // Assert
             Assert.That(output.Count == 2);

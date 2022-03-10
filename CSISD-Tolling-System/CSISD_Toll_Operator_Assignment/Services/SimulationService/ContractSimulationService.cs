@@ -16,7 +16,7 @@ namespace CSISD_Toll_Operator_Assignment.Services.SimulationService
         {
             _userManager = userManager;
         }
-        public List<Contract> Generate()
+        public List<Contract> GenerateAsync()
         {
             List<Contract> contracts = new List<Contract>();
             List<string> companyNames = new List<string>() { "Belhour Garvel Ltd", "Bjorn Avon Car" };

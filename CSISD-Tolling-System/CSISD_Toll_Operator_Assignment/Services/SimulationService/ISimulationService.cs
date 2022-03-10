@@ -11,6 +11,6 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 {
     public interface ISimulationService<T>
     {
-        public List<T> Generate();
+        public List<T> GenerateAsync();
     }
 }

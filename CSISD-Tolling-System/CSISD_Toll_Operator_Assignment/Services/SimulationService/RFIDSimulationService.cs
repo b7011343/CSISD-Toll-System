@@ -14,7 +14,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
             _vehicles = vehicles;
         }
 
-        public List<RFID> Generate()
+        public List<RFID> GenerateAsync()
         {
             int vehicleIndex = 0;
 

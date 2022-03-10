@@ -16,7 +16,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             ISimulationService<Invoice> sim = new InvoiceSimulationService(vehicles);
 
             // Act
-            List<Invoice> output = sim.Generate();
+            List<Invoice> output = sim.GenerateAsync();
 
             // Assert
             Assert.That(output.Count == 0);
@@ -33,7 +33,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             ISimulationService<Invoice> sim = new InvoiceSimulationService(vehicles);
 
             // Act
-            List<Invoice> output = sim.Generate();
+            List<Invoice> output = sim.GenerateAsync();
 
             // Assert
             Assert.That(output.Count == 1);
@@ -54,7 +54,7 @@ namespace CSISD_Toll_Operator_Assignment.UnitTests
             ISimulationService<Invoice> sim = new InvoiceSimulationService(vehicles);
 
             // Act
-            List<Invoice> output = sim.Generate();
+            List<Invoice> output = sim.GenerateAsync();
 
             // Assert
             Assert.That(output.Count == 2);

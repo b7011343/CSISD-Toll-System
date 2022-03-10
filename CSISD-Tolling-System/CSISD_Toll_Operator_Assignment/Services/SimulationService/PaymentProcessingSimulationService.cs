@@ -19,7 +19,7 @@ namespace CSISD_Toll_Operator_Assignment.Service
             _userManager = userManager;
         }
 
-        public List<Card> Generate()
+        public List<Card> GenerateAsync()
         {
             string[] cardNumbers = new string[]
             {
@@ -42,25 +42,21 @@ namespace CSISD_Toll_Operator_Assignment.Service
             List<Card> cards = new List<Card>();
             Random random = new Random();
             int index = 0;
-
             foreach (User user in _users)
             {
-                if (_userManager.IsInRoleAsync(user, Roles.RoadUser).Result == true)
+                DateTime expiry = DateTime.Today.AddMonths(-(random.Next(3, 14)));
+
+                Card card = new Card()
                 {
-                    DateTime expiry = DateTime.Today.AddMonths(-(random.Next(3, 14)));
+                    CardNumber = cardNumbers[index],
+                    Cvv = 123,
+                    ExpiryDate = expiry,
+                    NameOnCard = cardNames[index],
+                    OwnerID = user.Id
+                };
 
-                    Card card = new Card()
-                    {
-                        CardNumber = cardNumbers[index],
-                        Cvv        = 123,
-                        ExpiryDate = expiry,
-                        NameOnCard = cardNames[index],
-                        OwnerID    = user.Id
-                    };
-
-                    cards.Add(card);
-                    index++;
-                }
+                cards.Add(card);
+                index++;
             }
             return cards;
         }

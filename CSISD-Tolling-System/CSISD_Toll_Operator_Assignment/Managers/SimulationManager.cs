@@ -53,11 +53,19 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// <summary>
         /// Update the database with test data for the card table
         /// </summary>
-        private void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
+        private async void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
         {
-            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(db.Users, userManager);
-            List<Card> cards = cardSimulator.Generate();
-
+            List<User> users = db.Users.ToList();
+            List<User> roadUsers = new List<User>();
+            foreach(var user in users)
+            {
+                if(userManager.IsInRoleAsync(user, "road-user").Result == true)
+                {
+                    roadUsers.Add(user);
+                }
+            }
+            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(roadUsers, userManager);
+            List<Card> cards = cardSimulator.GenerateAsync();
             db.AddRange(cards);
             db.SaveChanges();
         }
@@ -68,7 +76,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         private void GenerateInvoices(ApplicationDbContext db)
         {
             ISimulationService<Invoice> invoiceSimulator = new InvoiceSimulationService(db.Vehicles);
-            List<Invoice> invoices = invoiceSimulator.Generate();
+            List<Invoice> invoices = invoiceSimulator.GenerateAsync();
 
             db.AddRange(invoices);
             db.SaveChanges();
@@ -80,7 +88,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         private void GenerateContracts(ApplicationDbContext db, UserManager<User> userManager)
         {
             ISimulationService<Contract> contractSimulator = new ContractSimulationService(userManager);
-            List<Contract> contracts = contractSimulator.Generate();
+            List<Contract> contracts = contractSimulator.GenerateAsync();
 
             db.Contracts.AddRange(contracts);
             db.SaveChanges();
@@ -92,7 +100,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         private void GenerateRFIDs(ApplicationDbContext db)
         {
             ISimulationService<RFID> rfidSimulator = new RFIDSimulationService(db.Vehicles);
-            List<RFID> rfids = rfidSimulator.Generate();
+            List<RFID> rfids = rfidSimulator.GenerateAsync();
 
             db.RFIDs.AddRange(rfids);
             db.SaveChanges();
@@ -108,11 +116,11 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         {
             // Generate the users
             ISimulationService<User> userSimulator = new UserSimulationService(userManager);
-            userSimulator.Generate();
+            userSimulator.GenerateAsync();
 
             // Generate the vehicles (can only do this after we've generated the users)
             ISimulationService<Vehicle> vehicleSimulator = new VehicleSimulationService(db.Users);
-            List<Vehicle> vehicles = vehicleSimulator.Generate();
+            List<Vehicle> vehicles = vehicleSimulator.GenerateAsync();
 
             db.Vehicles.AddRange(vehicles);
             db.SaveChanges();

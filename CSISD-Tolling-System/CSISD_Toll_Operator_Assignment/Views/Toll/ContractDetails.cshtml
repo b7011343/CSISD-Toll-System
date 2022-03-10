@@ -1,4 +1,5 @@
 ﻿@using CSISD_Toll_Operator_Assignment.Models
+@using Microsoft.AspNetCore.Identity
 
 @model Contract
 
@@ -8,8 +9,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ContractTollOperator</h1>
+<h1>Contract Details</h1>
 
 <div class="container">
-    <p>Details</p>
+    <h3>Details</h3>
+    <p>Contract Id: <b>@Model.Id</b></p>
+    <p>Company Name: <b>@Model.Company</b></p>
+    <p>Fee: <b>@Model.Fee</b></p>
+    <p>Expiry Date: <b>@Model.ExpiryDate</b></p>
+    @if (User.IsInRole("toll-operator"))
+    {
+        <p>Contracts User Id: <b>@Model.UserId</b></p>
+    }
+    @if (User.IsInRole("road-user"))
+    {
+        <button id="delContract" class="btn btn-danger">Request To Delete Contract</button>
+        <p id="delTxt" class="hidden">Your request has been sent. One of our team will get back to you shortly.</p>
+    }
 </div>

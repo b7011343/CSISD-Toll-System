@@ -33,8 +33,13 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <select class="custom-select mb-1" name="languages" id="languages-select">
-                                <option value="english">@Localizer["English"]</option>
-                                <option value="french">@Localizer["French"]</option>
+                                <option value="en">@Localizer["English"]</option>
+                                <option value="fr">@Localizer["French"]</option>
+                                <option value="ar">@Localizer["Arabic"]</option>
+                                <option value="no">@Localizer["Norwegian"]</option>
+                                <option value="sv">@Localizer["Swedish"]</option>
+                                <option value="da">@Localizer["Danish"]</option>
+                                <option value="fi">@Localizer["Finnish"]</option>
                             </select>
                             <div class="d-flex justify-content-end row align-items-center">
                                 <form asp-controller="Home" asp-action="DecrementMagnification" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post">

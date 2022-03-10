@@ -54,9 +54,13 @@ namespace CSISD_Toll_Operator_Assignment
                 {
                     var supportedCultures = new List<CultureInfo>
                     {
-                            new CultureInfo("en"),
-                            new CultureInfo("fr"),
-                            new CultureInfo("ar"),
+                            new CultureInfo("en"), // English
+                            new CultureInfo("fr"), // French
+                            new CultureInfo("ar"), // Arabic
+                            new CultureInfo("no"), // Norwegian
+                            new CultureInfo("sv"), // Swedish
+                            new CultureInfo("da"), // Danish
+                            new CultureInfo("fi"), // Finnish
                     };
 
                     opts.DefaultRequestCulture = new RequestCulture("en");

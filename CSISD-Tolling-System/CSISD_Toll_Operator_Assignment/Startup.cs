@@ -59,7 +59,7 @@ namespace CSISD_Toll_Operator_Assignment
                 opts =>
                 {
                     IList<CultureInfo> supportedCultures =
-                        Languages.DefaultLanguage.Select(lang => new CultureInfo(lang)).ToList();
+                        Languages.SupportedLanguages.Select(lang => new CultureInfo(lang.Code)).ToList();
 
                     opts.DefaultRequestCulture = new RequestCulture(Languages.DefaultLanguage);
 

@@ -14,22 +14,22 @@ namespace CSISD_Toll_Operator_Assignment.Service
         {
             _db = db;
         }
-
+        //this method gets all invoices linked to the userId specified
         public List<Invoice> GetUserInvoices(string userId)
         {
             return _db.Invoices.Where(x => x.UserId == userId).ToList();
         }
-
+        //this method gets all unpaid invoices linked to the userId specified
         public List<Invoice> GetUserUnpaidInvoices(string userId)
         {
             return _db.Invoices.Where(x => x.UserId == userId && x.Paid == false).ToList();
         }
-
+        //this method gets all invoices
         public List<Invoice> GetAllInvoices()
         {
             return _db.Invoices.ToList();
         }
-
+        //this method gets all unpaid invoices
         public List<Invoice> GetAllUnpaidInvoices()
         {
             return _db.Invoices.Where(x => x.Paid == false).ToList();

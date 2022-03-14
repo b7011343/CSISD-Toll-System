@@ -14,6 +14,7 @@ namespace CSISD_Toll_Operator_Assignment
 {
     public class UserPreferenceRequestCultureProvider : RequestCultureProvider
     {
+        //this method returns true if the specified language is supported in this application
         private bool IsSupportedLanguage(string lang)
         {
             return lang == "en" ||

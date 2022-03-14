@@ -18,9 +18,10 @@ namespace CSISD_Toll_Operator_Assignment.Service
             _users = users;
             _userManager = userManager;
         }
-
+        //this method creates a list of cards
         public List<Card> GenerateAsync()
         {
+            //create string array of card numbers
             string[] cardNumbers = new string[]
             {
                 "1234 5678 8910 1234",
@@ -29,7 +30,7 @@ namespace CSISD_Toll_Operator_Assignment.Service
                 "4373 3833 4403 2839",
                 "3737 4932 5433 2349"
             };
-
+            //create string array of card names
             string[] cardNames = new string[]
             {
                 "Joe Smithurst",
@@ -44,8 +45,9 @@ namespace CSISD_Toll_Operator_Assignment.Service
             int index = 0;
             foreach (User user in _users)
             {
+                //create random expiry date for the card
                 DateTime expiry = DateTime.Today.AddMonths(-(random.Next(3, 14)));
-
+                //create new card
                 Card card = new Card()
                 {
                     CardNumber = cardNumbers[index],
@@ -54,7 +56,7 @@ namespace CSISD_Toll_Operator_Assignment.Service
                     NameOnCard = cardNames[index],
                     OwnerID = user.Id
                 };
-
+                //add card to list
                 cards.Add(card);
                 index++;
             }

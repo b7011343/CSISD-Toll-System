@@ -24,6 +24,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         private const string DEFAULT_PASSWORD = "Test123!";
         private const int MAGNIFICATION_INCREMENT = 1;
 
+        //This is an instance method which instantiates _logger, _userManager, _db, _invoiceService and _preferenceService
         public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, ApplicationDbContext db, PreferenceService preferenceService)
         {
             _logger             = logger;
@@ -32,7 +33,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             _invoiceService     = new InvoiceService(db);
             _preferenceService  = preferenceService;
         }
-
+        //This method directs the user to the correct page - either "IndexRoadUser", "IndexTollOperator", "IndexAdmin" or the default error page "Index"
         public async Task<IActionResult> Index()
         {
             string userEmail = HttpContext.User.Identity.Name;
@@ -87,6 +88,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        //The method is a HttpPost method which means it is going to retrive data from the web page, most likely from the user
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public IActionResult AddPrivilagedUser(string role, string email)
@@ -113,7 +115,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             addRoleTask.Wait();
             return RedirectToAction("Index");
         }
-
+        //This method checks if the user has any preferences - such as language option, magnification setting etc
         public void CheckIfUserHasPreferences()
         {
             // Checks if the current user currently has changed their preference
@@ -139,6 +141,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             }
         }
 
+        //This method increases the size of the text on the screen
         [HttpPost]
         [Authorize]
         [AutoValidateAntiforgeryToken]
@@ -151,7 +154,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
             return Redirect(returnUrl);
         }
-
+        //this method decreases the size of the text on the screen
         [HttpPost]
         [Authorize]
         [AutoValidateAntiforgeryToken]
@@ -167,7 +170,7 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
             return Redirect(returnUrl);
         }
-
+        //this method changes the lanuage of the text on the screen
         [HttpPost]
         [Authorize]
         [AutoValidateAntiforgeryToken]

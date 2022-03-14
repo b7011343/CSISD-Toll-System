@@ -55,6 +55,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private async void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
         {
+            //this method adds card details for all road-users in the database
             List<User> users = db.Users.ToList();
             List<User> roadUsers = new List<User>();
             foreach(var user in users)
@@ -75,6 +76,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private void GenerateInvoices(ApplicationDbContext db)
         {
+            //this method adds invoices for all road-users in the database
             ISimulationService<Invoice> invoiceSimulator = new InvoiceSimulationService(db.Vehicles);
             List<Invoice> invoices = invoiceSimulator.GenerateAsync();
 
@@ -87,6 +89,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private void GenerateContracts(ApplicationDbContext db, UserManager<User> userManager)
         {
+            //this method adds contracts in the database
             ISimulationService<Contract> contractSimulator = new ContractSimulationService(userManager);
             List<Contract> contracts = contractSimulator.GenerateAsync();
 
@@ -99,6 +102,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private void GenerateRFIDs(ApplicationDbContext db)
         {
+            //this method adds RFID tags to certain road-users in the database
             ISimulationService<RFID> rfidSimulator = new RFIDSimulationService(db.Vehicles);
             List<RFID> rfids = rfidSimulator.GenerateAsync();
 
@@ -114,6 +118,7 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private void GenerateUsersAndVehicles(UserManager<User> userManager, ApplicationDbContext db)
         {
+            //this method adds users and vehicles to the database
             // Generate the users
             ISimulationService<User> userSimulator = new UserSimulationService(userManager);
             userSimulator.GenerateAsync();

@@ -10,17 +10,35 @@ namespace CSISD_Toll_Operator_Assignment.Models
     [Table("Preference", Schema = "dbo")]
     public class Preference
     {
+        /// <summary>
+        /// Auto-generated Id of the Preference
+        /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+        /// <summary>
+        /// The prefered FontSize of the user
+        /// </summary>
         [Required]
         public int FontSize { get; set; }
+        /// <summary>
+        /// The prefered Language of the user
+        /// </summary>
         [Required]
         public string Language { get; set; }
+        /// <summary>
+        /// The prefered magnification of the user
+        /// </summary>
         [Required]
         public int Magnification { get; set; }
+        /// <summary>
+        /// The prefered value for ColorBlindMode for the user
+        /// </summary>
         [Required, StringLength(5)]
         public bool ColorBlindMode { get; set; }
+        /// <summary>
+        /// The prefered value for ScreenReader for the user
+        /// </summary>
         [Required, StringLength(5)]
         public bool ScreenReader { get; set; }
     }

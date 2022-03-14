@@ -85,7 +85,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
 
             //dummy users
             //migrationBuilder.InsertData("Preference", new string[] { "Id", "UserName", "NormalizedUserName", "Email", "NormalizedEmail", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumber", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnd", "LockoutEnabled", "AccessFailedCount", "PreferenceId" }, new object[] { "0", "John Smith", "JOHN SMITH", "j.smith@testemail.com", "J.SMITH@TESTEMAIL.COM", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumber", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnd", "LockoutEnabled", "AccessFailedCount", "PreferenceId" });
-
+            //create RFID table
             migrationBuilder.CreateTable(
                 name: "RFID",
                 columns: table => new
@@ -100,7 +100,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                 {
                     table.PrimaryKey("PK_RFID", x => new { x.Id });
                 });
-
+            //create vehicle table
             migrationBuilder.CreateTable(
                 name: "Vehicle",
                 columns: table => new
@@ -118,7 +118,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                     table.ForeignKey(name: "FK_AspNetUsersVehicle", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
             //migrationBuilder.InsertData("Vehicle", new string[] { "Id", "Make", "Model", "RegistrationPlate", "OwnerId"}, new object[] { "0", "Ford", "Fiesta", "RF66 W5F", "1" });
-
+            //create invoice table
             migrationBuilder.CreateTable(
                 name: "Invoice",
                 columns: table => new
@@ -138,7 +138,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                     table.ForeignKey(name: "FK_AspNetUsersInvoice", column: x => x.UserId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(name: "FK_Vehicle", column: x => x.VehicleId, principalTable: "Vehicle", principalColumn: "Id", onDelete: ReferentialAction.NoAction);
                 });
-
+            //create payment method table
             migrationBuilder.CreateTable(
                 name: "PaymentMethod",
                 columns: table => new
@@ -153,7 +153,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                 {
                     table.PrimaryKey("PK_PaymentMethod", x => new { x.Id });
                 });
-
+            //create card table
             migrationBuilder.CreateTable(
                 name: "Card",
                 columns: table => new
@@ -171,7 +171,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                     table.PrimaryKey("PK_Card", x => new { x.Id });
                     table.ForeignKey(name: "FK_AspNetUsersCard", column: x => x.OwnerId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
-
+            //create contract table
             migrationBuilder.CreateTable(
                 name: "Contract",
                 columns: table => new
@@ -189,7 +189,7 @@ namespace CSISD_Toll_Operator_Assignment.Data.Migrations
                     table.PrimaryKey("PK_Contract", x => new { x.Id });
                     table.ForeignKey(name: "FK_AspNetUsersContract", column: x => x.UserId, principalTable: "AspNetUsers", principalColumn: "Id", onDelete: ReferentialAction.Cascade);
                 });
-
+            
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new

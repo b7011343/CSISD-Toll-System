@@ -25,54 +25,54 @@ namespace CSISD_Toll_Operator_Assignment.Service
             _httpContextAccessor = httpContextAccessor;
             defaultPreference = db.Preferences.Find(0L);
         }
-
+        //this method gets the user Preference settings
         private Preference GetUserPreference()
         {
             User user = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
             return user == null ? defaultPreference : user.GetPreference();
         }
-
+        //this method gets the users prefered language
         public string GetLanguage()
         {
             return GetUserPreference().Language;
         }
-
+        //this method get the user prefered magnification value
         public int GetMagnification()
         {
             return GetUserPreference().Magnification;
         }
-
+        //this method gets if the user is color blind 
         public bool GetColorBlindMode()
         {
             return GetUserPreference().ColorBlindMode;
         }
-
+        //this method gets if the user requires a screen reader
         public bool GetScreenReader()
         {
             return GetUserPreference().ScreenReader;
         }
-
+        //this method sets the users prefered magnifcation value
         public void SetMagnification(int magnification)
         {
             Preference preference = GetUserPreference();
             preference.Magnification = magnification;
             _db.SaveChanges();
         }
-
+        //this method sets the users prefered language
         public void SetLanguage(string language)
         {
             Preference preference = GetUserPreference();
             preference.Language = language;
             _db.SaveChanges();
         }
-
+        //this method sets the users prefered option for color blind mode
         public void SetColorBlindMode(bool isColorBlind)
         {
             Preference preference = GetUserPreference();
             preference.ColorBlindMode = isColorBlind;
             _db.SaveChanges();
         }
-
+        //this method sets the users prefered option for screen reader mode
         public void SetScreenReader(bool isScreenReader)
         {
             Preference preference = GetUserPreference();

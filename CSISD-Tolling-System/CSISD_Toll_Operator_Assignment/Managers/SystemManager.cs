@@ -15,11 +15,12 @@ namespace CSISD_Toll_Operator_Assignment.Data.Manager
         {
             _scopeFactory = scopeFactory;
         }
-
+        //this method is used to create an invoice
         public long CreateInvoice()
         {
+            //create new invoice with the Paid variable set to false
             Invoice invoice = new Invoice() { Paid = false };
-
+            //add invoice to database
             using (var scope = _scopeFactory.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -30,22 +31,22 @@ namespace CSISD_Toll_Operator_Assignment.Data.Manager
 
             return invoice.Id;
         }
-
+        //this method creates a contract
         public long CreateContract()
         {
             return 0;
         }
-
+        //this method sends the invoice to the user - this returns true always because it outside the scope of the assignment
         public bool SendInvoice()
         {
             return true;
         }
-
+        //this method sends the contract to the user - this returns true always because it outside the scope of the assignment
         public bool SendContract()
         {
             return true;
         }
-
+        //this method sends the invoice by post - this returns true always because it outside the scope of the assignment
         public bool SendInvoiceByPost()
         {
             return true;

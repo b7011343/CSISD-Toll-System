@@ -1,5 +1,6 @@
 ﻿namespace CSISD_Toll_Operator_Assignment.Data
 {
+    //this class lists all pf the different types of roles the user can be
     public class Roles
     {
         public const string RoadUser      = "road-user";

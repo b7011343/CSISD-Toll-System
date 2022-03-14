@@ -11,7 +11,13 @@ namespace CSISD_Toll_Operator_Assignment.Models
 {
     public class TollHistoryViewModel
     {
+        /// <summary>
+        /// List of invoices visible on the page
+        /// </summary>
         public List<Invoice> Invoices { get; set; }
+        /// <summary>
+        /// The userId linked to all of the invoices
+        /// </summary>
         public string UserId { get; set; }
 
         public TollHistoryViewModel(string role, User user, IInvoiceService invoiceService)

@@ -13,7 +13,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
         {
             _vehicles = vehicles;
         }
-
+        //this method creates a list of invoices
         public List<Invoice> GenerateAsync()
         {
             List<Invoice> invoices = new List<Invoice>();
@@ -22,9 +22,10 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 
             foreach (Vehicle vehicle in _vehicles)
             {
+                //create random entry and exit timestamps
                 DateTime entry = DateTime.Today.AddDays(-(random.Next(3, 14)));
                 DateTime exit = entry.AddHours(random.NextDouble());
-
+                //create new invoice
                 Invoice invoice = new Invoice()
                 {
                     Fee = random.Next(5, 50),
@@ -34,7 +35,7 @@ namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
                     EntryTimestamp = entry,
                     ExitTimestamp = exit
                 };
-
+                //add invoice to list
                 invoices.Add(invoice);
             }
 

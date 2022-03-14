@@ -13,13 +13,9 @@ namespace CSISD_Toll_Operator_Assignment.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-<<<<<<< HEAD
         /// <summary>
         // LThe company name on the contract
         /// </summary>
-=======
-
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         [Required]
         public string Company { get; set; }
         /// <summary>

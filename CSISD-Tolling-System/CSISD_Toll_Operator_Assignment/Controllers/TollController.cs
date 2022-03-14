@@ -16,22 +16,18 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 {
     public class TollController : Controller
     {
-<<<<<<< HEAD
-        private readonly ILogger<TollController> logger;
+        //private readonly ILogger<TollController> logger;
         private readonly ApplicationDbContext db;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly InvoiceService invoiceService;
         private readonly PaymentProcessingSimulationService paymentService;
         //this method instantiates the variables required for the controller
-        public TollController(ILogger<TollController> _logger, UserManager<User> _userManager, SignInManager<User> _signInManager, ApplicationDbContext _db)
-=======
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User>    _userManager;
         private readonly InvoiceService       _invoiceService;
 
         public TollController(UserManager<User> userManager, ApplicationDbContext db, InvoiceService invoiceService)
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         {
             _userManager    = userManager;
             _db             = db;
@@ -44,7 +40,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Payment(long invoiceId)
         {
             // Generate view model and return view
-<<<<<<< HEAD
             //get the required invoice by specifying the invoiceId from the ApplicationdbContext
             Invoice invoice = db.Invoices.Where(x => x.Id == invoiceId).First();
             //get the list of cards that are linked to the logged in user from the ApplicationdbContext
@@ -52,11 +47,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             //get the vehicle linked to the invoice from the ApplicationdbContext
             Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoiceId).First();
             //add objects above the PaymentViewModel
-=======
-            Invoice invoice = _db.Invoices.Where(x => x.Id == invoiceId).First();
-            List<Card> cards = _db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
-            Vehicle vehicle = _db.Vehicles.Where(x => x.Id == invoiceId).First();
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,
@@ -73,7 +63,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         public IActionResult Payment()
         {
             // Allows user to pay for an invoice
-<<<<<<< HEAD
             //get the required invoice by specifying the invoiceId from the ApplicationdbContext
             Invoice invoice = db.Invoices.Where(x => x.Id == (long)Convert.ToDouble(Request.Form["id"])).First();
             //get the card selected by the user in the payment form
@@ -83,12 +72,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             //get the vehicle linked to the invoice from the ApplicationdbContext
             Vehicle vehicle = db.Vehicles.Where(x => x.Id == invoice.Id).First();
             //add objects above the PaymentViewModel
-=======
-            Invoice invoice = _db.Invoices.Where(x => x.Id == (long)Convert.ToDouble(Request.Form["id"])).First();
-            Card card = _db.Cards.Where(x => x.CardNumber == (string)Request.Form["cards"].ToString()).First();
-            List<Card> cards = _db.Cards.Where(x => x.OwnerID == _userManager.GetUserId(User)).ToList();
-            Vehicle vehicle = _db.Vehicles.Where(x => x.Id == invoice.Id).First();
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
             PaymentViewModel model = new PaymentViewModel()
             {
                 invoice = invoice,
@@ -101,13 +84,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             {
                 //change boolean Paid from false to true
                 invoice.Paid = true;
-<<<<<<< HEAD
                 //save changes and update the context state
                 db.SaveChanges();
                 //return user to the home index page
-=======
-                _db.SaveChanges();
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
                 return LocalRedirect("/Home/Index");
             }
             else
@@ -136,15 +115,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
                 NameOnCard = model.NameOnCard,
                 OwnerID = _userManager.GetUserId(User)
             };
-<<<<<<< HEAD
             //add card to Cards table in ApplicationDbContext, then save the changes
             db.Cards.Add(card);
             db.SaveChanges();
-=======
-
-            _db.Cards.Add(card);
-            _db.SaveChanges();
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
 
             return RedirectToAction("Index", "Home");
         }
@@ -164,7 +137,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         {
             // Gets current user and checks role
             string userEmail = HttpContext.User.Identity.Name;
-<<<<<<< HEAD
             User user = await userManager.FindByEmailAsync(userEmail);
             string role = (await userManager.GetRolesAsync(user)).First();
             //get list of all contracts
@@ -173,13 +145,6 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
             //get list of contracts linked to the user that is signed in
             List<Contract> _userContracts = db.Contracts.Where(x => x.UserId == userManager.GetUserId(User)).ToList();
             //create ContractViewModel for the toll operator
-=======
-            User user = await _userManager.FindByEmailAsync(userEmail);
-            string role = (await _userManager.GetRolesAsync(user)).First();
-            List<Contract> _tollContracts = _db.Contracts.ToList();
-            var id = _userManager.GetUserId(User);
-            List<Contract> _userContracts = _db.Contracts.Where(x => x.UserId == _userManager.GetUserId(User)).ToList();
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
             ContractViewModel tollContracts = new ContractViewModel()
             {
                 Contracts = _tollContracts

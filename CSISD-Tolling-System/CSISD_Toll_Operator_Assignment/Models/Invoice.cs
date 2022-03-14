@@ -29,7 +29,6 @@ namespace CSISD_Toll_Operator_Assignment.Models
         /// </summary>
         [Required]
         public long VehicleId { get; set; }
-<<<<<<< HEAD
         /// <summary>
         /// The EntryTimestamp on the invoice
         /// </summary>
@@ -43,15 +42,6 @@ namespace CSISD_Toll_Operator_Assignment.Models
         /// <summary>
         /// Whether or not the invoice has been paid
         /// </summary>
-=======
-
-        [Required]
-        public DateTime EntryTimestamp { get; set; }
-
-        [Required]
-        public DateTime ExitTimestamp { get; set; }
-
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         [Required]
         public bool Paid { get; set; }
     }

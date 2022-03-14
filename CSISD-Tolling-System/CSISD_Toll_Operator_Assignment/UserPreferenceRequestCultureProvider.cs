@@ -10,7 +10,6 @@ namespace CSISD_Toll_Operator_Assignment
 {
     public class UserPreferenceRequestCultureProvider : RequestCultureProvider
     {
-<<<<<<< HEAD
         //this method returns true if the specified language is supported in this application
         private bool IsSupportedLanguage(string lang)
         {
@@ -23,8 +22,6 @@ namespace CSISD_Toll_Operator_Assignment
                    lang == "fi";
         }
 
-=======
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         public override Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
         {
             PreferenceService service = httpContext.RequestServices.GetService<PreferenceService>();

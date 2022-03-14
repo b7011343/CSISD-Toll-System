@@ -20,13 +20,8 @@ namespace CSISD_Toll_Operator_Assignment.Service
             _httpContextAccessor = httpContextAccessor;
             _defaultPreference   = db.Preferences.Find(0L);
         }
-<<<<<<< HEAD
         //this method gets the user Preference settings
-        private Preference GetUserPreference()
-=======
-
         private Preference GetCurrentlyLoggedInUserPreference()
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         {
             User user = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
             return user == null ? _defaultPreference : _db.Preferences.Find(user.PreferenceId);

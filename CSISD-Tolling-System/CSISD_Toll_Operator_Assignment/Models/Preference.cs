@@ -12,7 +12,6 @@ namespace CSISD_Toll_Operator_Assignment.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-<<<<<<< HEAD
         /// <summary>
         /// The prefered FontSize of the user
         /// </summary>
@@ -36,21 +35,6 @@ namespace CSISD_Toll_Operator_Assignment.Models
         /// <summary>
         /// The prefered value for ScreenReader for the user
         /// </summary>
-=======
-
-        [Required]
-        public int FontSize { get; set; }
-
-        [Required]
-        public string Language { get; set; }
-
-        [Required]
-        public int Magnification { get; set; }
-
-        [Required, StringLength(5)]
-        public bool ColorBlindMode { get; set; }
-
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         [Required, StringLength(5)]
         public bool ScreenReader { get; set; }
 

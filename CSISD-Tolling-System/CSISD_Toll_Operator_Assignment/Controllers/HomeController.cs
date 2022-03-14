@@ -23,13 +23,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
         private const int    MAGNIFICATION_INCREMENT = 1;
         private long         DEFAULT_PREFERENCE_ID   = 0;
 
-<<<<<<< HEAD
         //This is an instance method which instantiates _logger, _userManager, _db, _invoiceService and _preferenceService
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, ApplicationDbContext db, PreferenceService preferenceService)
-=======
         public HomeController(UserManager<User> userManager, ApplicationDbContext db,
                               PreferenceService preferenceService, InvoiceService invoiceService)
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         {
             _userManager        = userManager;
             _db                 = db;
@@ -114,13 +110,9 @@ namespace CSISD_Toll_Operator_Assignment.Controllers
 
             return RedirectToAction("Index");
         }
-<<<<<<< HEAD
         //This method checks if the user has any preferences - such as language option, magnification setting etc
-        public void CheckIfUserHasPreferences()
-=======
-
+        //public void CheckIfUserHasPreferences()
         public void CreateNewUserSpecificPreferenceIfNessesary()
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
         {
             // Checks if the current user currently has changed their preference
             User user = _userManager.GetUserAsync(User).Result;

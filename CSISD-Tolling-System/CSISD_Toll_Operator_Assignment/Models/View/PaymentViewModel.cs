@@ -4,7 +4,6 @@ namespace CSISD_Toll_Operator_Assignment.Models
 {
     public class PaymentViewModel
     {
-<<<<<<< HEAD
         /// <summary>
         /// The Invoice visible on the page
         /// </summary>
@@ -17,10 +16,5 @@ namespace CSISD_Toll_Operator_Assignment.Models
         /// Vehicle attached to the invoice
         /// </summary>
         public Vehicle vehicle { get; set; }
-=======
-        public Invoice    invoice { get; set; }
-        public List<Card> cards   { get; set; }
-        public Vehicle    vehicle { get; set; }
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
     }
 }

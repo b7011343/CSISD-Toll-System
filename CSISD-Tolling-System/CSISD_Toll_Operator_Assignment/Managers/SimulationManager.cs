@@ -53,11 +53,8 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// </summary>
         private void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
         {
-<<<<<<< HEAD
             //this method adds card details for all road-users in the database
             List<User> users = db.Users.ToList();
-=======
->>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
             List<User> roadUsers = new List<User>();
 
             foreach(var user in db.Users)

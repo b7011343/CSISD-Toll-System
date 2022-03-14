@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CSISD_Toll_Operator_Assignment.Service
+﻿namespace CSISD_Toll_Operator_Assignment.Service
 {
+    /// <summary>
+    /// Obsolete because we're instead making use of the builtin ASP.NET
+    /// translation system.
+    /// </summary>
     public class TranslationService
-    {
-
-    }
+    { }
 }

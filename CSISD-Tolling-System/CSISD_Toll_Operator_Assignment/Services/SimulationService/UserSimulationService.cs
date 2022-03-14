@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Identity;
+
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace CSISD_Toll_Operator_Assignment.Service.SimulationServices
 {

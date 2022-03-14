@@ -9,7 +9,7 @@
 @inject UserManager<User> UserManager
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,6 +35,11 @@
                         {
                             <form asp-controller="Home" asp-action="ChangeLanguage" asp-route-returnUrl="@Context.Request.GetDisplayUrl()" method="post" id="LanguageDropdown">
                                 <select class="custom-select mb-1" name="languages" id="languages-select" onchange="LanguageDropdown.submit()">
+                                    <!-- Deliberately not iterating over Languages.SupportedLanguages here to generate the <option> elements
+                                         because we want the pretty names to be localised themselves, but they will only get picked up by the
+                                         translator tool if they appear as string literals in the cshtml, and that wouldn't happen if the
+                                         data was being sourced from Languages.SupportedLanguages... Because of that there is a bit of duplication
+                                         here. -->
                                     <option value="en" selected="@(preferenceService.GetLanguage() == "en")">@Localizer["English"]</option>
                                     <option value="fr" selected="@(preferenceService.GetLanguage() == "fr")">@Localizer["French"]</option>
                                     <option value="ar" selected="@(preferenceService.GetLanguage() == "ar")">@Localizer["Arabic"]</option>

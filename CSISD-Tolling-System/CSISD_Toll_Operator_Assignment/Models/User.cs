@@ -1,16 +1,12 @@
-﻿using CSISD_Toll_Operator_Assignment.Data;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CSISD_Toll_Operator_Assignment.Models
 {
     //This inherits all variables and classes from the IdentityUser
     public class User : IdentityUser
     {
+<<<<<<< HEAD
         private readonly ApplicationDbContext _db;
 
         public User() {}
@@ -29,5 +25,9 @@ namespace CSISD_Toll_Operator_Assignment.Models
         {
             return _db.Preferences.Find(PreferenceId);
         }
+=======
+        [Required]
+        public long PreferenceId { get; set; }
+>>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
     }
 }

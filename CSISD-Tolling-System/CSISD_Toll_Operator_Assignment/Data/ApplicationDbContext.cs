@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.IO;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CSISD_Toll_Operator_Assignment.Models;
 using Microsoft.Extensions.Configuration;
-using System.IO;
+
+using CSISD_Toll_Operator_Assignment.Models;
 
 namespace CSISD_Toll_Operator_Assignment.Data
 {

@@ -1,22 +1,18 @@
-﻿using CSISD_Toll_Operator_Assignment.Data;
+﻿using System;
+using System.Collections.Generic;
+
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CSISD_Toll_Operator_Assignment.Service
 {
     public class PaymentProcessingSimulationService : ISimulationService<Card>
     {
         private IEnumerable<User> _users;
-        private UserManager<User> _userManager;
-        public PaymentProcessingSimulationService(IEnumerable<User> users, UserManager<User> userManager)
+
+        public PaymentProcessingSimulationService(IEnumerable<User> users)
         {
             _users = users;
-            _userManager = userManager;
         }
         //this method creates a list of cards
         public List<Card> GenerateAsync()

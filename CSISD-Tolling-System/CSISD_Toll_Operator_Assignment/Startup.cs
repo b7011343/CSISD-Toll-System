@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -5,16 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Models;
 using CSISD_Toll_Operator_Assignment.Manager;
 using CSISD_Toll_Operator_Assignment.Data.Manager;
 using CSISD_Toll_Operator_Assignment.Service;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CSISD_Toll_Operator_Assignment
 {
@@ -35,11 +38,13 @@ namespace CSISD_Toll_Operator_Assignment
             services.AddDefaultIdentity<User>()
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
+            
             services.AddHttpContextAccessor();
             services.AddSingleton<SimulationManager>();
             services.AddSingleton<SystemManager>();
             services.AddTransient<PreferenceService>();
+            services.AddTransient<InvoiceService>();
+            services.AddTransient<IApplicationDbContext, ApplicationDbContext>();
 
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
@@ -53,18 +58,10 @@ namespace CSISD_Toll_Operator_Assignment
             services.Configure<RequestLocalizationOptions>(
                 opts =>
                 {
-                    var supportedCultures = new List<CultureInfo>
-                    {
-                            new CultureInfo("en"), // English
-                            new CultureInfo("fr"), // French
-                            new CultureInfo("ar"), // Arabic
-                            new CultureInfo("nb"), // Norwegian
-                            new CultureInfo("sv"), // Swedish
-                            new CultureInfo("da"), // Danish
-                            new CultureInfo("fi"), // Finnish
-                    };
+                    IList<CultureInfo> supportedCultures =
+                        Languages.SupportedLanguages.Select(lang => new CultureInfo(lang.Code)).ToList();
 
-                    opts.DefaultRequestCulture = new RequestCulture("en");
+                    opts.DefaultRequestCulture = new RequestCulture(Languages.DefaultLanguage);
 
                     // Formatting numbers, dates, etc.
                     opts.SupportedCultures = supportedCultures;

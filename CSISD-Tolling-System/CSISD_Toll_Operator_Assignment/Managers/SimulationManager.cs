@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+
 using CSISD_Toll_Operator_Assignment.Service.SimulationServices;
 using CSISD_Toll_Operator_Assignment.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using CSISD_Toll_Operator_Assignment.Data;
 using CSISD_Toll_Operator_Assignment.Service;
-using Microsoft.Extensions.DependencyInjection;
 using CSISD_Toll_Operator_Assignment.Services.SimulationService;
 
 namespace CSISD_Toll_Operator_Assignment.Manager
@@ -53,20 +51,26 @@ namespace CSISD_Toll_Operator_Assignment.Manager
         /// <summary>
         /// Update the database with test data for the card table
         /// </summary>
-        private async void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
+        private void GenerateCards(UserManager<User> userManager, ApplicationDbContext db)
         {
+<<<<<<< HEAD
             //this method adds card details for all road-users in the database
             List<User> users = db.Users.ToList();
+=======
+>>>>>>> 7297ed2f7b6b233950b559c4a1eb682bea329f17
             List<User> roadUsers = new List<User>();
-            foreach(var user in users)
+
+            foreach(var user in db.Users)
             {
                 if(userManager.IsInRoleAsync(user, "road-user").Result == true)
                 {
                     roadUsers.Add(user);
                 }
             }
-            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(roadUsers, userManager);
+
+            ISimulationService<Card> cardSimulator = new PaymentProcessingSimulationService(roadUsers);
             List<Card> cards = cardSimulator.GenerateAsync();
+
             db.AddRange(cards);
             db.SaveChanges();
         }

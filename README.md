@@ -10,3 +10,5 @@ To drop the database tables run the following command in the package manager con
 ```
   drop-database -Context ApplicationDbContext
 ```
+Evaluation
+https://docs.google.com/document/d/1dgVq2ICH6qq9jLhJaWJyXFA_kPWrYkm6U2NVR3IWGxE/edit?usp=sharing

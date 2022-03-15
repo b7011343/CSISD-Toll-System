@@ -58,7 +58,7 @@ namespace ResourceTranslator
         static string template;
 
         static string subscriptionEndpoint = "https://api.cognitive.microsofttranslator.com/";
-        static string subscriptionKey = "5bed6ec37df3433d90e66fdd70b1fee5";
+        static string subscriptionKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
         static async Task<Dictionary<string, Dictionary<string, string>>> TranslateAll(HashSet<string> keys)
         {
